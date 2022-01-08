@@ -1,7 +1,16 @@
 import React from "react";
+// components
+import Login from "./components/Login/Login";
+// styles
+import { GlobalStyle } from "./components/Styled/SGlobal";
 
-function App() {
-	return <div>Bibliophile Land</div>;
-}
+const App = () => {
+	return (
+		<>
+			<GlobalStyle />
+			<Login />
+		</>
+	);
+};
 
 export default App;
