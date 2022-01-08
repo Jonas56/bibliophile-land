@@ -1,7 +1,7 @@
 "use strict";
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
-  class User extends Model {
+  class Book extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -11,48 +11,46 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
-  User.init(
+  Book.init(
     {
       id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
       },
-      name: {
+
+      title: {
         type: DataTypes.STRING,
         allowNull: false,
-        validate: {
-          notEmpty: true,
-        },
-      },
-      email: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-          notEmpty: true,
-          isEmail: true,
-        },
-      },
-      username: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        unique: true,
-        validate: {
-          notEmpty: true,
-        },
-      },
-      hashed_password: {
-        type: DataTypes.STRING(64),
-        validate: {
-          is: /^[0-9a-f]{64}$/i,
-        },
-      },
-      age: {
-        type: DataTypes.FLOAT,
       },
 
-      avatar_image: {
+      isbn: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+
+      page_count: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+
+      published_date: {
+        type: DataTypes.DATE,
+        allowNull: false,
+      },
+
+      image_link: {
         type: DataTypes.TEXT,
+        allowNull: false,
+      },
+
+      description: {
+        type: DataTypes.TEXT,
+        allowNull: false,
+      },
+
+      status: {
+        type: DataTypes.STRING,
         allowNull: false,
       },
     },
@@ -60,8 +58,8 @@ module.exports = (sequelize, DataTypes) => {
       sequelize,
       underscored: true,
       timestamps: true,
-      modelName: "user",
+      modelName: "book",
     }
   );
-  return User;
+  return Book;
 };
