@@ -10,15 +10,29 @@ module.exports = {
       },
       book_id: {
         type: DataTypes.INTEGER,
+        references: {
+          model: "books",
+          key: "id",
+        },
+        allowNull: false,
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE",
       },
       author_id: {
         type: DataTypes.INTEGER,
+        references: {
+          model: "authors",
+          key: "id",
+        },
+        allowNull: false,
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE",
       },
-      createdAt: {
+      created_at: {
         allowNull: false,
         type: DataTypes.DATE,
       },
-      updatedAt: {
+      updated_at: {
         allowNull: false,
         type: DataTypes.DATE,
       },

@@ -13,11 +13,36 @@ module.exports = (sequelize, DataTypes) => {
   }
   AuthorBooks.init(
     {
-      book_id: DataTypes.INTEGER,
-      author_id: DataTypes.INTEGER,
+      id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+      },
+      book_id: {
+        type: DataTypes.INTEGER,
+        references: {
+          model: "Book",
+          key: "id",
+        },
+        allowNull: false,
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE",
+      },
+      author_id: {
+        type: DataTypes.INTEGER,
+        references: {
+          model: "Author",
+          key: "id",
+        },
+        allowNull: false,
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE",
+      },
     },
     {
       sequelize,
+      underscored: true,
+      timestamps: true,
       modelName: "AuthorBooks",
     }
   );
