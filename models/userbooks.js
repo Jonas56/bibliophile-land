@@ -13,8 +13,26 @@ module.exports = (sequelize, DataTypes) => {
   }
   UserBooks.init(
     {
-      book_id: DataTypes.INTEGER,
-      user_id: DataTypes.INTEGER,
+      book_id: {
+        type: DataTypes.INTEGER,
+        references: {
+          model: "Book",
+          key: "id",
+        },
+        allowNull: false,
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE",
+      },
+      user_id: {
+        type: DataTypes.INTEGER,
+        references: {
+          model: "User",
+          key: "id",
+        },
+        allowNull: false,
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE",
+      },
     },
     {
       sequelize,
