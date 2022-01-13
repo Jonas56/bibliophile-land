@@ -1,16 +1,14 @@
 import React from "react";
 // components
 import Login from "./components/Login/Login";
-// styles
-import { GlobalStyle } from "./components/Styled/SGlobal";
-
+import Navbar from "./components/Navbar";
+import "./index.css";
 const App = () => {
-	return (
-		<>
-			<GlobalStyle />
-			<Login />
-		</>
-	);
+  return (
+    <>
+      <Navbar />
+    </>
+  );
 };
 
 export default App;
