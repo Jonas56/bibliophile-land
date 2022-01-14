@@ -35,6 +35,6 @@ const Right = styled.section`
   height: 100%;
   background-color: #141a1f;
   border-radius: 10px;
-  padding: 1.5rem;
+  padding: 1.5rem 3rem;
   flex: 2.5;
 `;
