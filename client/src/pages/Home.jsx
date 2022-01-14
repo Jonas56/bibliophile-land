@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import ProfileSection from "../components/home/Profile";
+import RightContent from "../components/home/RightContent";
 
 const Home = () => {
   return (
@@ -7,7 +8,9 @@ const Home = () => {
       <Left>
         <ProfileSection />
       </Left>
-      <Right>Marcos Work Here!</Right>
+      <Right>
+        <RightContent />
+      </Right>
     </Container>
   );
 };
