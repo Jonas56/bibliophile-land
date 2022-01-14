@@ -11,4 +11,6 @@ body {
   background-color: #0d1117;
   font-family: "Montserrat", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   padding: 1.2rem 3rem;
+  width: 100%;
+  height: 100%;
 }

@@ -44,7 +44,7 @@ const Navbar = () => {
 
 export default Navbar;
 
-const Container = styled.nav`
+const Container = styled.header`
   width: 100%;
   height: 8vh;
   display: flex;
@@ -53,7 +53,7 @@ const Container = styled.nav`
   padding-left: 2rem;
   padding-right: 2rem;
 `;
-const NavMenu = styled.div`
+const NavMenu = styled.nav`
   display: flex;
   justify-content: space-evenly;
   align-items: center;
