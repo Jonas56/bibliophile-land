@@ -8,11 +8,11 @@
     "dev": "cross-env NODE_ENV=development nodemon index.js",
     "lint": "eslint . --fix",
     "test": "cross-env NODE_ENV=test jest --verbose --runInBand",
-    "build:ui": "rm -rf build && cd ../part2 && npm run build --prod && cp -r build ../part3",
+    "build-ui": "rm -rf dist && cd ./client && npm run build && cp -r build ../dist",
     "deploy": "git push heroku master",
-    "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push && npm run deploy",
-    "logs:prod": "heroku logs --tail",
-    "start:test": "cross-env NODE_ENV=test node index.js"
+    "deploy-full": "npm run build:ui && git add . && git commit -m uibuild && git push && npm run deploy",
+    "logs-prod": "heroku logs --tail",
+    "start-test": "cross-env NODE_ENV=test node index.js"
   },
   "author": "",
   "license": "ISC",
