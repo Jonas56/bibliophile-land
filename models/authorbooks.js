@@ -20,20 +20,12 @@ module.exports = (sequelize, DataTypes) => {
       },
       book_id: {
         type: DataTypes.INTEGER,
-        references: {
-          model: "Book",
-          key: "id",
-        },
         allowNull: false,
         onDelete: "CASCADE",
         onUpdate: "CASCADE",
       },
       author_id: {
         type: DataTypes.INTEGER,
-        references: {
-          model: "Author",
-          key: "id",
-        },
         allowNull: false,
         onDelete: "CASCADE",
         onUpdate: "CASCADE",

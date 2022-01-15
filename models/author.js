@@ -7,16 +7,13 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate({ Book }) {
+    static associate({ Book, AuthorBooks }) {
       // define association here
       this.belongsToMany(Book, {
-        through: "AuthorBooks",
-        foreignKey: "author_id",
-        as: "authors",
+        through: AuthorBooks,
+        foreignKey: "book_id",
+        as: "books",
       });
-      // TODO: Super Many-To-Many Relationship
-      // From https://sequelize.org/master/manual/advanced-many-to-many.html#through-tables-versus-normal-tables-and-the--quot-super-many-to-many-association-quot-
-      // this.hasMany(AuthorBooks);
     }
   }
   Author.init(
@@ -28,6 +25,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       name: {
         type: DataTypes.STRING,
+        allowNull: false,
       },
       biography: {
         type: DataTypes.TEXT,
