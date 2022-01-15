@@ -11,6 +11,7 @@ module.exports = {
       name: {
         type: DataTypes.STRING,
         allowNull: false,
+        unique: true,
       },
       biography: {
         type: DataTypes.TEXT,
