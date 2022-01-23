@@ -25,34 +25,44 @@ async function loadDataTodb() {
     try {
       const book = await Book.create({ ...newBook });
       newBook.authors.forEach(async (a) => {
-        let author = await Author.findOne({ where: { name: a } });
-        if (!author) {
-          author = await Author.create({ name: a });
-        }
-        try {
-          // await book.addAuthors(author, { through: "AuthorBooks" });
-          await AuthorBooks.create({
-            book_id: book.id,
-            author_id: author.id,
-          });
-        } catch (err) {
-          console.log(err.message);
+        if (a !== "") {
+          let author = await Author.findOne({ where: { name: a } });
+          if (!author) {
+            try {
+              // FIXME: Decline Error
+              author = await Author.create({ name: a });
+            } catch (err) {
+              console.log("-------", err.message);
+            }
+          }
+          try {
+            await book.addAuthors(author, { through: AuthorBooks });
+            // await AuthorBooks.create({
+            //   book_id: book.id,
+            //   author_id: author.id,
+            // });
+          } catch (err) {
+            console.log(err.message);
+          }
         }
       });
 
       newBook.categories.forEach(async (c) => {
-        let category = await Category.findOne({ where: { name: c } });
-        if (!category) {
-          category = await Category.create({ name: c });
-        }
-        try {
-          // await book.addCategories(category, { through: "CategoryBooks" });
-          await CategoryBooks.create({
-            book_id: book.id,
-            category_id: category.id,
-          });
-        } catch (err) {
-          console.log(err.message);
+        if (c !== "") {
+          let category = await Category.findOne({ where: { name: c } });
+          if (!category) {
+            // FIXME: Fix  Error rejection
+            category = await Category.create({ name: c });
+          }
+          try {
+            await book.addCategories(category, { through: CategoryBooks });
+            // await CategoryBooks.create({
+            //   book_id: book.id,
+            //   category_id: category.id,
+            // });
+          } catch (err) {
+            console.log(err.message);
+          }
         }
       });
     } catch (err) {

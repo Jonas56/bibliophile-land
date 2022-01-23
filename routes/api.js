@@ -1,6 +1,6 @@
 const api = require("express").Router();
-const pingRouter = require("./pingRouter");
+const booksRouter = require("./booksRouter");
 
-api.use("/api/ping", pingRouter);
+api.use("/api/books", booksRouter);
 
 module.exports = api;
