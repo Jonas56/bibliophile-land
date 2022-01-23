@@ -3,7 +3,7 @@ const { getPagination } = require("../utils/query");
 
 const httpGetAllAuthors = async (req, res) => {
   const { offset, limit } = getPagination(req.query);
-  const authors = await Author.findAll({
+  const authors = await Author.findAndCountAll({
     attributes: ["name"],
     limit,
     offset,

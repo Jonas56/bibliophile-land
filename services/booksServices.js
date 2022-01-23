@@ -3,7 +3,7 @@ const { getPagination } = require("../utils/query");
 
 const httpGetAllBooks = async (req, res) => {
   const { offset, limit } = getPagination(req.query);
-  const books = await Book.findAll({
+  const books = await Book.findAndCountAll({
     include: [
       {
         model: Author,
