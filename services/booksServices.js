@@ -33,7 +33,6 @@ const httpGetAllBooks = async (req, res) => {
 const httpGetBookById = async (req, res) => {
   const id = Number(req.params.id);
 
-  console.log("HELLO");
   const book = await Book.findByPk(id, {
     include: [
       {
