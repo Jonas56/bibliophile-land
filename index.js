@@ -5,7 +5,7 @@ const logger = require("./utils/logger");
 const { connectToDatabase } = require("./utils/db");
 const server = http.createServer(app);
 
-server.listen(config.PORT, () => {
-  connectToDatabase();
+server.listen(config.PORT, async () => {
+  await connectToDatabase();
   logger.info(`Server running on port ${config.PORT}`);
 });
