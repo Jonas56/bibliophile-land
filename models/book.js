@@ -11,13 +11,13 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       this.belongsToMany(Author, {
         through: AuthorBooks,
-        foreignKey: "author_id",
+        foreignKey: "book_id",
         as: "authors",
       });
 
       this.belongsToMany(Category, {
         through: CategoryBooks,
-        foreignKey: "category_id",
+        foreignKey: "book_id",
         as: "categories",
       });
     }
