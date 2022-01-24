@@ -8,7 +8,7 @@ const httpGetAllAuthors = async (req, res) => {
     limit,
     offset,
   });
-  return res.status(201).json(authors);
+  return res.status(200).json(authors);
 };
 
 module.exports = { httpGetAllAuthors };
