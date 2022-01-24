@@ -1,0 +1,13 @@
+GET http://localhost:3001/v1/api/authors
+
+
+###
+GET http://localhost:3001/v1/api/authors?limit=40&page=3
+
+
+###
+GET http://localhost:3001/v1/api/authors?page=4
+
+
+###
+GET http://localhost:3001/v1/api/authors?limit=5

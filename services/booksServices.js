@@ -90,9 +90,13 @@ const httpUpdateBook = async (req, res) => {
 
 const httpDeleteBook = async (req, res) => {
   const id = Number(req.params.id);
-  const book = await Book.findByPK(id);
-  book.destroy();
-  return res.status(200).json({ message: "Book deleted succesfully" });
+  const book = await Book.findByPk(id);
+  if (book) {
+    await book.destroy(); // delete
+    return res.status(200).json({ message: "Book deleted succesfully" });
+  } else {
+    return res.status(400).json({ message: "Book not found" });
+  }
 };
 
 module.exports = {

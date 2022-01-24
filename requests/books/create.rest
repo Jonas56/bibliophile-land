@@ -1,0 +1,19 @@
+POST http://localhost:3001/v1/api/books
+Content-Type: application/json
+
+{
+    "title": "Book example",
+    "isbn": "99172727IAOLD",
+    "page_count": 369,
+    "published_date": "2009-04-01T00:00:00.000-0700",
+    "image_link": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/ableson.jpg",
+    "description": "Description example",
+    "status": "cool",
+    "authors" : [
+        {"name" : "Jonas Tesla"}
+    ],
+    "categories" :[
+        {"name" : "Internet"},
+        {"name" : "Java"}
+    ]
+}
