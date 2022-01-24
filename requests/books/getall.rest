@@ -1,0 +1,10 @@
+GET http://localhost:3001/v1/api/books
+
+### 
+GET http://localhost:3001/v1/api/books?limit=50&page=3
+
+###
+GET http://localhost:3001/v1/api/books?page=3
+
+###
+GET http://localhost:3001/v1/api/books?limit=4
