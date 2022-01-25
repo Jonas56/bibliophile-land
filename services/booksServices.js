@@ -67,18 +67,34 @@ const httpAddnewBook = async (req, res) => {
   const newBook = await Book.create(body);
 
   // Add authors + M:N
-  body.authors.map(async (a) => {
-    let author = await Author.findOne(a);
-    if (!author) author = await Author.create(a);
-    await newBook.addAuthors(author, { through: "AuthorBooks" });
-  });
+  if (body.authors) {
+    body.authors.map(async (a) => {
+      let author = await Author.findOne({ where: { name: a } });
+      if (!author) author = await Author.create({ name: a });
+      try {
+        await newBook.addAuthor(author, { through: "AuthorBooks" });
+      } catch (error) {
+        console.log(error.message);
+      }
+    });
+  } else {
+    return res.status(400).json({ message: "Book must contain an author" });
+  }
 
   // Add categories + M:N
-  body.categories.map(async (c) => {
-    let category = await Category.findOne(c);
-    if (!category) category = await Category.create(c);
-    await newBook.addCategories(category, { through: "CategoryBooks" });
-  });
+  if (body.categories) {
+    body.categories.map(async (c) => {
+      let category = await Category.findOne({ where: { name: c } });
+      if (!category) category = await Category.create({ name: c });
+      try {
+        await newBook.addCategories(category, { through: "CategoryBooks" });
+      } catch (error) {
+        console.log(error.message);
+      }
+    });
+  } else {
+    return res.status(400).json({ message: "Book must contain a category" });
+  }
 
   return res.status(201).json(newBook);
 };
