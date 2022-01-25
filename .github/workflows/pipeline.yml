@@ -1,0 +1,36 @@
+name: Deployment pipeline
+
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build_test_pipeline:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: "14.x"
+      - name: Install dependencies
+        run: npm install
+      - name: lint checking
+        run: npm run lint
+        env:
+          NODE_ENV: production
+      # - name: build
+      #   run: npm run build-ui
+      - name: test
+        run: npm run test
+        env:
+          DB_TEST_NAME: ${{ secrets.DB_TEST_NAME }}
+          DB_TEST_USERNAME: ${{ secrets.DB_TEST_USERNAME }}
+          DB_TEST_PASSWORD: ${{ secrets.DB_TEST_PASSWORD }}
+          DB_TEST_HOSTNAME: ${{ secrets.DB_TEST_HOSTNAME }}
+      - name: Deploy
+        if: ${{ github.ref_name == 'main' }}
+        uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "bibliophile-land" # Must be unique in Heroku
+          heroku_email: "youneslamkhanter02@gmail.com"
