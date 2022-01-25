@@ -10,10 +10,10 @@ Content-Type: application/json
     "description": "Description example",
     "status": "cool",
     "authors" : [
-        {"name" : "Jonas Tesla"}
+        "Jonas Tesla"
     ],
     "categories" :[
-        {"name" : "Internet"},
-        {"name" : "Java"}
+        "Internet",
+        "Java"
     ]
 }
