@@ -1,6 +1,24 @@
 import styled from "styled-components";
 
 const ProfileSection = () => {
+  const books = [
+    {
+      url: "./assets/book.jpg",
+      title: "Memory",
+    },
+    {
+      url: "./assets/book.jpg",
+      title: "Memory",
+    },
+    {
+      url: "./assets/book.jpg",
+      title: "Memory",
+    },
+    {
+      url: "./assets/book.jpg",
+      title: "Memory",
+    },
+  ];
   return (
     <Container>
       <ProfileInfo>
@@ -31,43 +49,23 @@ const ProfileSection = () => {
         <FavBooks>
           <span>Favorite Books</span>
           <Books>
-            <Book>
-              <img src="/assets/book.jpg" />
-              <BookTitle>Memories</BookTitle>
-            </Book>
-            <Book>
-              <img src="/assets/book.jpg" />
-              <BookTitle>Memories</BookTitle>
-            </Book>
-            <Book>
-              <img src="/assets/book.jpg" />
-              <BookTitle>Memories</BookTitle>
-            </Book>
-            <Book>
-              <img src="/assets/book.jpg" />
-              <BookTitle>Memories</BookTitle>
-            </Book>
+            {books.map((book, index) => (
+              <Book key={index}>
+                <img src={book.url} alt={book.title} />
+                <span>{book.title}</span>
+              </Book>
+            ))}
           </Books>
         </FavBooks>
         <OtherBooks>
           <span>Other Books</span>
           <Books>
-            <Book>
-              <img src="/assets/book.jpg" />
-              <BookTitle>Memories</BookTitle>
-            </Book>
-            <Book>
-              <img src="/assets/book.jpg" />
-              <BookTitle>Memories</BookTitle>
-            </Book>
-            <Book>
-              <img src="/assets/book.jpg" />
-              <BookTitle>Memories</BookTitle>
-            </Book>
-            <Book>
-              <img src="/assets/book.jpg" />
-              <BookTitle>Memories</BookTitle>
-            </Book>
+            {books.map((book, index) => (
+              <Book key={index}>
+                <img src={book.url} alt={book.title} />
+                <span>{book.title}</span>
+              </Book>
+            ))}
           </Books>
         </OtherBooks>
       </BooksSection>
@@ -159,17 +157,27 @@ const Books = styled.div`
   display: flex;
   align-items: center;
   gap: 1rem;
+  overflow: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  ::-webkit-scrollbar {
+    display: none;
+  }
 `;
 const Book = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
+  gap: 0.4rem;
   flex-direction: column;
 
   img {
-    width: 100px;
+    width: 110px;
     height: 170px;
+    border-radius: 5px;
+  }
+  span {
+    font-size: 12px;
   }
   * {
     cursor: pointer;
