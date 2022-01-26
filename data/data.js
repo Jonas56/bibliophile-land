@@ -71,4 +71,6 @@ async function loadDataTodb() {
   });
 }
 
+loadDataTodb();
+
 module.exports = { loadDataTodb };
