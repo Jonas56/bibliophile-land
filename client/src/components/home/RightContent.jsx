@@ -1,64 +1,46 @@
 import styled from "styled-components";
 
 const RightContent = () => {
+  const books = [
+    {
+      url: "./assets/book.jpg",
+      title: "Memory",
+    },
+    {
+      url: "./assets/book.jpg",
+      title: "Memory",
+    },
+    {
+      url: "./assets/book.jpg",
+      title: "Memory",
+    },
+    {
+      url: "./assets/book.jpg",
+      title: "Memory",
+    },
+  ];
   return (
     <Container>
       <BooksSection>
         <span>Trending</span>
         <Books>
-          <Book>
-            <img src="./assets/book.jpg" alt="Memory" />
-            <span>Memory</span>
-          </Book>
-          <Book>
-            <img src="./assets/book.jpg" alt="Memory" />
-            <span>Memory</span>
-          </Book>
-          <Book>
-            <img src="./assets/book.jpg" alt="Memory" />
-            <span>Memory</span>
-          </Book>
-          <Book>
-            <img src="./assets/book.jpg" alt="Memory" />
-            <span>Memory</span>
-          </Book>
-          <Book>
-            <img src="./assets/book.jpg" alt="Memory" />
-            <span>Memory</span>
-          </Book>
-          <Book>
-            <img src="./assets/book.jpg" alt="Memory" />
-            <span>Memory</span>
-          </Book>
+          {books.map((book, index) => (
+            <Book key={index}>
+              <img src={book.url} alt={book.title} />
+              <span>{book.title}</span>
+            </Book>
+          ))}
         </Books>
       </BooksSection>
       <BooksSection>
         <span>Best Sellers</span>
         <Books>
-          <Book>
-            <img src="./assets/book.jpg" alt="Memory" />
-            <span>Memory</span>
-          </Book>
-          <Book>
-            <img src="./assets/book.jpg" alt="Memory" />
-            <span>Memory</span>
-          </Book>
-          <Book>
-            <img src="./assets/book.jpg" alt="Memory" />
-            <span>Memory</span>
-          </Book>
-          <Book>
-            <img src="./assets/book.jpg" alt="Memory" />
-            <span>Memory</span>
-          </Book>
-          <Book>
-            <img src="./assets/book.jpg" alt="Memory" />
-            <span>Memory</span>
-          </Book>
-          <Book>
-            <img src="./assets/book.jpg" alt="Memory" />
-            <span>Memory</span>
-          </Book>
+          {books.map((book, index) => (
+            <Book key={index}>
+              <img src={book.url} alt={book.title} />
+              <span>{book.title}</span>
+            </Book>
+          ))}
         </Books>
       </BooksSection>
       <AuthorSection>
@@ -101,13 +83,15 @@ const Container = styled.div`
   flex-direction: column;
   height: 100%;
   justify-content: flex-start;
-  gap: 3rem;
+  gap: 2rem;
 `;
 
 const BooksSection = styled.div`
   display: flex;
   flex-direction: column;
+  max-height: 100%;
   gap: 1.3rem;
+  flex: 1;
   span {
     font-size: 18px;
   }
@@ -116,6 +100,14 @@ const BooksSection = styled.div`
 const Books = styled.div`
   display: flex;
   gap: 1rem;
+  align-items: center;
+  max-height: 100%;
+  overflow: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  ::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 const Book = styled.div`
@@ -123,14 +115,14 @@ const Book = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 0.6rem;
-
+  gap: 0.4rem;
   img {
-    height: 210px;
-    width: 140px;
+    height: 205px;
+    width: 130px;
+    border-radius: 5px;
   }
   span {
-    font-size: 15px;
+    font-size: 14px;
   }
   * {
     cursor: pointer;

@@ -52,6 +52,11 @@ const Container = styled.header`
   align-items: center;
   padding-left: 2rem;
   padding-right: 2rem;
+
+  @media screen and (max-width: 1000px) {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
 `;
 const NavMenu = styled.nav`
   display: flex;
@@ -77,12 +82,18 @@ const Search = styled.div`
   * {
     font-size: 16px;
   }
+  @media screen and (max-width: 1000px) {
+    display: none;
+  }
 `;
 const Icons = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 1rem;
+  @media screen and (max-width: 1000px) {
+    gap: 0.5rem;
+  }
 `;
 const Icon = styled.div`
   font-size: 21px;
