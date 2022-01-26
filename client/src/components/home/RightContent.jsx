@@ -1,24 +1,25 @@
 import styled from "styled-components";
 
-const RightContent = () => {
-  const books = [
-    {
-      url: "./assets/book.jpg",
-      title: "Memory",
-    },
-    {
-      url: "./assets/book.jpg",
-      title: "Memory",
-    },
-    {
-      url: "./assets/book.jpg",
-      title: "Memory",
-    },
-    {
-      url: "./assets/book.jpg",
-      title: "Memory",
-    },
-  ];
+const RightContent = ({ books, loading, authors }) => {
+  // const books = [
+  //   {
+  //     url: "./assets/book.jpg",
+  //     title: "Memory",
+  //   },
+  //   {
+  //     url: "./assets/book.jpg",
+  //     title: "Memory",
+  //   },
+  //   {
+  //     url: "./assets/book.jpg",
+  //     title: "Memory",
+  //   },
+  //   {
+  //     url: "./assets/book.jpg",
+  //     title: "Memory",
+  //   },
+  // ];
+  const url = "./assets/book.jpg";
   return (
     <Container>
       <BooksSection>
@@ -26,7 +27,7 @@ const RightContent = () => {
         <Books>
           {books.map((book, index) => (
             <Book key={index}>
-              <img src={book.url} alt={book.title} />
+              <img src={url} alt={book.title} />
               <span>{book.title}</span>
             </Book>
           ))}
@@ -37,7 +38,7 @@ const RightContent = () => {
         <Books>
           {books.map((book, index) => (
             <Book key={index}>
-              <img src={book.url} alt={book.title} />
+              <img src={url} alt={book.title} />
               <span>{book.title}</span>
             </Book>
           ))}
@@ -46,6 +47,12 @@ const RightContent = () => {
       <AuthorSection>
         <span>Authors</span>
         <Authors>
+          {authors.map((author, index) => (
+            <Author key={index}>
+              <img src="./assets/obito.jpg" alt={author.name} />
+              <span>{author.name}</span>
+            </Author>
+          ))}
           <Author>
             <img src="./assets/obito.jpg" alt="Obito Uchiha" />
             <span>Obito</span>
@@ -100,7 +107,7 @@ const BooksSection = styled.div`
 const Books = styled.div`
   display: flex;
   gap: 1rem;
-  align-items: center;
+  align-items: stretch;
   max-height: 100%;
   overflow: scroll;
   -ms-overflow-style: none;
@@ -113,7 +120,7 @@ const Books = styled.div`
 const Book = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   gap: 0.4rem;
   img {
