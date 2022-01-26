@@ -22,7 +22,7 @@ const httpGetAllBooks = async (req, res) => {
         },
       },
     ],
-    attributes: ["title"],
+    attributes: ["title", "image_link"],
     limit,
     offset,
     order: [["title", "ASC"]],

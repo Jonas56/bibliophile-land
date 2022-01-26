@@ -18,9 +18,9 @@ app.use(middleware.requestLogger);
 
 app.use("/v1", api);
 
-app.use("/*", (req, res) => {
-  res.sendFile(path.join(__dirname, "dist", "index.html"));
-});
+// app.use("/*", (req, res) => {
+//   res.sendFile(path.join(__dirname, "dist", "index.html"));
+// });
 
 app.use(middleware.unknownEndpoint);
 app.use(middleware.errorHandler);
