@@ -12,7 +12,7 @@ const Home = () => {
 
   const getBooks = () => {
     axios
-      .get("http://localhost:3001/v1/api/books")
+      .get("v1/api/books")
       .then((response) => {
         console.log(response);
         setBooks(response.data.rows);
@@ -22,7 +22,7 @@ const Home = () => {
   };
   const getAuthors = () => {
     axios
-      .get("http://localhost:3001/v1/api/authors")
+      .get("/v1/api/authors")
       .then((response) => {
         console.log(response);
         setAuthors(response.data.rows);

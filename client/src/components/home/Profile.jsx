@@ -55,10 +55,7 @@ const ProfileSection = ({ books, loading }) => {
             <Books>
               {books.map((book, index) => (
                 <Book key={index}>
-                  <img
-                    src={book.image_link ? book.image_link : url}
-                    alt={book.title}
-                  />
+                  <img src={book.image_link} alt={book.title} />
                   <span>{book.title}</span>
                 </Book>
               ))}
@@ -70,7 +67,7 @@ const ProfileSection = ({ books, loading }) => {
           <Books>
             {books.map((book, index) => (
               <Book key={index}>
-                <img src={url} alt={book.title} />
+                <img src={book.image_link} alt={book.title} />
                 <span>{book.title}</span>
               </Book>
             ))}
