@@ -1,24 +1,25 @@
 import styled from "styled-components";
 
-const ProfileSection = () => {
-  const books = [
-    {
-      url: "./assets/book.jpg",
-      title: "Memory",
-    },
-    {
-      url: "./assets/book.jpg",
-      title: "Memory",
-    },
-    {
-      url: "./assets/book.jpg",
-      title: "Memory",
-    },
-    {
-      url: "./assets/book.jpg",
-      title: "Memory",
-    },
-  ];
+const ProfileSection = ({ books, loading }) => {
+  // const books = [
+  //   {
+  //     url: "./assets/book.jpg",
+  //     title: "Memory",
+  //   },
+  //   {
+  //     url: "./assets/book.jpg",
+  //     title: "Memory",
+  //   },
+  //   {
+  //     url: "./assets/book.jpg",
+  //     title: "Memory",
+  //   },
+  //   {
+  //     url: "./assets/book.jpg",
+  //     title: "Memory",
+  //   },
+  // ];
+  const url = "./assets/book.jpg";
   return (
     <Container>
       <ProfileInfo>
@@ -48,21 +49,28 @@ const ProfileSection = () => {
       <BooksSection>
         <FavBooks>
           <span>Favorite Books</span>
-          <Books>
-            {books.map((book, index) => (
-              <Book key={index}>
-                <img src={book.url} alt={book.title} />
-                <span>{book.title}</span>
-              </Book>
-            ))}
-          </Books>
+          {loading ? (
+            <p>Loading ..</p>
+          ) : (
+            <Books>
+              {books.map((book, index) => (
+                <Book key={index}>
+                  <img
+                    src={book.image_link ? book.image_link : url}
+                    alt={book.title}
+                  />
+                  <span>{book.title}</span>
+                </Book>
+              ))}
+            </Books>
+          )}
         </FavBooks>
         <OtherBooks>
           <span>Other Books</span>
           <Books>
             {books.map((book, index) => (
               <Book key={index}>
-                <img src={book.url} alt={book.title} />
+                <img src={url} alt={book.title} />
                 <span>{book.title}</span>
               </Book>
             ))}
@@ -82,7 +90,6 @@ const Container = styled.div`
   gap: 1.5rem;
 
   height: 100%;
-  width: 100%;
 `;
 const ProfileInfo = styled.div`
   display: flex;
@@ -95,9 +102,13 @@ const Profile = styled.div`
   display: flex;
   gap: 1rem;
   justify-content: space-between;
-  width: 100%;
+  min-width: 100%;
   padding-left: 2.4rem;
   padding-top: 1.3rem;
+
+  /* @media screen and (max-width: 1024px) {
+    padding-left: 0.7rem;
+  } */
 `;
 const Photo = styled.div`
   width: 100px;
