@@ -3,6 +3,7 @@ import styled from "styled-components";
 import ProfileSection from "../components/home/Profile";
 import RightContent from "../components/home/RightContent";
 import axios from "axios";
+import { Outlet } from "react-router-dom";
 
 const Home = () => {
   const [books, setBooks] = useState([]);
@@ -35,14 +36,18 @@ const Home = () => {
     getAuthors();
   }, []);
   return (
-    <Container>
-      <Left>
-        <ProfileSection books={books} loading={loading} />
-      </Left>
-      <Right>
-        <RightContent books={books} loading={loading} authors={authors} />
-      </Right>
-    </Container>
+    <>
+      {" "}
+      <Container>
+        <Left>
+          <ProfileSection books={books} loading={loading} />
+        </Left>
+        <Right>
+          <RightContent books={books} loading={loading} authors={authors} />
+        </Right>
+      </Container>
+      {/* <Outlet /> */}
+    </>
   );
 };
 

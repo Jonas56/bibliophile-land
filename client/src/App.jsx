@@ -1,14 +1,11 @@
 import React from "react";
-// components
-import Login from "./components/login/Login";
-import Navbar from "./components/Navbar";
+import AppRoutes from "./AppRoutes";
 import "./index.css";
-import Home from "./pages/Home";
+
 const App = () => {
   return (
     <>
-      <Navbar />
-      <Home />
+      <AppRoutes />
     </>
   );
 };

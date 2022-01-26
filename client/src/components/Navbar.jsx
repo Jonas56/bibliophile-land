@@ -5,40 +5,44 @@ import { BsThreeDots } from "react-icons/bs";
 import { IoMdNotifications } from "react-icons/io";
 import { FaUserAlt } from "react-icons/fa";
 import { useState } from "react";
+import { Outlet } from "react-router-dom";
 
 const Navbar = () => {
   const [searchInput, setSearchInput] = useState("");
   return (
-    <Container>
-      <Logo />
-      <NavMenu>
-        <Search>
-          <input
-            type="text"
-            placeholder="Search .."
-            value={searchInput}
-            onChange={(e) => setSearchInput(e.target.value)}
-          />
-          <BiSearchAlt2
-            style={{
-              cursor: "pointer",
-              fontSize: "21px",
-            }}
-          />
-        </Search>
-        <Icons>
-          <Icon>
-            <BsThreeDots />
-          </Icon>
-          <Icon>
-            <IoMdNotifications />
-          </Icon>
-          <Icon>
-            <FaUserAlt />
-          </Icon>
-        </Icons>
-      </NavMenu>
-    </Container>
+    <>
+      <Container>
+        <Logo />
+        <NavMenu>
+          <Search>
+            <input
+              type="text"
+              placeholder="Search .."
+              value={searchInput}
+              onChange={(e) => setSearchInput(e.target.value)}
+            />
+            <BiSearchAlt2
+              style={{
+                cursor: "pointer",
+                fontSize: "21px",
+              }}
+            />
+          </Search>
+          <Icons>
+            <Icon>
+              <BsThreeDots />
+            </Icon>
+            <Icon>
+              <IoMdNotifications />
+            </Icon>
+            <Icon>
+              <FaUserAlt />
+            </Icon>
+          </Icons>
+        </NavMenu>
+      </Container>
+      <Outlet />
+    </>
   );
 };
 

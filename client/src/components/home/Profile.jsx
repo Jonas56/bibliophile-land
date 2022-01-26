@@ -166,7 +166,8 @@ const FavBooks = styled.div`
 
 const Books = styled.div`
   display: flex;
-  align-items: center;
+  align-items: stretch;
+
   gap: 1rem;
   overflow: scroll;
   -ms-overflow-style: none;
@@ -178,7 +179,7 @@ const Books = styled.div`
 const Book = styled.div`
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 0.4rem;
   flex-direction: column;
 
