@@ -5,40 +5,48 @@ import { BsThreeDots } from "react-icons/bs";
 import { IoMdNotifications } from "react-icons/io";
 import { FaUserAlt } from "react-icons/fa";
 import { useState } from "react";
-
+import { Outlet } from "react-router-dom";
+import { Link } from "react-router-dom";
 const Navbar = () => {
   const [searchInput, setSearchInput] = useState("");
   return (
-    <Container>
-      <Logo />
-      <NavMenu>
-        <Search>
-          <input
-            type="text"
-            placeholder="Search .."
-            value={searchInput}
-            onChange={(e) => setSearchInput(e.target.value)}
-          />
-          <BiSearchAlt2
-            style={{
-              cursor: "pointer",
-              fontSize: "21px",
-            }}
-          />
-        </Search>
-        <Icons>
-          <Icon>
-            <BsThreeDots />
-          </Icon>
-          <Icon>
-            <IoMdNotifications />
-          </Icon>
-          <Icon>
-            <FaUserAlt />
-          </Icon>
-        </Icons>
-      </NavMenu>
-    </Container>
+    <>
+      <Container>
+        <Link to="/" className="link">
+          <Logo />
+        </Link>
+        <NavMenu>
+          <Search>
+            <input
+              type="text"
+              placeholder="Search .."
+              value={searchInput}
+              onChange={(e) => setSearchInput(e.target.value)}
+            />
+            <BiSearchAlt2
+              style={{
+                cursor: "pointer",
+                fontSize: "21px",
+              }}
+            />
+          </Search>
+          <Icons>
+            <Icon>
+              <BsThreeDots />
+            </Icon>
+            <Icon>
+              <IoMdNotifications />
+            </Icon>
+            <Link to="user">
+              <Icon>
+                <FaUserAlt />
+              </Icon>
+            </Link>
+          </Icons>
+        </NavMenu>
+      </Container>
+      <Outlet />
+    </>
   );
 };
 
@@ -52,6 +60,10 @@ const Container = styled.header`
   align-items: center;
   padding-left: 2rem;
   padding-right: 2rem;
+
+  .link {
+    text-decoration: none;
+  }
 
   @media screen and (max-width: 1000px) {
     padding-left: 0.5rem;
