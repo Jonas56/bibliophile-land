@@ -1,24 +1,6 @@
 import styled from "styled-components";
 
 const RightContent = ({ books, loading, authors }) => {
-  // const books = [
-  //   {
-  //     url: "./assets/book.jpg",
-  //     title: "Memory",
-  //   },
-  //   {
-  //     url: "./assets/book.jpg",
-  //     title: "Memory",
-  //   },
-  //   {
-  //     url: "./assets/book.jpg",
-  //     title: "Memory",
-  //   },
-  //   {
-  //     url: "./assets/book.jpg",
-  //     title: "Memory",
-  //   },
-  // ];
   const url = "./assets/book.jpg";
   return (
     <Container>
@@ -53,30 +35,6 @@ const RightContent = ({ books, loading, authors }) => {
               <span>{author.name}</span>
             </Author>
           ))}
-          <Author>
-            <img src="./assets/obito.jpg" alt="Obito Uchiha" />
-            <span>Obito</span>
-          </Author>
-          <Author>
-            <img src="./assets/obito.jpg" alt="Obito Uchiha" />
-            <span>Obito</span>
-          </Author>
-          <Author>
-            <img src="./assets/obito.jpg" alt="Obito Uchiha" />
-            <span>Obito</span>
-          </Author>
-          <Author>
-            <img src="./assets/obito.jpg" alt="Obito Uchiha" />
-            <span>Obito</span>
-          </Author>
-          <Author>
-            <img src="./assets/obito.jpg" alt="Obito Uchiha" />
-            <span>Obito</span>
-          </Author>
-          <Author>
-            <img src="./assets/obito.jpg" alt="Obito Uchiha" />
-            <span>Obito</span>
-          </Author>
         </Authors>
       </AuthorSection>
     </Container>
