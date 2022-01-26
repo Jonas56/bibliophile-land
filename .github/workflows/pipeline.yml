@@ -13,13 +13,13 @@ jobs:
         with:
           node-version: "14.x"
       - name: Install dependencies
-        run: npm install
+        run: npm run install-app
       - name: lint checking
         run: npm run lint
         env:
           NODE_ENV: production
-      # - name: build
-      #   run: npm run build-ui
+      - name: build
+        run: npm run build-ui
       - name: test
         run: npm run test
         env:
@@ -32,5 +32,5 @@ jobs:
         uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "bibliophile-land" # Must be unique in Heroku
+          heroku_app_name: "bibliophile-land"
           heroku_email: "youneslamkhanter02@gmail.com"

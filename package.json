@@ -5,14 +5,17 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
+    "start-test": "cross-env NODE_ENV=test node index.js",
+    "install-client": "cd ./client && npm install",
+    "install-app": "npm install && npm run install-client",
+    "build-ui": "rm -rf dist && cd ./client && npm run build && cp -r build ../dist",
+    "build": "npm run install-app && npm run build-ui",
     "dev": "cross-env NODE_ENV=development nodemon index.js",
     "lint": "eslint . --fix",
     "test": "cross-env NODE_ENV=test jest --verbose --runInBand",
-    "build-ui": "rm -rf dist && cd ./client && npm run build && cp -r build ../dist",
     "deploy": "git push heroku main",
-    "deploy-full": "npm run build:ui && git add . && git commit -m uibuild && git push && npm run deploy",
-    "logs-prod": "heroku logs --tail",
-    "start-test": "cross-env NODE_ENV=test node index.js"
+    "deploy-full": "npm run build-ui && git add . && git commit -m uibuild && git push && npm run deploy",
+    "logs-prod": "heroku logs --tail"
   },
   "author": "",
   "license": "ISC",
@@ -31,5 +34,6 @@
     "jest": "^27.1.1",
     "nodemon": "^2.0.12",
     "supertest": "^6.2.2"
-  }
+  },
+  "heroku-run-build-script": true
 }
