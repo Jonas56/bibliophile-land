@@ -6,13 +6,15 @@ import { IoMdNotifications } from "react-icons/io";
 import { FaUserAlt } from "react-icons/fa";
 import { useState } from "react";
 import { Outlet } from "react-router-dom";
-
+import { Link } from "react-router-dom";
 const Navbar = () => {
   const [searchInput, setSearchInput] = useState("");
   return (
     <>
       <Container>
-        <Logo />
+        <Link to="/" className="link">
+          <Logo />
+        </Link>
         <NavMenu>
           <Search>
             <input
@@ -35,9 +37,11 @@ const Navbar = () => {
             <Icon>
               <IoMdNotifications />
             </Icon>
-            <Icon>
-              <FaUserAlt />
-            </Icon>
+            <Link to="user">
+              <Icon>
+                <FaUserAlt />
+              </Icon>
+            </Link>
           </Icons>
         </NavMenu>
       </Container>
@@ -56,6 +60,10 @@ const Container = styled.header`
   align-items: center;
   padding-left: 2rem;
   padding-right: 2rem;
+
+  .link {
+    text-decoration: none;
+  }
 
   @media screen and (max-width: 1000px) {
     padding-left: 0.5rem;
