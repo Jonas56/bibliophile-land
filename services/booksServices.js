@@ -55,7 +55,7 @@ const httpGetBookById = async (req, res) => {
   });
 
   if (book) {
-    return res.status(201).json(book);
+    return res.status(200).json(book);
   } else {
     return res.status(400).json({ message: "Book not found!" });
   }
