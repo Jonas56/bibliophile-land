@@ -17,6 +17,7 @@ const Book = () => {
   useEffect(() => {
     getBooks();
   }, []);
+  console.log(books);
   return (
     <Container>
       <BookInfo>
@@ -25,9 +26,14 @@ const Book = () => {
             <img src="./assets/book.jpg" alt="" />
           </div>
           <div className="book-info">
-            <div className="book-info__title">Book </div>
+            <h1 className="book-info__title">Book </h1>
             <p className="book-info__description">
               Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Recusandae non eius voluptatum ab reiciendis consequatur possimus
+              sed optio repudiandae quisquam.Lorem ipsum dolor sit amet
+              consectetur adipisicing elit. Recusandae non eius voluptatum ab
+              reiciendis consequatur possimus sed optio repudiandae
+              quisquam.Lorem ipsum dolor sit amet consectetur adipisicing elit.
               Recusandae non eius voluptatum ab reiciendis consequatur possimus
               sed optio repudiandae quisquam.
             </p>
@@ -36,11 +42,11 @@ const Book = () => {
         </Info>
         <Details>test</Details>
       </BookInfo>
-      <Suggetions>
+      <Suggestions>
         <h2>Similar Books</h2>
         <div className="books-section">
-          {books.map((book) => {
-            <div key={book.title}>
+          {books.slice(3, 8).map((book) => (
+            <div key={book.title} className="books-section__book">
               <h3>{book.title}</h3>
               <p>
                 Lorem, ipsum dolor sit amet consectetur adipisicing elit.
@@ -48,10 +54,10 @@ const Book = () => {
                 blanditiis cumque dolor. Id iste possimus repellat, enim velit
                 corporis amet quidem reprehenderit?
               </p>
-            </div>;
-          })}
+            </div>
+          ))}
         </div>
-      </Suggetions>
+      </Suggestions>
     </Container>
   );
 };
@@ -69,10 +75,7 @@ const Container = styled.div`
   overflow: hidden;
 
   @media screen and (max-width: 1280px) {
-    display: flex;
-    gap: 1.5rem;
-    align-content: center;
-    justify-content: center;
+    grid-template-rows: repeat(4, 1fr);
   }
 `;
 const BookInfo = styled.div`
@@ -84,7 +87,7 @@ const BookInfo = styled.div`
   grid-template-rows: repeat(2, 1fr);
   gap: 1.5rem;
   @media screen and (max-width: 1280px) {
-    flex: 1;
+    grid-area: 1 / 1 / 4 / 4;
   }
 `;
 const Info = styled.div`
@@ -101,6 +104,7 @@ const Info = styled.div`
     img {
       width: 237px;
       height: 359px;
+      border-radius: 5px;
     }
   }
 
@@ -108,28 +112,70 @@ const Info = styled.div`
     grid-area: 1 / 2 / 4 / 4;
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: space-between;
     margin-right: 1rem;
+
+    h1 {
+      font-weight: 500;
+      font-size: 24px;
+    }
+    p {
+      font-weight: 300;
+      line-height: 20px;
+      font-size: 1rem;
+    }
+    .book-info__buttons {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
   }
 `;
 const Details = styled.div`
   grid-area: 2 / 1 / 3 / 2;
 `;
-const Suggetions = styled.div`
+const Suggestions = styled.div`
   grid-area: 1 / 3 / 6 / 4;
   width: 100%;
   height: 100%;
   display: flex;
   gap: 1.2rem;
   flex-direction: column;
-  align-items: center;
+  justify-content: flex-start;
+  align-items: flex-start;
+  h2 {
+    font-size: 20px;
+    font-weight: 500;
+  }
   .books-section {
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 1rem;
+    .books-section__book {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+
+      p {
+        font-size: 16px;
+
+        font-weight: 300;
+        line-height: 20px;
+        letter-spacing: 0em;
+        text-align: left;
+      }
+      h3 {
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 20px;
+        letter-spacing: 0em;
+        text-align: left;
+      }
+    }
   }
+
   @media screen and (max-width: 1280px) {
-    flex: 1;
+    grid-area: 4 / 1 / 5 / 4;
   }
-  overflow-x: auto;
 `;
