@@ -1,31 +1,12 @@
 import styled from "styled-components";
+import BooksSlider from "./BooksSlider";
 
 const RightContent = ({ books, loading, authors }) => {
   const url = "./assets/book.jpg";
   return (
     <Container>
-      <BooksSection>
-        <span>Trending</span>
-        <Books>
-          {books.map((book, index) => (
-            <Book key={index}>
-              <img src={book.image_link} alt={book.title} />
-              <span>{book.title}</span>
-            </Book>
-          ))}
-        </Books>
-      </BooksSection>
-      <BooksSection>
-        <span>Best Sellers</span>
-        <Books>
-          {books.map((book, index) => (
-            <Book key={index}>
-              <img src={book.image_link} alt={book.title} />
-              <span>{book.title}</span>
-            </Book>
-          ))}
-        </Books>
-      </BooksSection>
+      <BooksSlider title="Trending" books={books} />
+      <BooksSlider title="Best Sellers" books={books} />
       <AuthorSection>
         <span>Authors</span>
         <Authors>

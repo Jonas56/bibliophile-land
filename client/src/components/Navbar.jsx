@@ -60,6 +60,7 @@ const Container = styled.header`
   align-items: center;
   padding-left: 2rem;
   padding-right: 2rem;
+  margin-bottom: 1.7rem;
 
   .link {
     text-decoration: none;
