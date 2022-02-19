@@ -1,11 +1,14 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const Book = ({ book }) => {
   return (
-    <Container>
-      <img src={book.image_link} alt={book.title} />
-      <span className="book-title">{book.title}</span>
-    </Container>
+    <Link to="books">
+      <Container>
+        <img src={book.image_link} alt={book.title} />
+        <span className="book-title">{book.title}</span>
+      </Container>
+    </Link>
   );
 };
 
@@ -24,6 +27,7 @@ const Container = styled.div`
   }
   .book-title {
     font-size: 14px;
+    text-align: center;
   }
   * {
     cursor: pointer;
