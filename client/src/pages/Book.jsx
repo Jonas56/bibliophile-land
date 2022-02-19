@@ -71,15 +71,16 @@ const Container = styled.div`
   padding: 1.2rem 1.7rem;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(5, 1fr);
+  grid-template-rows: repeat(4, 1fr);
   overflow: hidden;
 
   @media screen and (max-width: 1280px) {
-    grid-template-rows: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
   }
 `;
 const BookInfo = styled.div`
-  grid-area: 1 / 1 / 6 / 3;
+  grid-area: 1 / 1 / 5 / 3;
   width: 100%;
   height: 100%;
   display: grid;
@@ -87,7 +88,9 @@ const BookInfo = styled.div`
   grid-template-rows: repeat(2, 1fr);
   gap: 1.5rem;
   @media screen and (max-width: 1280px) {
-    grid-area: 1 / 1 / 4 / 4;
+    grid-area: 1 / 1 / 3 / 4;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
   }
 `;
 const Info = styled.div`
@@ -130,12 +133,26 @@ const Info = styled.div`
       gap: 1rem;
     }
   }
+  @media screen and (max-width: 1280px) {
+    grid-area: 1 / 1 / 2 / 4;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 1fr;
+    .book-image {
+      grid-area: 1 / 1 / 2 / 2;
+    }
+    .book-info {
+      grid-area: 1 / 2 / 2 / 4;
+    }
+  }
 `;
 const Details = styled.div`
   grid-area: 2 / 1 / 3 / 2;
+  @media screen and (max-width: 1280px) {
+    grid-area: 2 / 1 / 3 / 4;
+  }
 `;
 const Suggestions = styled.div`
-  grid-area: 1 / 3 / 6 / 4;
+  grid-area: 1 / 3 / 5 / 4;
   width: 100%;
   height: 100%;
   display: flex;
@@ -143,6 +160,9 @@ const Suggestions = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
+  background-color: #0d1117;
+  border-radius: 5px;
+  padding: 1rem;
   h2 {
     font-size: 20px;
     font-weight: 500;
@@ -176,6 +196,6 @@ const Suggestions = styled.div`
   }
 
   @media screen and (max-width: 1280px) {
-    grid-area: 4 / 1 / 5 / 4;
+    grid-area: 3 / 1 / 4 / 4;
   }
 `;

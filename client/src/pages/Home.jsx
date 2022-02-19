@@ -3,7 +3,6 @@ import styled from "styled-components";
 import ProfileSection from "../components/home/Profile";
 import RightContent from "../components/home/RightContent";
 import axios from "axios";
-import { Outlet } from "react-router-dom";
 
 const Home = () => {
   const [books, setBooks] = useState([]);
@@ -46,7 +45,6 @@ const Home = () => {
           <RightContent books={books} loading={loading} authors={authors} />
         </Right>
       </Container>
-      {/* <Outlet /> */}
     </>
   );
 };
