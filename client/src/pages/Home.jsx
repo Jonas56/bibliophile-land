@@ -9,8 +9,8 @@ const Home = () => {
   const [authors, setAuthors] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const getBooks = () => {
-    axios
+  const getBooks = async () => {
+    await axios
       .get("v1/api/books")
       .then((response) => {
         console.log(response);
@@ -19,7 +19,7 @@ const Home = () => {
       .catch((e) => console.log(e))
       .finally(() => setLoading(false));
   };
-  const getAuthors = () => {
+  const getAuthors = async () => {
     axios
       .get("/v1/api/authors")
       .then((response) => {
