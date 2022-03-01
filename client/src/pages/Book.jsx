@@ -1,6 +1,8 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import styled from "styled-components";
+import BooksSlider from "../components/home/BooksSlider";
+import BookCard from "../components/single-book/suggestions/BookCard";
 
 const Book = () => {
   const [books, setBooks] = useState([]);
@@ -17,7 +19,19 @@ const Book = () => {
   useEffect(() => {
     getBooks();
   }, []);
-  console.log(books);
+
+  const [windowWidth, setWindowWidth] = useState(0);
+
+  let resizeWindow = () => {
+    setWindowWidth(window.innerWidth);
+  };
+
+  useEffect(() => {
+    resizeWindow();
+    window.addEventListener("resize", resizeWindow);
+    return () => window.removeEventListener("resize", resizeWindow);
+  }, []);
+
   return (
     <Container>
       <BookInfo>
@@ -43,20 +57,18 @@ const Book = () => {
         <Details>test</Details>
       </BookInfo>
       <Suggestions>
-        <h2>Similar Books</h2>
-        <div className="books-section">
-          {books.slice(3, 8).map((book) => (
-            <div key={book.title} className="books-section__book">
-              <h3>{book.title}</h3>
-              <p>
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                Cupiditate saepe beatae a qui architecto repellat ipsam fugiat
-                blanditiis cumque dolor. Id iste possimus repellat, enim velit
-                corporis amet quidem reprehenderit?
-              </p>
+        {windowWidth > 1280 ? (
+          <>
+            <h2>Similar Books</h2>
+            <div className="books-section">
+              {books.slice(3, 8).map((book) => (
+                <BookCard book={book} />
+              ))}
             </div>
-          ))}
-        </div>
+          </>
+        ) : (
+          <BooksSlider books={books} />
+        )}
       </Suggestions>
     </Container>
   );
