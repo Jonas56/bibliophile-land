@@ -12,9 +12,10 @@ const BookCard = ({ book }) => {
       <div className="book-card__info">
         <h3 className="book-card__title">{title}</h3>
         <p className="book-card__desc">
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Cupiditate
-          saepe beatae a qui architecto repellat ipsam fugiat blanditiis cumque
-          dolor.
+          It is a long established fact that a reader will be distracted by the
+          readable content of a page when looking at its layout. The point of
+          using Lorem Ipsum is that it has a more-or-less normal distribution of
+          letters.
         </p>
       </div>
     </Container>
@@ -27,13 +28,18 @@ const Container = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: 1fr;
-  gap: 1.2rem;
+  gap: 0.8rem;
   height: 210px;
 
   /* image styles */
 
   .book-card__image {
     grid-area: 1 / 1 / 2 / 2;
+
+    img {
+      height: 205px;
+      width: 130px;
+    }
   }
 
   /* infos styles */
