@@ -42,14 +42,13 @@ const Book = () => {
           <div className="book-info">
             <h1 className="book-info__title">Book </h1>
             <p className="book-info__description">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Recusandae non eius voluptatum ab reiciendis consequatur possimus
-              sed optio repudiandae quisquam.Lorem ipsum dolor sit amet
-              consectetur adipisicing elit. Recusandae non eius voluptatum ab
-              reiciendis consequatur possimus sed optio repudiandae
-              quisquam.Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Recusandae non eius voluptatum ab reiciendis consequatur possimus
-              sed optio repudiandae quisquam.
+              It is a long established fact that a reader will be distracted by
+              the readable content of a page when looking at its layout. The
+              point of using Lorem Ipsum is that it has a more-or-less normal
+              distribution of letters. It is a long established fact that a
+              reader will be distracted by the readable content of a page when
+              looking at its layout. The point of using Lorem Ipsum is that it
+              has a more-or-less normal distribution of letters.
             </p>
             <div className="book-info__buttons">btn</div>
           </div>
@@ -67,7 +66,7 @@ const Book = () => {
             </div>
           </>
         ) : (
-          <BooksSlider books={books} />
+          <BooksSlider books={books} title={"Similar Books"} />
         )}
       </Suggestions>
     </Container>
@@ -94,7 +93,7 @@ const Container = styled.div`
 const BookInfo = styled.div`
   grid-area: 1 / 1 / 5 / 3;
   width: 100%;
-  height: 100%;
+  height: 389px;
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: repeat(2, 1fr);
@@ -174,7 +173,13 @@ const Suggestions = styled.div`
   align-items: flex-start;
   background-color: #0d1117;
   border-radius: 5px;
-  padding: 1rem;
+  padding: 1.3rem 2rem;
+  overflow: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  ::-webkit-scrollbar {
+    display: none;
+  }
   h2 {
     font-size: 20px;
     font-weight: 500;
