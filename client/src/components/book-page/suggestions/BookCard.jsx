@@ -48,14 +48,14 @@ const Container = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    gap: 2rem;
+    gap: 0.7rem;
+    overflow: hidden;
 
     h3 {
       font-size: 16px;
       font-style: normal;
       font-weight: 500;
       line-height: 20px;
-      letter-spacing: 0em;
     }
 
     p {
@@ -64,7 +64,6 @@ const Container = styled.div`
       font-style: normal;
       font-weight: 300;
       line-height: 20px;
-      letter-spacing: 0em;
     }
   }
 `;

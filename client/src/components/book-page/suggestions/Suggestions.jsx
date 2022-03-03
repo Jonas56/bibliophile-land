@@ -40,7 +40,7 @@ export default Suggestions;
 const Container = styled.div`
   grid-area: 1 / 3 / 5 / 4;
   width: 100%;
-  height: 100%;
+  height: auto;
   display: flex;
   gap: 1.2rem;
   flex-direction: column;
@@ -58,7 +58,7 @@ const Container = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1rem;
+    gap: 3rem;
     .books-section__book {
       display: flex;
       flex-direction: column;
@@ -66,24 +66,29 @@ const Container = styled.div`
 
       p {
         font-size: 16px;
-
         font-weight: 300;
         line-height: 20px;
-        letter-spacing: 0em;
-        text-align: left;
       }
       h3 {
         font-size: 16px;
         font-weight: 500;
         line-height: 20px;
-        letter-spacing: 0em;
-        text-align: left;
       }
+    }
+    overflow: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    ::-webkit-scrollbar {
+      display: none;
     }
   }
 
   @media screen and (max-width: 1280px) {
     grid-area: 3 / 1 / 4 / 4;
     background-color: transparent;
+    padding: 0;
+  }
+  @media screen and (max-width: 780px) {
+    flex: 1;
   }
 `;
