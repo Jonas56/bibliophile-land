@@ -11,7 +11,7 @@ const BookPage = () => {
   const [bookById, setBookById] = useState(null);
   const getBookById = () => {
     axios
-      .get("http://localhost:3001/v1/api/books/" + bookid)
+      .get("/v1/api/books/" + bookid)
       .then((response) => {
         console.log(response);
         setBookById(response.data);
@@ -21,7 +21,7 @@ const BookPage = () => {
 
   const getBooks = () => {
     axios
-      .get("http://localhost:3001/v1/api/books/")
+      .get("/v1/api/books/")
       .then((response) => {
         console.log(response);
         setBooks(response.data.rows);
@@ -31,7 +31,7 @@ const BookPage = () => {
   useEffect(() => {
     getBooks();
     getBookById();
-  }, [bookById]);
+  }, []);
 
   return (
     <Container>
