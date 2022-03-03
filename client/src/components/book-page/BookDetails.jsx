@@ -1,25 +1,16 @@
 import React from "react";
 import styled from "styled-components";
 
-const BookDetails = () => {
+const BookDetails = ({ book }) => {
   return (
     <Container>
-      {/* <BookDetails book={book}/>  */}
       <Info>
         <div className="book-image">
-          <img src="./assets/book.jpg" alt="" />
+          <img src={book.image_link} alt={book.title} />
         </div>
         <div className="book-info">
-          <h1 className="book-info__title">Book </h1>
-          <p className="book-info__description">
-            It is a long established fact that a reader will be distracted by
-            the readable content of a page when looking at its layout. The point
-            of using Lorem Ipsum is that it has a more-or-less normal
-            distribution of letters. It is a long established fact that a reader
-            will be distracted by the readable content of a page when looking at
-            its layout. The point of using Lorem Ipsum is that it has a
-            more-or-less normal distribution of letters.
-          </p>
+          <h1 className="book-info__title">{book.title}</h1>
+          <p className="book-info__description">{book.description}</p>
           <div className="book-info__buttons">btn</div>
         </div>
       </Info>
@@ -76,7 +67,7 @@ const Info = styled.div`
     p {
       font-weight: 300;
       line-height: 20px;
-      font-size: 1rem;
+      font-size: 0.9rem;
     }
     .book-info__buttons {
       display: flex;

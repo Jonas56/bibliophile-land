@@ -1,14 +1,27 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { useParams } from "react-router";
 import styled from "styled-components";
 import BookDetails from "../components/book-page/BookDetails";
 import Suggestions from "../components/book-page/suggestions/Suggestions";
 
 const BookPage = () => {
+  const { bookid } = useParams();
   const [books, setBooks] = useState([]);
+  const [bookById, setBookById] = useState(null);
+  const getBookById = () => {
+    axios
+      .get("http://localhost:3001/v1/api/books/" + bookid)
+      .then((response) => {
+        console.log(response);
+        setBookById(response.data);
+      })
+      .catch((e) => console.log(e));
+  };
+
   const getBooks = () => {
     axios
-      .get("v1/api/books")
+      .get("http://localhost:3001/v1/api/books/")
       .then((response) => {
         console.log(response);
         setBooks(response.data.rows);
@@ -17,11 +30,12 @@ const BookPage = () => {
   };
   useEffect(() => {
     getBooks();
-  }, []);
+    getBookById();
+  }, [bookById]);
 
   return (
     <Container>
-      <BookDetails />
+      {bookById !== null ? <BookDetails book={bookById} /> : <p>Loading</p>}
       <Suggestions books={books} />
     </Container>
   );
