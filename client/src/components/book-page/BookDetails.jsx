@@ -95,6 +95,18 @@ const Info = styled.div`
       grid-area: 1 / 2 / 2 / 4;
     }
   }
+  @media screen and (max-width: 780px) {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+
+    .book-info {
+      justify-content: center;
+      align-items: center;
+      gap: 1.3rem;
+    }
+  }
 `;
 const Details = styled.div`
   grid-area: 2 / 1 / 3 / 2;

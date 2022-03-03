@@ -49,12 +49,7 @@ const Container = styled.div`
   background-color: #0d1117;
   border-radius: 5px;
   padding: 1.3rem 2rem;
-  overflow: scroll;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-  ::-webkit-scrollbar {
-    display: none;
-  }
+
   h2 {
     font-size: 20px;
     font-weight: 500;
