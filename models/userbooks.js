@@ -15,20 +15,12 @@ module.exports = (sequelize, DataTypes) => {
     {
       book_id: {
         type: DataTypes.INTEGER,
-        references: {
-          model: "Book",
-          key: "id",
-        },
         allowNull: false,
         onDelete: "CASCADE",
         onUpdate: "CASCADE",
       },
       user_id: {
         type: DataTypes.INTEGER,
-        references: {
-          model: "User",
-          key: "id",
-        },
         allowNull: false,
         onDelete: "CASCADE",
         onUpdate: "CASCADE",
@@ -36,6 +28,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
+      underscored: true,
+      timestamps: true,
       modelName: "UserBooks",
     }
   );
