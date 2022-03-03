@@ -31,6 +31,7 @@ export default BookPage;
 
 const Container = styled.div`
   width: 100%;
+  height: auto;
   background-color: #141a1f;
   border-radius: 5px;
   padding: 1.2rem 1.7rem;
@@ -42,5 +43,10 @@ const Container = styled.div`
   @media screen and (max-width: 1280px) {
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
+  }
+  @media screen and (max-width: 780px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
 `;

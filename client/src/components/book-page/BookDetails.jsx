@@ -33,7 +33,7 @@ export default BookDetails;
 const Container = styled.div`
   grid-area: 1 / 1 / 5 / 3;
   width: 100%;
-  height: 389px;
+  height: fit-content;
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: repeat(2, 1fr);
@@ -96,6 +96,7 @@ const Info = styled.div`
     }
   }
   @media screen and (max-width: 780px) {
+    flex: 2;
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -110,6 +111,10 @@ const Info = styled.div`
 `;
 const Details = styled.div`
   grid-area: 2 / 1 / 3 / 2;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  place-content: center;
   @media screen and (max-width: 1280px) {
     grid-area: 2 / 1 / 3 / 4;
   }

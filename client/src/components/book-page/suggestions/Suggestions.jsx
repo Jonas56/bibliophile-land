@@ -40,7 +40,7 @@ export default Suggestions;
 const Container = styled.div`
   grid-area: 1 / 3 / 5 / 4;
   width: 100%;
-  height: 100%;
+  height: auto;
   display: flex;
   gap: 1.2rem;
   flex-direction: column;
@@ -85,5 +85,9 @@ const Container = styled.div`
   @media screen and (max-width: 1280px) {
     grid-area: 3 / 1 / 4 / 4;
     background-color: transparent;
+    padding: 0;
+  }
+  @media screen and (max-width: 780px) {
+    flex: 1;
   }
 `;
