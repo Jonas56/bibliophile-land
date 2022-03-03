@@ -3,22 +3,22 @@ import {
     Route
   } from "react-router-dom";
 import Navbar from "./components/Navbar";
-import Book from "./pages/Book";
+import BookPage from "./pages/BookPage";
 import Home from "./pages/Home";
-import User from "./pages/User";
+import UserPage from "./pages/UserPage";
 
 const AppRoutes = () => {
   return (
   <Routes>
       <Route path="/" element={<Navbar />}>
         <Route index element={<Home />} />
-        <Route path="books" element={<Book />}>
-          <Route path=":id" element={<Book />} />
+        <Route path="books" element={<BookPage />}>
+          <Route path=":id" element={<BookPage />} />
           {/* <Route path=":teamId" element={<Team />} />
           <Route path="new" element={<NewTeamForm />} />
           <Route index element={<LeagueStandings />} /> */}
         </Route>
-        <Route path="user" element={<User />}></Route>
+        <Route path="user" element={<UserPage />}></Route>
         {/* <Route path="*" element={<p>NotFound</p>} /> */}
       </Route>
   </Routes>

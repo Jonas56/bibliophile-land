@@ -4,7 +4,7 @@ import styled from "styled-components";
 import BooksSlider from "../components/home/BooksSlider";
 import BookCard from "../components/single-book/suggestions/BookCard";
 
-const Book = () => {
+const BookPage = () => {
   const [books, setBooks] = useState([]);
   const getBooks = () => {
     axios
@@ -73,7 +73,7 @@ const Book = () => {
   );
 };
 
-export default Book;
+export default BookPage;
 
 const Container = styled.div`
   width: 100%;
@@ -214,5 +214,6 @@ const Suggestions = styled.div`
 
   @media screen and (max-width: 1280px) {
     grid-area: 3 / 1 / 4 / 4;
+    background-color: transparent;
   }
 `;
