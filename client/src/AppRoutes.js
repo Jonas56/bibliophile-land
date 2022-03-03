@@ -13,13 +13,10 @@ const AppRoutes = () => {
       <Route path="/" element={<Navbar />}>
         <Route index element={<Home />} />
         <Route path="books" element={<BookPage />}>
-          <Route path=":id" element={<BookPage />} />
-          {/* <Route path=":teamId" element={<Team />} />
-          <Route path="new" element={<NewTeamForm />} />
-          <Route index element={<LeagueStandings />} /> */}
+          <Route path=":bookid" element={<BookPage />} />
         </Route>
         <Route path="user" element={<UserPage />}></Route>
-        {/* <Route path="*" element={<p>NotFound</p>} /> */}
+        <Route path="*" element={<p>NotFound</p>} />
       </Route>
   </Routes>
   )
