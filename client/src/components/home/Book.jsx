@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Book = ({ book }) => {
   return (
-    <Link to="books">
+    <Link to={`/books/${book.id}`}>
       <Container>
         <img src={book.image_link} alt={book.title} />
         <span className="book-title">{book.title}</span>
