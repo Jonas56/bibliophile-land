@@ -31,7 +31,7 @@ const BookPage = () => {
   useEffect(() => {
     getBooks();
     getBookById();
-  }, []);
+  }, [bookid]);
 
   return (
     <Container>

@@ -1,6 +1,7 @@
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import BooksSlider from "../../home/BooksSlider";
 import BookCard from "./BookCard";
@@ -24,7 +25,9 @@ const Suggestions = ({ books }) => {
           <h2>Similar Books</h2>
           <div className="books-section">
             {books.slice(3, 8).map((book) => (
-              <BookCard book={book} />
+              <Link to={`/books/${book.id}`} key={book.title}>
+                <BookCard book={book} />
+              </Link>
             ))}
           </div>
         </>
