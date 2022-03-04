@@ -1,0 +1,14 @@
+POST  http://localhost:3001/v1/api/register
+Content-Type: application/json
+
+{
+    "name" : "Jonas",
+    "email" : "jonas@email.com",
+    "username" : "Jonas81",
+    "password" : "Jonas@123",
+    "age" : 45
+}
+
+# - username must be unique
+# - password must contain minimum eight characters, 
+#   at least one letter, one number and one special character
