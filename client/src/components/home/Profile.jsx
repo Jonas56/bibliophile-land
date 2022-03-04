@@ -1,25 +1,6 @@
 import styled from "styled-components";
 
 const ProfileSection = ({ books, loading }) => {
-  // const books = [
-  //   {
-  //     url: "./assets/book.jpg",
-  //     title: "Memory",
-  //   },
-  //   {
-  //     url: "./assets/book.jpg",
-  //     title: "Memory",
-  //   },
-  //   {
-  //     url: "./assets/book.jpg",
-  //     title: "Memory",
-  //   },
-  //   {
-  //     url: "./assets/book.jpg",
-  //     title: "Memory",
-  //   },
-  // ];
-  const url = "./assets/book.jpg";
   return (
     <Container>
       <ProfileInfo>
@@ -94,6 +75,7 @@ const ProfileInfo = styled.div`
   align-items: center;
   width: 100%;
   gap: 0.7rem;
+  margin-bottom: 1rem;
 `;
 const Profile = styled.div`
   display: flex;
@@ -102,6 +84,7 @@ const Profile = styled.div`
   min-width: 100%;
   padding-left: 2.4rem;
   padding-top: 1.3rem;
+  margin-bottom: 1rem;
 
   /* @media screen and (max-width: 1024px) {
     padding-left: 0.7rem;
@@ -126,17 +109,26 @@ const Info = styled.div`
   margin-left: 0.8rem;
 `;
 const Name = styled.span`
-  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 21px;
+  line-height: 26px;
 `;
 const Username = styled.span`
-  font-size: 15px;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 17px;
 `;
 const Followers = styled.span`
-  font-size: 13px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 13px;
 `;
 
 const Readbooks = styled.div`
-  width: 87%;
+  width: 90%;
+  max-width: 389px;
   height: 45px;
   background-color: goldenrod;
   border-radius: 10px;
@@ -145,8 +137,24 @@ const Readbooks = styled.div`
   align-items: center;
   padding: 1rem;
 `;
-const Title = styled.span``;
-const Number = styled.span``;
+const Title = styled.span`
+  font-family: Montserrat;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px;
+  letter-spacing: 0em;
+  text-align: left;
+`;
+const Number = styled.span`
+  font-family: Montserrat;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 29px;
+  letter-spacing: 0em;
+  text-align: left;
+`;
 
 /************** */
 

@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import AddButton from "../buttons/AddButton";
 
 const BookDetails = ({ book }) => {
   return (
@@ -11,7 +12,10 @@ const BookDetails = ({ book }) => {
         <div className="book-info">
           <h1 className="book-info__title">{book.title}</h1>
           <p className="book-info__description">{book.description}</p>
-          <div className="book-info__buttons">btn</div>
+          <div className="book-info__buttons">
+            <AddButton text={"Mark as read"} />
+            <AddButton text={"Add to collection"} />
+          </div>
         </div>
       </Info>
       <Details>test</Details>
@@ -57,7 +61,8 @@ const Info = styled.div`
     grid-area: 1 / 2 / 4 / 4;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
+    gap: 1rem;
     margin-right: 1rem;
 
     h1 {
@@ -72,6 +77,7 @@ const Info = styled.div`
     .book-info__buttons {
       display: flex;
       align-items: center;
+      justify-content: center;
       gap: 1rem;
     }
   }
