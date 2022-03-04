@@ -1,5 +1,7 @@
 "use strict";
 const { Model } = require("sequelize");
+const bcrypt = require("bcrypt");
+
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     /**
@@ -35,25 +37,25 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         validate: {
           notEmpty: true,
-          isEmail: true,
+          isEmail: { msg: "email field must be a valid one!" },
         },
       },
       username: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: true,
+        unique: { msg: "That username is taken." },
         validate: {
           notEmpty: true,
         },
       },
       hashed_password: {
         type: DataTypes.STRING(64),
-        validate: {
-          is: /^[0-9a-f]{64}$/i,
-        },
+        allowNull: false,
+        validate: {},
       },
       age: {
-        type: DataTypes.FLOAT,
+        type: DataTypes.DOUBLE,
+        allowNull: false,
       },
     },
     {
@@ -63,5 +65,15 @@ module.exports = (sequelize, DataTypes) => {
       modelName: "User",
     }
   );
+
+  User.addHook("beforeCreate", async (user) => {
+    if (user.hashed_password) {
+      const saltRounds = 10;
+      user.hashed_password = await bcrypt.hash(
+        user.hashed_password,
+        saltRounds
+      );
+    }
+  });
   return User;
 };
