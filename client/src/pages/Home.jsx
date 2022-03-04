@@ -40,6 +40,7 @@ const Home = () => {
       {" "}
       <Container>
         <Left>
+          <Cover />
           <ProfileSection books={books} loading={loading} />
         </Left>
         <Right>
@@ -90,7 +91,9 @@ const Left = styled.section`
   background-color: #141a1f;
   border-radius: 10px;
   padding: 1.2rem;
+  position: relative;
   overflow-x: auto;
+
   /* @media screen and (max-width: 928px) {
     max-width: 100%;
   } */
@@ -104,6 +107,18 @@ const Left = styled.section`
     grid-area: 1 / 1 / 6 / 2;
   }
 `;
+const Cover = styled.div`
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  width: 100%;
+  height: 70px;
+  background-image: url("/assets/profilecover.png");
+  background-size: cover;
+  z-index: 1;
+`;
+
 const Right = styled.section`
   grid-area: 1 / 2 / 6 / 5;
   height: 100%;
