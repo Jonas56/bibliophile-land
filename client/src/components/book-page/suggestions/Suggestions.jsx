@@ -41,9 +41,8 @@ const Suggestions = ({ books }) => {
 export default Suggestions;
 
 const Container = styled.div`
-  grid-area: 1 / 3 / 5 / 4;
+  grid-area: 1 / 3 / 3 / 4;
   width: 100%;
-  height: auto;
   display: flex;
   gap: 1.2rem;
   flex-direction: column;

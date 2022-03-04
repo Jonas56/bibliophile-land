@@ -26,7 +26,7 @@ const BookDetails = ({ book }) => {
 export default BookDetails;
 
 const Container = styled.div`
-  grid-area: 1 / 1 / 5 / 3;
+  grid-area: 1 / 1 / 3 / 3;
   width: 100%;
   height: fit-content;
   display: grid;
@@ -61,7 +61,7 @@ const Info = styled.div`
     grid-area: 1 / 2 / 4 / 4;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: space-between;
     gap: 1rem;
     margin-right: 1rem;
 

@@ -45,18 +45,19 @@ export default BookPage;
 
 const Container = styled.div`
   width: 100%;
-  height: auto;
+  height: 100vh;
   background-color: #141a1f;
   border-radius: 5px;
   padding: 1.2rem 1.7rem;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(4, 1fr);
+  grid-template-rows: repeat(2, 1fr);
   overflow: hidden;
 
   @media screen and (max-width: 1280px) {
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
+    height: auto;
   }
   @media screen and (max-width: 780px) {
     display: flex;
