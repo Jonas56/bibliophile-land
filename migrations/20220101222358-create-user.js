@@ -11,34 +11,24 @@ module.exports = {
       name: {
         type: DataTypes.STRING,
         allowNull: false,
-        validate: {
-          notEmpty: true,
-        },
+      },
+      email: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true,
       },
       username: {
         type: DataTypes.STRING,
         allowNull: false,
         unique: true,
-        validate: {
-          notEmpty: true,
-        },
       },
       hashed_password: {
         type: DataTypes.STRING(64),
-        validate: {
-          is: /^[0-9a-f]{64}$/i,
-        },
-      },
-      email: {
-        type: DataTypes.STRING,
         allowNull: false,
-        validate: {
-          notEmpty: true,
-          isEmail: true,
-        },
       },
       age: {
-        type: DataTypes.FLOAT,
+        type: DataTypes.DOUBLE,
+        allowNull: false,
       },
       created_at: {
         allowNull: false,
