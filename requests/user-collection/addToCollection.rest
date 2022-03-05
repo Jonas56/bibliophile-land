@@ -1,0 +1,5 @@
+POST  http://localhost:3001/v1/api/user/books/1
+# Authorization: bearer token_here
+
+
+# Request that add book.id = 3 from user collection
