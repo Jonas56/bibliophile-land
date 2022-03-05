@@ -9,6 +9,6 @@ api.use("/api/login", loginRouter);
 api.use("/api/register", registerRouter);
 api.use("/api/books", booksRouter);
 api.use("/api/authors", authorsRouter);
-api.use("/api/users", collectionRouter);
+api.use("/api/user", collectionRouter);
 
 module.exports = api;
