@@ -1,0 +1,5 @@
+DELETE  http://localhost:3001/v1/api/user/books/3
+# Authorization: bearer token_here
+
+
+# Request that removes book.id = 3 from user collection

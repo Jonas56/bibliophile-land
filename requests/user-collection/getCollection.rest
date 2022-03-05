@@ -1,0 +1,2 @@
+GET http://localhost:3001/v1/api/user/books
+# Authorization: bearer token_here
