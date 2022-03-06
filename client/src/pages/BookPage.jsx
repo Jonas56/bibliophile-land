@@ -9,8 +9,8 @@ const BookPage = () => {
   const { bookid } = useParams();
   const [books, setBooks] = useState([]);
   const [bookById, setBookById] = useState(null);
-  const getBookById = () => {
-    axios
+  const getBookById = async () => {
+    await axios
       .get("/v1/api/books/" + bookid)
       .then((response) => {
         console.log(response);
@@ -19,8 +19,8 @@ const BookPage = () => {
       .catch((e) => console.log(e));
   };
 
-  const getBooks = () => {
-    axios
+  const getBooks = async () => {
+    await axios
       .get("/v1/api/books/")
       .then((response) => {
         console.log(response);
@@ -29,8 +29,8 @@ const BookPage = () => {
       .catch((e) => console.log(e));
   };
   useEffect(() => {
-    getBooks();
-    getBookById();
+    await getBooks();
+    await getBookById();
   }, [bookid]);
 
   return (

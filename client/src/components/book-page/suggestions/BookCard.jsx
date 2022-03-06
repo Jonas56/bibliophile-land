@@ -39,6 +39,7 @@ const Container = styled.div`
     img {
       height: 205px;
       width: 130px;
+      object-fit: fill;
     }
   }
 

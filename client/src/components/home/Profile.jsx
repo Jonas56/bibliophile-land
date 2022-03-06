@@ -18,14 +18,14 @@ const ProfileSection = ({ books, loading }) => {
           <Title>Books Read</Title>
           <Number>69</Number>
         </Readbooks>
-        <Readbooks>
-          <Title>Books Read</Title>
-          <Number>69</Number>
-        </Readbooks>
-        <Readbooks>
-          <Title>Books Read</Title>
-          <Number>69</Number>
-        </Readbooks>
+        <ReadPages>
+          <Title>Pages Read</Title>
+          <Number>18,320</Number>
+        </ReadPages>
+        <TotalAuthors>
+          <Title>Total Authors</Title>
+          <Number>47</Number>
+        </TotalAuthors>
       </ProfileInfo>
       <BooksSection>
         <FavBooks>
@@ -62,13 +62,14 @@ const ProfileSection = ({ books, loading }) => {
 export default ProfileSection;
 
 const Container = styled.div`
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  gap: 1.5rem;
-
+  gap: 1.2rem;
   height: 100%;
 `;
+
 const ProfileInfo = styled.div`
   display: flex;
   flex-direction: column;
@@ -77,14 +78,16 @@ const ProfileInfo = styled.div`
   gap: 0.7rem;
   margin-bottom: 1rem;
 `;
+
 const Profile = styled.div`
   display: flex;
   gap: 1rem;
   justify-content: space-between;
   min-width: 100%;
   padding-left: 2.4rem;
-  padding-top: 1.3rem;
+  padding-top: 1.5rem;
   margin-bottom: 1rem;
+  z-index: 10;
 
   /* @media screen and (max-width: 1024px) {
     padding-left: 0.7rem;
@@ -93,7 +96,7 @@ const Profile = styled.div`
 const Photo = styled.div`
   width: 100px;
   height: 100px;
-
+  margin-top: -0.5rem;
   img {
     width: 100%;
     height: 100%;
@@ -103,6 +106,7 @@ const Photo = styled.div`
 const Info = styled.div`
   display: flex;
   flex-direction: column;
+  padding-top: 2rem;
   gap: 0.5rem;
   align-self: flex-end;
   margin-right: auto;
@@ -129,14 +133,22 @@ const Followers = styled.span`
 const Readbooks = styled.div`
   width: 90%;
   max-width: 389px;
-  height: 45px;
-  background-color: goldenrod;
+  height: 53px;
+  background-image: url("/assets/readbooks.png");
+  background-size: cover;
   border-radius: 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
 `;
+const ReadPages = styled(Readbooks)`
+  background-image: url("/assets/readpages.png");
+`;
+const TotalAuthors = styled(Readbooks)`
+  background-image: url("/assets/totalauthors.png");
+`;
+
 const Title = styled.span`
   font-family: Montserrat;
   font-size: 13px;
