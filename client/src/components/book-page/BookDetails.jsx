@@ -54,6 +54,7 @@ const Info = styled.div`
       width: 237px;
       height: 359px;
       border-radius: 5px;
+      object-fit: fill;
     }
   }
 

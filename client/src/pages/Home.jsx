@@ -32,8 +32,8 @@ const Home = () => {
   };
 
   useEffect(() => {
-    getBooks();
-    getAuthors();
+    await getBooks();
+    await getAuthors();
   }, []);
   return (
     <>
