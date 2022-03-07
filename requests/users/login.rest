@@ -1,0 +1,11 @@
+POST  http://localhost:3001/v1/api/login
+Content-Type: application/json
+
+
+{
+    "email" : "jonas@laous.com",
+    "password" : "Jonas@123"
+}
+
+
+# Response {name,email,token}
