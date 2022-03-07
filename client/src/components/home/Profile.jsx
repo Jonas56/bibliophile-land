@@ -27,34 +27,6 @@ const ProfileSection = ({ books, loading }) => {
           <Number>47</Number>
         </TotalAuthors>
       </ProfileInfo>
-      <BooksSection>
-        <FavBooks>
-          <span>Favorite Books</span>
-          {loading ? (
-            <p>Loading ..</p>
-          ) : (
-            <Books>
-              {books.map((book, index) => (
-                <Book key={index}>
-                  <img src={book.image_link} alt={book.title} />
-                  <span>{book.title}</span>
-                </Book>
-              ))}
-            </Books>
-          )}
-        </FavBooks>
-        <OtherBooks>
-          <span>Other Books</span>
-          <Books>
-            {books.map((book, index) => (
-              <Book key={index}>
-                <img src={book.image_link} alt={book.title} />
-                <span>{book.title}</span>
-              </Book>
-            ))}
-          </Books>
-        </OtherBooks>
-      </BooksSection>
     </Container>
   );
 };
@@ -167,52 +139,3 @@ const Number = styled.span`
   letter-spacing: 0em;
   text-align: left;
 `;
-
-/************** */
-
-const BooksSection = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-`;
-const FavBooks = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 0.7rem;
-`;
-
-const Books = styled.div`
-  display: flex;
-  align-items: stretch;
-
-  gap: 1rem;
-  overflow: scroll;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-  ::-webkit-scrollbar {
-    display: none;
-  }
-`;
-const Book = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 0.4rem;
-  flex-direction: column;
-
-  img {
-    width: 110px;
-    height: 170px;
-    border-radius: 5px;
-  }
-  span {
-    font-size: 12px;
-  }
-  * {
-    cursor: pointer;
-  }
-`;
-const BookTitle = styled.span`
-  font-size: 12px;
-`;
-const OtherBooks = styled(FavBooks)``;

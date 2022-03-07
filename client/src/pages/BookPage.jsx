@@ -29,8 +29,8 @@ const BookPage = () => {
       .catch((e) => console.log(e));
   };
   useEffect(() => {
-    await getBooks();
-    await getBookById();
+    getBooks();
+    getBookById();
   }, [bookid]);
 
   return (

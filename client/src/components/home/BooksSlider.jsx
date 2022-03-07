@@ -4,7 +4,11 @@ import Book from "./Book";
 const BooksSlider = ({ books, title }) => {
   return (
     <BooksSection>
-      <span>{title}</span>
+      <div className="section-header">
+        <span className="section-title">{title}</span>
+        <span className="section-button">See more</span>
+      </div>
+
       <Books>
         {books.map((book, index) => (
           <Book key={index} book={book} />
@@ -22,8 +26,23 @@ const BooksSection = styled.div`
   max-height: 100%;
   gap: 1.3rem;
   flex: 1;
-  span {
-    font-size: 18px;
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .section-title {
+      font-size: 18px;
+    }
+    .section-button {
+      font-size: 15px;
+      padding-bottom: 3px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-right: 1rem;
+      :hover {
+        border-bottom: 1px solid white;
+      }
+    }
   }
 `;
 
