@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import styled from "styled-components";
 import BookDetails from "../components/book-page/BookDetails";
-import Suggestions from "../components/book-page/suggestions/Suggestions";
+import VerticalBooksSlider from "../components/book-page/suggestions/VerticalBooksSlider";
 
 const BookPage = () => {
   const { bookid } = useParams();
@@ -29,14 +29,14 @@ const BookPage = () => {
       .catch((e) => console.log(e));
   };
   useEffect(() => {
-    await getBooks();
-    await getBookById();
+    getBooks();
+    getBookById();
   }, [bookid]);
 
   return (
     <Container>
       {bookById !== null ? <BookDetails book={bookById} /> : <p>Loading</p>}
-      <Suggestions books={books} />
+      <VerticalBooksSlider books={books} />
     </Container>
   );
 };
@@ -45,7 +45,7 @@ export default BookPage;
 
 const Container = styled.div`
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   background-color: #141a1f;
   border-radius: 5px;
   padding: 1.2rem 1.7rem;
@@ -56,7 +56,7 @@ const Container = styled.div`
 
   @media screen and (max-width: 1280px) {
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(3, 1fr);
+    grid-template-rows: 1fr 0.5fr 0.5fr;
     height: auto;
   }
   @media screen and (max-width: 780px) {

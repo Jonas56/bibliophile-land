@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
-import ProfileSection from "../components/home/Profile";
-import RightContent from "../components/home/RightContent";
+import ProfileSection from "../components/user-page/ProfileSide";
+import RightContent from "../components/home/RightHomeContent";
 import axios from "axios";
 import { Outlet } from "react-router";
 
@@ -32,8 +32,8 @@ const Home = () => {
   };
 
   useEffect(() => {
-    await getBooks();
-    await getAuthors();
+    getBooks();
+    getAuthors();
   }, []);
   return (
     <>
@@ -61,7 +61,7 @@ const Container = styled.main`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(5, 1fr);
-  grid-column-gap: 2rem;
+  grid-column-gap: 1rem;
   grid-row-gap: 0px;
   overflow: hidden;
 
@@ -76,8 +76,11 @@ const Container = styled.main`
   }
   @media screen and (max-width: 1024px) {
     display: flex;
-    align-items: center;
     justify-content: center;
+    flex-direction: column;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    gap: 2rem;
   }
   @media screen and (max-width: 1280px) {
     grid-template-columns: repeat(3, 1fr);
@@ -88,6 +91,8 @@ const Container = styled.main`
 const Left = styled.section`
   grid-area: 1 / 1 / 6 / 2;
   height: 100%;
+  max-width: 458px;
+  min-width: 400px;
   background-color: #141a1f;
   border-radius: 10px;
   padding: 1.2rem;
@@ -102,6 +107,7 @@ const Left = styled.section`
   }
   @media screen and (max-width: 1024px) {
     flex: 1;
+    align-self: center;
   }
   @media screen and (max-width: 1280px) {
     grid-area: 1 / 1 / 6 / 2;

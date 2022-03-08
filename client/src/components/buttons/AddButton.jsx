@@ -1,15 +1,19 @@
 import React from "react";
 import styled from "styled-components";
 
-const AddButton = ({ text }) => {
-  return <Container>{text}</Container>;
+const AddButton = ({ text, color, bgColor }) => {
+  return (
+    <Container color={color} bgColor={bgColor}>
+      {text}
+    </Container>
+  );
 };
 
 export default AddButton;
 
 const Container = styled.button`
-  background-color: #c8edc2;
-  color: #29461b;
+  background-color: ${(props) => (props.bgColor ? props.bgColor : "#c8edc2")};
+  color: ${(props) => (props.color ? props.color : "#29461b")};
   padding: 0.5rem 1.1rem;
   font-size: 14px;
   font-style: normal;

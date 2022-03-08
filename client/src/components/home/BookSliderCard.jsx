@@ -21,9 +21,9 @@ const Container = styled.div`
   align-items: center;
   gap: 0.4rem;
   img {
-    height: 205px;
-    width: 130px;
-    border-radius: 5px;
+    height: 216px;
+    width: 140px;
+    border-radius: 3px;
   }
   .book-title {
     font-size: 14px;
