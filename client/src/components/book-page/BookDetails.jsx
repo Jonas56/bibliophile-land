@@ -14,7 +14,11 @@ const BookDetails = ({ book }) => {
           <p className="book-info__description">{book.description}</p>
           <div className="book-info__buttons">
             <AddButton text={"Mark as read"} />
-            <AddButton text={"Add to collection"} />
+            <AddButton
+              text={"Add to collection"}
+              color="#413F2A"
+              bgColor={"#D6C957"}
+            />
           </div>
         </div>
       </Info>

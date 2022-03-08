@@ -4,9 +4,9 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import BooksSlider from "../../home/BooksSlider";
-import BookCard from "./VerticalBookCard";
+import VerticalBookCard from "./VerticalBookCard";
 
-const Suggestions = ({ books, title }) => {
+const VerticalBooksSlider = ({ books, title }) => {
   const [windowWidth, setWindowWidth] = useState(0);
 
   let resizeWindow = () => {
@@ -26,7 +26,7 @@ const Suggestions = ({ books, title }) => {
           <div className="vertical-books-section">
             {books.slice(3, 8).map((book) => (
               <Link to={`/books/${book.id}`} key={book.title}>
-                <BookCard book={book} />
+                <VerticalBookCard book={book} />
               </Link>
             ))}
           </div>
@@ -38,7 +38,7 @@ const Suggestions = ({ books, title }) => {
   );
 };
 
-export default Suggestions;
+export default VerticalBooksSlider;
 
 const Container = styled.div`
   grid-area: 1 / 3 / 3 / 4;

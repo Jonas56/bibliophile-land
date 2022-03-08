@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-const BookCard = ({ book }) => {
+const VerticalBookCard = ({ book }) => {
   const { title, image_link } = book;
 
   return (
@@ -22,7 +22,7 @@ const BookCard = ({ book }) => {
   );
 };
 
-export default BookCard;
+export default VerticalBookCard;
 
 const Container = styled.div`
   display: grid;
