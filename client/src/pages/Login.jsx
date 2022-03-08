@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import Logo from "../Logo";
+import Logo from "../components/Logo";
 
 const Login = () => {
   return (
