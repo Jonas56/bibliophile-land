@@ -6,12 +6,12 @@ const BookCard = ({ book }) => {
 
   return (
     <Container>
-      <div className="book-card__image">
+      <div className="vertical-book-card__image">
         <img src={image_link} alt={title} />
       </div>
-      <div className="book-card__info">
-        <h3 className="book-card__title">{title}</h3>
-        <p className="book-card__desc">
+      <div className="vertical-book-card__info">
+        <h3 className="vertical-book-card__title">{title}</h3>
+        <p className="vertical-book-card__desc">
           It is a long established fact that a reader will be distracted by the
           readable content of a page when looking at its layout. The point of
           using Lorem Ipsum is that it has a more-or-less normal distribution of
@@ -33,7 +33,7 @@ const Container = styled.div`
 
   /* image styles */
 
-  .book-card__image {
+  .vertical-book-card__image {
     grid-area: 1 / 1 / 2 / 2;
 
     img {
@@ -44,7 +44,7 @@ const Container = styled.div`
   }
 
   /* infos styles */
-  .book-card__info {
+  .vertical-book-card__info {
     grid-area: 1 / 2 / 2 / 4;
     display: flex;
     flex-direction: column;
@@ -52,14 +52,14 @@ const Container = styled.div`
     gap: 0.7rem;
     overflow: hidden;
 
-    h3 {
+    .vertical-book-card__title {
       font-size: 16px;
       font-style: normal;
       font-weight: 500;
       line-height: 20px;
     }
 
-    p {
+    .vertical-book-card__desc {
       font-family: Montserrat;
       font-size: 16px;
       font-style: normal;

@@ -23,7 +23,7 @@ const Suggestions = ({ books, title }) => {
       {windowWidth > 1280 ? (
         <>
           <h2>Similar Books</h2>
-          <div className="books-section">
+          <div className="vertical-books-section">
             {books.slice(3, 8).map((book) => (
               <Link to={`/books/${book.id}`} key={book.title}>
                 <BookCard book={book} />
@@ -62,12 +62,12 @@ const Container = styled.div`
     font-size: 20px;
     font-weight: 500;
   }
-  .books-section {
+  .vertical-books-section {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 3rem;
-    .books-section__book {
+    .vertical-books-section__book {
       display: flex;
       flex-direction: column;
       justify-content: space-evenly;
