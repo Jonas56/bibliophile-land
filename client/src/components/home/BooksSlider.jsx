@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Book from "./Book";
+import Book from "./BookSliderCard";
 
 const BooksSlider = ({ books, title }) => {
   return (
@@ -24,14 +24,20 @@ const BooksSection = styled.div`
   display: flex;
   flex-direction: column;
   max-height: 100%;
-  gap: 1.3rem;
+  gap: 1rem;
   flex: 1;
   .section-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     .section-title {
-      font-size: 18px;
+      font-family: Montserrat;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 20px;
+      letter-spacing: 0em;
+      text-align: left;
     }
     .section-button {
       font-size: 15px;
@@ -48,7 +54,7 @@ const BooksSection = styled.div`
 
 const Books = styled.div`
   display: flex;
-  gap: 3rem;
+  gap: 3.25rem;
   align-items: stretch;
   max-height: 100%;
   overflow: scroll;

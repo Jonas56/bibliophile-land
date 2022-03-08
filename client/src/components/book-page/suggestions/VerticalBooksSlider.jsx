@@ -4,9 +4,9 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import BooksSlider from "../../home/BooksSlider";
-import BookCard from "./BookCard";
+import BookCard from "./VerticalBookCard";
 
-const Suggestions = ({ books }) => {
+const Suggestions = ({ books, title }) => {
   const [windowWidth, setWindowWidth] = useState(0);
 
   let resizeWindow = () => {

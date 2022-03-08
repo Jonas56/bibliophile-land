@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
-import ProfileSection from "../components/home/Profile";
-import RightContent from "../components/home/RightContent";
+import ProfileSection from "../components/user-page/ProfileSide";
+import RightContent from "../components/home/RightHomeContent";
 import axios from "axios";
 import { Outlet } from "react-router";
 

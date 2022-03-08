@@ -1,8 +1,8 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import styled from "styled-components";
-import ProfileSection from "../components/home/Profile";
-import RightContent from "../components/home/RightContent";
+import ProfileSection from "../components/user-page/ProfileSide";
+import RightContent from "../components/home/RightHomeContent";
 import axios from "axios";
 import { Outlet } from "react-router";
 
@@ -95,7 +95,7 @@ const Left = styled.section`
   max-width: 458px;
   min-width: 400px;
   background-color: #141a1f;
-  border-radius: 10px;
+  border-radius: 20px;
   padding: 1.2rem;
   position: relative;
   overflow-x: auto;
@@ -130,7 +130,7 @@ const Right = styled.section`
   grid-area: 1 / 2 / 6 / 5;
   height: 100%;
   /* background-color: #141a1f; */
-  border-radius: 10px;
+  border-radius: 20px;
   padding: 1.2rem;
   overflow-x: auto;
   background: linear-gradient(

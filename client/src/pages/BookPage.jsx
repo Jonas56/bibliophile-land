@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import styled from "styled-components";
 import BookDetails from "../components/book-page/BookDetails";
-import Suggestions from "../components/book-page/suggestions/Suggestions";
+import Suggestions from "../components/book-page/suggestions/VerticalBooksSlider";
 
 const BookPage = () => {
   const { bookid } = useParams();
