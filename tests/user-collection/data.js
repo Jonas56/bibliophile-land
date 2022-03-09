@@ -33,7 +33,7 @@ const user = {
   name: "Jonas",
   username: "Jonas56",
   email: "jonas@tesla.com",
-  hashed_password: "OIDANN*$dayéé&hca!:ca..Aaaa",
+  hashed_password: "Jonas@123",
   age: 21,
 };
 

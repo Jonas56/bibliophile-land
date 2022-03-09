@@ -39,7 +39,7 @@ describe("POST /v1/api/books", () => {
       .post("/v1/api/books")
       .send(helper.nonValidBook)
       .expect(400);
-    expect(response.body.message).toEqual("Book must contain an author");
+    expect(response.body.message).toEqual("Book must belong to an author");
   });
 });
 
