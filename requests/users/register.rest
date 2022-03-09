@@ -5,10 +5,9 @@ Content-Type: application/json
     "name" : "Jonas",
     "email" : "jonas@email.com",
     "username" : "Jonas81",
-    "password" : "Jonas@123",
-    "age" : 45
+    "password" : "Jonas@123"
 }
 
-# - username must be unique
+# - email must be unique
 # - password must contain minimum eight characters, 
 #   at least one letter, one number and one special character

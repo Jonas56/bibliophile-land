@@ -20,14 +20,9 @@ module.exports = {
       username: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: true,
       },
       hashed_password: {
         type: DataTypes.STRING(64),
-        allowNull: false,
-      },
-      age: {
-        type: DataTypes.DOUBLE,
         allowNull: false,
       },
       created_at: {
