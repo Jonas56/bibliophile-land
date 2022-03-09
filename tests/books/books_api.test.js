@@ -10,6 +10,8 @@ beforeAll(async () => {
   await helper.loadDataToDb();
 });
 
+jest.setTimeout(10000);
+
 describe("GET /v1/api/books", () => {
   test("should return all books", async () => {
     const response = await request(app).get("/v1/api/books").expect(200);

@@ -36,7 +36,7 @@ const authors = [
 const { Author } = require("../../models");
 
 const clearDB = async () => {
-  await Author.destroy({ where: {}, truncate: { cascade: true } });
+  await Author.sync({ force: true });
 };
 const loadDataToDb = async () => {
   await Author.bulkCreate(authors);
