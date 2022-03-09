@@ -2,9 +2,9 @@ const { book, author, category, validBook, nonValidBook } = require("./data");
 const { Book, Author, Category } = require("../../models");
 
 const clearDB = async () => {
-  await Book.destroy({ where: {}, truncate: { cascade: true } });
-  await Author.destroy({ where: {}, truncate: { cascade: true } });
-  await Category.destroy({ where: {}, truncate: { cascade: true } });
+  await Book.sync({ force: true });
+  await Author.sync({ force: true });
+  await Category.sync({ force: true });
 };
 const loadDataToDb = async () => {
   const createdBook = await Book.create(book);

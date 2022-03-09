@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import styled from "styled-components";
 import Logo from "../components/Logo";
@@ -16,7 +17,7 @@ const Login = () => {
             <input type="text" className="usernameInput" id="" />
             <p className="passwordLabel">
               Password
-              <a className="forgetPassword" href="">
+              <a className="forgetPassword" href="#">
                 Forgot password?
               </a>
             </p>
@@ -26,7 +27,7 @@ const Login = () => {
         </div>
         <div className="signUpDiv">
           <p className="signUpP">
-            new here? <a href="">Create an account</a>
+            new here? <a href="#">Create an account</a>
           </p>
         </div>
         <div>

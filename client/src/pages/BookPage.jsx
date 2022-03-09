@@ -31,6 +31,7 @@ const BookPage = () => {
   useEffect(() => {
     getBooks();
     getBookById();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [bookid]);
 
   return (
