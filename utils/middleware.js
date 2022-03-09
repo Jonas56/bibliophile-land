@@ -14,6 +14,19 @@ const unknownEndpoint = (request, response) => {
 };
 
 const errorHandler = (error, request, response, next) => {
+  let errors = {};
+  console.log(error.name);
+  if (error.name === "SequelizeValidationError") {
+    error.errors.forEach((e) => {
+      errors[e.path] = e.message;
+    });
+    return response.status(400).json(errors);
+  } else if (error.name === "SequelizeUniqueConstraintError") {
+    error.errors.forEach((e) => {
+      errors[e.path] = e.message;
+    });
+    return response.status(400).json(errors);
+  }
   response.status(400).json({ message: error.message });
   next();
 };

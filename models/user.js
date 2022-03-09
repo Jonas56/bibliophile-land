@@ -29,14 +29,18 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
+          notNull: { msg: "Please enter your name" },
           notEmpty: true,
         },
       },
       email: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: { msg: "email already in use!" },
+        unique: {
+          msg: "email already in use! Please login or reset your password",
+        },
         validate: {
+          notNull: { msg: "Please enter your email" },
           notEmpty: true,
           isEmail: { msg: "email field must be a valid one!" },
         },
@@ -44,19 +48,30 @@ module.exports = (sequelize, DataTypes) => {
       username: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: { msg: "That username is taken." },
         validate: {
+          notNull: { msg: "Please enter your username" },
           notEmpty: true,
+          len: {
+            args: [5, 10],
+            msg: "Username length must be between 5 and 10 characters",
+          },
         },
       },
       hashed_password: {
         type: DataTypes.STRING(64),
         allowNull: false,
-        validate: {},
-      },
-      age: {
-        type: DataTypes.DOUBLE,
-        allowNull: false,
+        validate: {
+          notNull: { msg: "Please enter your password" },
+          isPassword: (value) => {
+            const validPassword =
+              /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
+            if (!validPassword.test(value)) {
+              throw new Error(
+                "Password must contain minimum eight characters, at least one letter, one number and one special character"
+              );
+            }
+          },
+        },
       },
     },
     {
@@ -67,7 +82,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
 
-  User.addHook("beforeCreate", async (user) => {
+  User.addHook("afterValidate", async (user) => {
     if (user.hashed_password) {
       const saltRounds = 10;
       user.hashed_password = await bcrypt.hash(

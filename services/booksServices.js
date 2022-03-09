@@ -78,7 +78,7 @@ const httpAddnewBook = async (req, res) => {
       }
     });
   } else {
-    return res.status(400).json({ message: "Book must contain an author" });
+    return res.status(400).json({ message: "Book must belong to an author" });
   }
 
   // Add categories + M:N
@@ -93,7 +93,7 @@ const httpAddnewBook = async (req, res) => {
       }
     });
   } else {
-    return res.status(400).json({ message: "Book must contain a category" });
+    return res.status(400).json({ message: "Book must belong to a category" });
   }
 
   return res.status(201).json(newBook);
