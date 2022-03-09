@@ -2,7 +2,6 @@ import styled from "styled-components";
 import BooksSlider from "./BooksSlider";
 
 const RightContent = ({ books, loading, authors }) => {
-  const url = "./assets/book.jpg";
   return (
     <Container>
       <BooksSlider title="Trending" books={books} />
