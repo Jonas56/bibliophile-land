@@ -1,5 +1,12 @@
 import { useState } from "react";
 import styled from "styled-components";
+import {
+  MdKeyboardArrowDown,
+  MdKeyboardArrowUp,
+  MdOutlineMenuBook,
+  MdOutlineCategory,
+  MdOutlineLocalLibrary,
+} from "react-icons/md";
 
 const PageLayout1 = () => {
   // dropdown 1
@@ -14,10 +21,19 @@ const PageLayout1 = () => {
         <DropDownContainer>
           <div className="dropdown-categories">
             {" "}
-            <DropDownHeader onClick={toggling}>Categories</DropDownHeader>
+            <DropDownHeader onClick={toggling}>
+              <span>
+                <MdOutlineCategory />
+                Categories
+              </span>
+              {isOpen ? <MdKeyboardArrowUp /> : <MdKeyboardArrowDown />}
+            </DropDownHeader>
             {isOpen && (
               <DropDownListContainer>
                 <DropDownList>
+                  <ListItem>Classics</ListItem>
+                  <ListItem>Comic</ListItem>
+                  <ListItem>Fantasy</ListItem>
                   <ListItem>Classics</ListItem>
                   <ListItem>Comic</ListItem>
                   <ListItem>Fantasy</ListItem>
@@ -27,7 +43,13 @@ const PageLayout1 = () => {
           </div>
           <div className="dropdown-library">
             {" "}
-            <DropDownHeader onClick={toggling2}>Your Library</DropDownHeader>
+            <DropDownHeader onClick={toggling2}>
+              <span>
+                <MdOutlineLocalLibrary />
+                Your Library
+              </span>
+              {isOpen2 ? <MdKeyboardArrowUp /> : <MdKeyboardArrowDown />}
+            </DropDownHeader>
             {isOpen2 && (
               <DropDownListContainer>
                 <DropDownList>
@@ -40,15 +62,20 @@ const PageLayout1 = () => {
           </div>
         </DropDownContainer>
         <CurrentlyReading>
-          <div className="currently-reading-image">
-            <img src="./assets/book.jpg" alt="Book" />
-          </div>
-          <div className="currently-reading-info">
-            <div className="currently-reading-info_title">
-              <span>The Greatest Book</span>
+          <span>Currently Reading</span>
+          <div className="currently-reading">
+            {" "}
+            <div className="currently-reading-image">
+              <img src="./assets/book.jpg" alt="Book" />
             </div>
-            <div className="currently-reading-info_nbPages">
-              <span>page 69/169</span>
+            <div className="currently-reading-info">
+              <div className="currently-reading-info_title">
+                <span>The Greatest Book</span>
+              </div>
+              <div className="currently-reading-info_nbPages">
+                <span>page 69/169</span>
+                <MdOutlineMenuBook className="currently-reading-info_nbPages_icon" />
+              </div>
             </div>
           </div>
         </CurrentlyReading>
@@ -111,7 +138,7 @@ const RightSide = styled.div`
 /* DropDown Section */
 
 const DropDownContainer = styled("div")`
-  width: 12.5em;
+  width: 15.5em;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -120,18 +147,32 @@ const DropDownContainer = styled("div")`
 
 const DropDownHeader = styled("div")`
   margin-bottom: 0.8em;
-  padding: 0.4em 2em 0.4em 1em;
+  padding: 0.4em 0.4em 0.4em 1em;
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.15);
   color: white;
   border-radius: 10px;
   background: #0d1117;
-  font-family: Montserrat;
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 24px;
-  letter-spacing: 0em;
-  text-align: left;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  * {
+    font-family: Montserrat;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: 0em;
+    text-align: left;
+  }
+  span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.71rem;
+    margin-right: 3rem;
+  }
+
   cursor: pointer;
 `;
 
@@ -165,42 +206,63 @@ const ListItem = styled("li")`
 
 /* Currently Reading */
 const CurrentlyReading = styled.div`
-  display: flex;
-  background: #0d1117;
-  border-radius: 10px;
-  padding: 0.4em 0.8em 0.4em 1em;
-  gap: 1rem;
-  .currently-reading-image {
-    img {
-      height: 103px;
-      width: 67px;
-    }
+  span {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+    margin-left: 0.8rem;
   }
-  .currently-reading-info {
+  .currently-reading {
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-
-    &_title {
-      span {
-        font-family: Montserrat;
-        font-size: 1rem;
-        font-style: normal;
-        font-weight: 500;
-        line-height: 24px;
-        letter-spacing: 0em;
-        text-align: left;
+    background: #0d1117;
+    border-radius: 10px;
+    padding: 0.4em 1em 0.4em 1em;
+    gap: 0.3rem;
+    margin-top: 0.5rem;
+    .currently-reading-image {
+      img {
+        height: 103px;
+        width: 67px;
       }
     }
-    &_nbPages {
-      span {
-        font-family: Montserrat;
-        font-size: 13px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: 20px;
-        letter-spacing: 0em;
-        text-align: left;
+    .currently-reading-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      &_title {
+        span {
+          font-family: Montserrat;
+          font-size: 1rem;
+          font-style: normal;
+          font-weight: 500;
+          line-height: 24px;
+          letter-spacing: 0em;
+          text-align: left;
+        }
+      }
+      &_nbPages {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        span {
+          font-family: Montserrat;
+          font-size: 13px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 20px;
+          letter-spacing: 0em;
+          text-align: left;
+        }
+        &_icon {
+          font-size: 1.7rem;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 20px;
+          letter-spacing: 0em;
+          text-align: left;
+        }
       }
     }
   }
