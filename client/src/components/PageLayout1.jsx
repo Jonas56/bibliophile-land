@@ -2,35 +2,56 @@ import { useState } from "react";
 import styled from "styled-components";
 
 const PageLayout1 = () => {
+  // dropdown 1
   const [isOpen, setIsOpen] = useState(false);
   const toggling = () => setIsOpen(!isOpen);
+  // dorpdown 2
+  const [isOpen2, setIsOpen2] = useState(false);
+  const toggling2 = () => setIsOpen2(!isOpen2);
   return (
     <Container>
       <LeftSide>
         <DropDownContainer>
-          <DropDownHeader onClick={toggling}>Categories</DropDownHeader>
-          {isOpen && (
-            <DropDownListContainer>
-              <DropDownList>
-                <ListItem>Classics</ListItem>
-                <ListItem>Comic</ListItem>
-                <ListItem>Fantasy</ListItem>
-              </DropDownList>
-            </DropDownListContainer>
-          )}
+          <div className="dropdown-categories">
+            {" "}
+            <DropDownHeader onClick={toggling}>Categories</DropDownHeader>
+            {isOpen && (
+              <DropDownListContainer>
+                <DropDownList>
+                  <ListItem>Classics</ListItem>
+                  <ListItem>Comic</ListItem>
+                  <ListItem>Fantasy</ListItem>
+                </DropDownList>
+              </DropDownListContainer>
+            )}
+          </div>
+          <div className="dropdown-library">
+            {" "}
+            <DropDownHeader onClick={toggling2}>Your Library</DropDownHeader>
+            {isOpen2 && (
+              <DropDownListContainer>
+                <DropDownList>
+                  <ListItem>Read Books</ListItem>
+                  <ListItem>Top3</ListItem>
+                  <ListItem>Read Later</ListItem>
+                </DropDownList>
+              </DropDownListContainer>
+            )}
+          </div>
         </DropDownContainer>
-        <DropDownContainer>
-          <DropDownHeader onClick={toggling}>Your Library</DropDownHeader>
-          {isOpen && (
-            <DropDownListContainer>
-              <DropDownList>
-                <ListItem>Read Books</ListItem>
-                <ListItem>Top3</ListItem>
-                <ListItem>Read Later</ListItem>
-              </DropDownList>
-            </DropDownListContainer>
-          )}
-        </DropDownContainer>
+        <CurrentlyReading>
+          <div className="currently-reading-image">
+            <img src="./assets/book.jpg" alt="Book" />
+          </div>
+          <div className="currently-reading-info">
+            <div className="currently-reading-info_title">
+              <span>The Greatest Book</span>
+            </div>
+            <div className="currently-reading-info_nbPages">
+              <span>page 69/169</span>
+            </div>
+          </div>
+        </CurrentlyReading>
       </LeftSide>
       <RightSide></RightSide>
     </Container>
@@ -66,7 +87,7 @@ const LeftSide = styled.div`
   padding: 1.7rem 1.3rem;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
   gap: 3rem;
   p:nth-child(3) {
@@ -87,11 +108,14 @@ const RightSide = styled.div`
   }
 `;
 
-/***********/
+/* DropDown Section */
 
 const DropDownContainer = styled("div")`
   width: 12.5em;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 `;
 
 const DropDownHeader = styled("div")`
@@ -108,6 +132,7 @@ const DropDownHeader = styled("div")`
   line-height: 24px;
   letter-spacing: 0em;
   text-align: left;
+  cursor: pointer;
 `;
 
 const DropDownListContainer = styled("div")`
@@ -136,4 +161,47 @@ const ListItem = styled("li")`
   line-height: 20px;
   letter-spacing: 0em;
   text-align: left;
+`;
+
+/* Currently Reading */
+const CurrentlyReading = styled.div`
+  display: flex;
+  background: #0d1117;
+  border-radius: 10px;
+  padding: 0.4em 0.8em 0.4em 1em;
+  gap: 1rem;
+  .currently-reading-image {
+    img {
+      height: 103px;
+      width: 67px;
+    }
+  }
+  .currently-reading-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    &_title {
+      span {
+        font-family: Montserrat;
+        font-size: 1rem;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 24px;
+        letter-spacing: 0em;
+        text-align: left;
+      }
+    }
+    &_nbPages {
+      span {
+        font-family: Montserrat;
+        font-size: 13px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 20px;
+        letter-spacing: 0em;
+        text-align: left;
+      }
+    }
+  }
 `;
