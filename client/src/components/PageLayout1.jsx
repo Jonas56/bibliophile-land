@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import {
   MdKeyboardArrowDown,
@@ -7,6 +7,8 @@ import {
   MdOutlineCategory,
   MdOutlineLocalLibrary,
 } from "react-icons/md";
+import RightContent from "./home/RightHomeContent";
+import axios from "axios";
 
 const PageLayout1 = () => {
   // dropdown 1
@@ -15,6 +17,38 @@ const PageLayout1 = () => {
   // dorpdown 2
   const [isOpen2, setIsOpen2] = useState(false);
   const toggling2 = () => setIsOpen2(!isOpen2);
+
+  // data
+  const [books, setBooks] = useState([]);
+  const [authors, setAuthors] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const getBooks = async () => {
+    await axios
+      .get("v1/api/books")
+      .then((response) => {
+        console.log(response);
+        setBooks(response.data.rows);
+      })
+      .catch((e) => console.log(e))
+      .finally(() => setLoading(false));
+  };
+  const getAuthors = async () => {
+    axios
+      .get("/v1/api/authors")
+      .then((response) => {
+        console.log(response);
+        setAuthors(response.data.rows);
+      })
+      .catch((e) => console.log(e))
+      .finally(() => setLoading(false));
+  };
+
+  useEffect(() => {
+    getBooks();
+    getAuthors();
+  }, []);
+
   return (
     <Container>
       <LeftSide>
@@ -80,7 +114,9 @@ const PageLayout1 = () => {
           </div>
         </CurrentlyReading>
       </LeftSide>
-      <RightSide></RightSide>
+      <RightSide>
+        <RightContent books={books} loading={loading} authors={authors} />
+      </RightSide>
     </Container>
   );
 };
@@ -117,6 +153,7 @@ const LeftSide = styled.div`
   justify-content: space-between;
   align-items: center;
   gap: 3rem;
+  height: 81vh;
   p:nth-child(3) {
     justify-self: flex-end;
   }
@@ -130,6 +167,9 @@ const RightSide = styled.div`
   grid-area: 1 / 2 / 6 / 6;
   background-color: #141a1f;
   border-radius: 20px;
+  height: 100%;
+  padding: 1.2rem;
+  overflow-x: auto;
   @media screen and (max-width: 1024px) {
     grid-area: 1 / 1 / 6 / 2;
   }
@@ -194,6 +234,7 @@ const DropDownList = styled("ul")`
 const ListItem = styled("li")`
   list-style: none;
   margin-bottom: 0.8em;
+  margin-left: 2rem;
   color: white;
   font-family: Montserrat;
   font-size: 16px;
@@ -218,7 +259,6 @@ const CurrentlyReading = styled.div`
     background: #0d1117;
     border-radius: 10px;
     padding: 0.4em 1em 0.4em 1em;
-    gap: 0.3rem;
     margin-top: 0.5rem;
     .currently-reading-image {
       img {
