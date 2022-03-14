@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       Category,
       CategoryBooks,
       User,
-      UserBooks,
+      UserCollection,
     }) {
       // define association here
       this.belongsToMany(Author, {
@@ -29,7 +29,7 @@ module.exports = (sequelize, DataTypes) => {
       });
 
       this.belongsToMany(User, {
-        through: UserBooks,
+        through: UserCollection,
         foreignKey: "book_id",
         as: "users",
       });

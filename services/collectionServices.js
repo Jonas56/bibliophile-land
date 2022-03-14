@@ -1,4 +1,4 @@
-const { Book, User, UserBooks } = require("../models");
+const { Book, User, UserCollection } = require("../models");
 
 const httpGetAllUserBooks = async (req, res) => {
   // TODO: Extract id from req middleware
@@ -6,7 +6,7 @@ const httpGetAllUserBooks = async (req, res) => {
   const userBooks = await User.findByPk(id, {
     include: {
       model: Book,
-      as: "books",
+      as: "collection",
       attributes: ["id", "title", "image_link", "isbn"],
       through: {
         attributes: [],
@@ -31,10 +31,12 @@ const httpAddBookToCollection = async (req, res) => {
   const book = await Book.findByPk(bookId);
 
   if (!(user && book)) {
-    return res.status(400).json({ message: "Cannot find the provided book!" });
+    return res.status(400).json({ message: "Cannot find this book!" });
   }
 
-  const associate = await user.addBooks(book, { through: { UserBooks } });
+  const associate = await user.addCollection(book, {
+    through: { UserCollection },
+  });
 
   if (associate[0]) {
     return res.status(200).json({ message: "Book added succesfully!" });
@@ -56,13 +58,14 @@ const httpRemoveFromCollection = async (req, res) => {
     return res.status(400).json({ message: "Cannot find the provided book" });
   }
 
-  const associate = await user.removeBooks(book, { through: { UserBooks } });
+  const associate = await user.removeCollection(book, {
+    through: { UserCollection },
+  });
 
-  console.log("Association", associate);
   if (associate) {
     return res.status(200).json({ message: "Book removed succesfully!" });
   } else {
-    return res.status(400).json({ error: "Book already removed!" });
+    return res.status(400).json({ error: "Book not found in the collection!" });
   }
 };
 
