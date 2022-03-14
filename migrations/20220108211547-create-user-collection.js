@@ -1,7 +1,7 @@
 "use strict";
 module.exports = {
   up: async (queryInterface, DataTypes) => {
-    await queryInterface.createTable("user_books", {
+    await queryInterface.createTable("user_collection", {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -40,6 +40,6 @@ module.exports = {
   },
   // eslint-disable-next-line no-unused-vars
   down: async (queryInterface, DataTypes) => {
-    await queryInterface.dropTable("user_books");
+    await queryInterface.dropTable("user_collection");
   },
 };
