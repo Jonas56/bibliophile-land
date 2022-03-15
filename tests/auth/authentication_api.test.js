@@ -26,8 +26,7 @@ describe("POST /v1/api/login", () => {
     const response = await request(app)
       .post("/v1/api/login")
       .send(credentials)
-      .expect(400);
-    console.log(response.body);
+      .expect(200);
     expect(response.body.token).toBeDefined();
   });
   test("should return an error when sending wrong credentials", async () => {
