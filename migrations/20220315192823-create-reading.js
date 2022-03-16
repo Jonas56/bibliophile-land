@@ -12,6 +12,10 @@ module.exports = {
       user_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        references: {
+          model: "users",
+          key: "id",
+        },
         onDelete: "CASCADE",
         onUpdate: "CASCADE",
       },
@@ -19,6 +23,10 @@ module.exports = {
       book_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        references: {
+          model: "books",
+          key: "id",
+        },
         onDelete: "CASCADE",
         onUpdate: "CASCADE",
       },
@@ -29,11 +37,11 @@ module.exports = {
         defaultValue: null,
       },
 
-      createdAt: {
+      created_at: {
         allowNull: false,
         type: DataTypes.DATE,
       },
-      updatedAt: {
+      updated_at: {
         allowNull: false,
         type: DataTypes.DATE,
       },
