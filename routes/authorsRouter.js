@@ -3,9 +3,9 @@ const httpRequests = require("../services/authorsServices");
 
 authorsRouter.get("/", httpRequests.httpGetAllAuthors);
 
-// authorsRouter.get("/:id", );
+authorsRouter.get("/:id", httpRequests.httpGetAuthorById);
 
-// authorsRouter.post("/");
+authorsRouter.post("/", httpRequests.httpAddNewAuthor);
 
 // authorsRouter.put("/:id");
 
