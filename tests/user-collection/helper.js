@@ -1,12 +1,18 @@
 const { book, book2, author, category, user } = require("./data");
-const { Book, Author, Category, User, UserBooks } = require("../../models");
+const {
+  Book,
+  Author,
+  Category,
+  User,
+  UserCollection,
+} = require("../../models");
 
 const clearDB = async () => {
   await Book.sync({ force: true });
   await Author.sync({ force: true });
   await Category.sync({ force: true });
   await User.sync({ force: true });
-  await UserBooks.sync({ force: true });
+  await UserCollection.sync({ force: true });
 };
 const loadDataToDb = async () => {
   const createdBook = await Book.create(book);
@@ -23,7 +29,7 @@ const loadDataToDb = async () => {
   await createdBook2.addCategories(createdCategory, {
     through: "CategoryBooks",
   });
-  await createdUser.addBooks(createdBook, { through: "UserBooks" });
+  await createdUser.addCollection(createdBook, { through: "UserCollection" });
 };
 
 module.exports = { loadDataToDb, clearDB };

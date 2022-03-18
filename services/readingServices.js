@@ -1,12 +1,12 @@
-const { Book, User, UserCollection } = require("../models");
+const { Book, User, Reading } = require("../models");
 
-const httpGetAllUserBooks = async (req, res) => {
+const httpGetAllReadedBooks = async (req, res) => {
   // TODO: Extract id from req middleware
   const id = 1;
   const userBooks = await User.findByPk(id, {
     include: {
       model: Book,
-      as: "collection",
+      as: "reading",
       attributes: ["id", "title", "image_link", "isbn"],
       through: {
         attributes: [],
@@ -21,7 +21,7 @@ const httpGetAllUserBooks = async (req, res) => {
   }
 };
 
-const httpAddBookToCollection = async (req, res) => {
+const httpAddBookToReadingList = async (req, res) => {
   // TODO: Extract id from middleware
   const userId = 1;
   const bookId = Number(req.params.bookid);
@@ -34,8 +34,8 @@ const httpAddBookToCollection = async (req, res) => {
     return res.status(400).json({ message: "Cannot find this book!" });
   }
 
-  const associate = await user.addCollection(book, {
-    through: { UserCollection },
+  const associate = await user.addReading(book, {
+    through: { Reading },
   });
 
   if (associate[0]) {
@@ -45,7 +45,7 @@ const httpAddBookToCollection = async (req, res) => {
   }
 };
 
-const httpRemoveFromCollection = async (req, res) => {
+const httpRemoveFromReadingList = async (req, res) => {
   // TODO: Extract id from middleware
   const userId = 1;
   const bookId = Number(req.params.bookid);
@@ -58,8 +58,8 @@ const httpRemoveFromCollection = async (req, res) => {
     return res.status(400).json({ message: "Cannot find the provided book" });
   }
 
-  const associate = await user.removeCollection(book, {
-    through: { UserCollection },
+  const associate = await user.removeReading(book, {
+    through: { Reading },
   });
 
   if (associate) {
@@ -69,8 +69,23 @@ const httpRemoveFromCollection = async (req, res) => {
   }
 };
 
+const httpUpdateRank = async (req, res) => {
+  // TODO: Extract id from middleware
+  const userId = 1;
+  const bookId = Number(req.params.bookid);
+
+  const user = await User.findByPk(userId);
+
+  const book = await Book.findByPk(bookId);
+
+  if (!(user && book)) {
+    return res.status(400).json({ message: "Cannot find the provided book" });
+  }
+};
+
 module.exports = {
-  httpGetAllUserBooks,
-  httpAddBookToCollection,
-  httpRemoveFromCollection,
+  httpGetAllReadedBooks,
+  httpAddBookToReadingList,
+  httpRemoveFromReadingList,
+  httpUpdateRank,
 };

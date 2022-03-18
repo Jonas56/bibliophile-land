@@ -30,6 +30,7 @@ jobs:
           DB_TEST_USERNAME: ${{ secrets.DB_TEST_USERNAME }}
           DB_TEST_PASSWORD: ${{ secrets.DB_TEST_PASSWORD }}
           DB_TEST_HOSTNAME: ${{ secrets.DB_TEST_HOSTNAME }}
+          SECRET: ${{ secrets.SECRET }}
       - name: Deploy
         if: ${{ github.ref_name == 'main' }}
         uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
