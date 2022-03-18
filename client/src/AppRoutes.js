@@ -5,7 +5,6 @@ import {
 import Navbar from "./components/Navbar";
 import PageLayout1 from "./components/PageLayout1";
 import BookPage from "./pages/BookPage";
-import Home from "./pages/Home";
 import Login from "./pages/Login";
 import UserPage from "./pages/UserPage";
 
