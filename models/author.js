@@ -27,8 +27,14 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
         unique: true,
+        validate: {
+          notNull: { msg: "author name cannot be empty!" },
+        },
       },
       biography: {
+        type: DataTypes.TEXT,
+      },
+      image_link: {
         type: DataTypes.TEXT,
       },
     },
