@@ -4,6 +4,7 @@ import styled from "styled-components";
 import ProfileSection from "../components/user-page/ProfileSide";
 import RightContent from "../components/home/RightHomeContent";
 import axios from "axios";
+import { MdOutlineMenuBook } from "react-icons/md";
 import { Outlet } from "react-router";
 
 const UserPage = () => {
@@ -43,6 +44,24 @@ const UserPage = () => {
         <Left>
           <Cover />
           <ProfileSection books={books} loading={loading} />
+          <CurrentlyReading>
+            <span>Currently Reading</span>
+            <div className="currently-reading">
+              {" "}
+              <div className="currently-reading-image">
+                <img src="./assets/book.jpg" alt="Book" />
+              </div>
+              <div className="currently-reading-info">
+                <div className="currently-reading-info_title">
+                  <span>The Greatest Book</span>
+                </div>
+                <div className="currently-reading-info_nbPages">
+                  <span>page 69/169</span>
+                  <MdOutlineMenuBook className="currently-reading-info_nbPages_icon" />
+                </div>
+              </div>
+            </div>
+          </CurrentlyReading>
         </Left>
         <Right>
           <RightContent books={books} loading={loading} authors={authors} />
@@ -150,5 +169,68 @@ const Right = styled.section`
   }
   @media screen and (max-width: 1280px) {
     grid-area: 1 / 2 / 6 / 4;
+  }
+`;
+
+/* Currently Reading */
+const CurrentlyReading = styled.div`
+  span {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+    margin-left: 0.8rem;
+  }
+  .currently-reading {
+    display: flex;
+    background: #0d1117;
+    border-radius: 10px;
+    padding: 0.4em 1em 0.4em 1em;
+    margin-top: 0.5rem;
+    .currently-reading-image {
+      img {
+        height: 103px;
+        width: 67px;
+      }
+    }
+    .currently-reading-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      &_title {
+        span {
+          font-family: Montserrat;
+          font-size: 1rem;
+          font-style: normal;
+          font-weight: 500;
+          line-height: 24px;
+          letter-spacing: 0em;
+          text-align: left;
+        }
+      }
+      &_nbPages {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        span {
+          font-family: Montserrat;
+          font-size: 13px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 20px;
+          letter-spacing: 0em;
+          text-align: left;
+        }
+        &_icon {
+          font-size: 1.7rem;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 20px;
+          letter-spacing: 0em;
+          text-align: left;
+        }
+      }
+    }
   }
 `;

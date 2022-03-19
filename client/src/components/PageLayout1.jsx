@@ -170,6 +170,8 @@ const RightSide = styled.div`
   height: 100%;
   padding: 1.2rem;
   overflow-x: auto;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none;
   @media screen and (max-width: 1024px) {
     grid-area: 1 / 1 / 6 / 2;
   }
