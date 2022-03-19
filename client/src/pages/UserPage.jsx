@@ -1,49 +1,18 @@
 import React from "react";
-import { useState, useEffect } from "react";
 import styled from "styled-components";
 import ProfileSection from "../components/user-page/ProfileSide";
-import RightContent from "../components/home/RightHomeContent";
-import axios from "axios";
 import { MdOutlineMenuBook } from "react-icons/md";
 import { Outlet } from "react-router";
+import BooksCollection from "../components/user-page/BooksCollection";
 
 const UserPage = () => {
-  const [books, setBooks] = useState([]);
-  const [authors, setAuthors] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  const getBooks = async () => {
-    await axios
-      .get("v1/api/books")
-      .then((response) => {
-        console.log(response);
-        setBooks(response.data.rows);
-      })
-      .catch((e) => console.log(e))
-      .finally(() => setLoading(false));
-  };
-  const getAuthors = async () => {
-    axios
-      .get("/v1/api/authors")
-      .then((response) => {
-        console.log(response);
-        setAuthors(response.data.rows);
-      })
-      .catch((e) => console.log(e))
-      .finally(() => setLoading(false));
-  };
-
-  useEffect(() => {
-    getBooks();
-    getAuthors();
-  }, []);
   return (
     <>
       {" "}
       <Container>
         <Left>
           <Cover />
-          <ProfileSection books={books} loading={loading} />
+          <ProfileSection />
           <CurrentlyReading>
             <span>Currently Reading</span>
             <div className="currently-reading">
@@ -64,7 +33,7 @@ const UserPage = () => {
           </CurrentlyReading>
         </Left>
         <Right>
-          <RightContent books={books} loading={loading} authors={authors} />
+          <BooksCollection />
         </Right>
       </Container>
       <Outlet />
@@ -76,14 +45,13 @@ export default UserPage;
 
 const Container = styled.main`
   width: 100%;
-  margin-top: 1.7rem;
-  margin-bottom: 1.7rem;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(5, 1fr);
   grid-column-gap: 1rem;
   grid-row-gap: 0px;
   overflow: hidden;
+  height: 82vh;
 
   @media screen and (max-width: 768px) {
     display: flex;
@@ -101,6 +69,7 @@ const Container = styled.main`
     margin-top: 1.5rem;
     margin-bottom: 1.5rem;
     gap: 2rem;
+    height: auto;
   }
   @media screen and (max-width: 1280px) {
     grid-template-columns: repeat(3, 1fr);
@@ -114,10 +83,12 @@ const Left = styled.section`
   max-width: 458px;
   min-width: 400px;
   background-color: #141a1f;
-  border-radius: 20px;
+  border-radius: 10px;
   padding: 1.2rem;
   position: relative;
-  overflow-x: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 
   /* @media screen and (max-width: 928px) {
     max-width: 100%;
@@ -143,33 +114,8 @@ const Cover = styled.div`
   background-image: url("/assets/profilecover.png");
   background-size: cover;
   z-index: 1;
-`;
 
-const Right = styled.section`
-  grid-area: 1 / 2 / 6 / 5;
-  height: 100%;
-  /* background-color: #141a1f; */
-  border-radius: 20px;
-  padding: 1.2rem;
-  overflow-x: auto;
-  background: linear-gradient(
-    119.25deg,
-    #171f29 3.31%,
-    rgba(0, 0, 0, 0) 109.45%
-  );
-
-  /* @media screen and (max-width: 928px) {
-    max-width: 100%;
-  } */
-  @media screen and (max-width: 768px) {
-    max-width: 100%;
-  }
-  @media screen and (max-width: 1024px) {
-    flex: 1;
-  }
-  @media screen and (max-width: 1280px) {
-    grid-area: 1 / 2 / 6 / 4;
-  }
+  border-radius: 10px;
 `;
 
 /* Currently Reading */
@@ -232,5 +178,33 @@ const CurrentlyReading = styled.div`
         }
       }
     }
+  }
+`;
+
+/*** RIght Side */
+const Right = styled.section`
+  grid-area: 1 / 2 / 6 / 5;
+  height: 100%;
+  /* background-color: #141a1f; */
+  border-radius: 20px;
+  padding: 1.2rem;
+  overflow-x: auto;
+  background: linear-gradient(
+    119.25deg,
+    #171f29 3.31%,
+    rgba(0, 0, 0, 0) 109.45%
+  );
+
+  /* @media screen and (max-width: 928px) {
+    max-width: 100%;
+  } */
+  @media screen and (max-width: 768px) {
+    max-width: 100%;
+  }
+  @media screen and (max-width: 1024px) {
+    flex: 1;
+  }
+  @media screen and (max-width: 1280px) {
+    grid-area: 1 / 2 / 6 / 4;
   }
 `;
