@@ -2,12 +2,14 @@ import axios from "axios";
 import React from "react";
 import styled from "styled-components";
 import AddButton from "../buttons/AddButton";
+import { toast } from "react-toastify";
 
 const BookDetails = ({ book }) => {
   const markAsRead = async () => {
     console.log("here");
     const res = await axios.post("/v1/api/reading/" + book.id, book);
     console.log(res);
+    toast.error("added");
   };
 
   return (

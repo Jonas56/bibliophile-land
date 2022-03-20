@@ -55,7 +55,7 @@ const Container = styled.div`
 const Books = styled.div`
   display: flex;
   gap: 1.5rem;
-  align-items: center;
+  align-items: stretch;
   max-height: 100%;
   flex-wrap: wrap;
 `;
