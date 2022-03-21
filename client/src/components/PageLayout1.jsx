@@ -130,7 +130,7 @@ const Container = styled.div`
   grid-template-rows: repeat(5, 1fr);
   grid-column-gap: 2rem;
   grid-row-gap: 1rem;
-  height: 81vh;
+  min-height: 81vh;
   width: 100%;
   @media screen and (max-width: 768px) {
   }
@@ -169,7 +169,7 @@ const RightSide = styled.div`
   border-radius: 20px;
   height: 100%;
   padding: 1.2rem;
-  overflow-x: auto;
+  overflow: auto;
   @media screen and (max-width: 1024px) {
     grid-area: 1 / 1 / 6 / 2;
   }

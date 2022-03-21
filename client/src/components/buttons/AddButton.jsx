@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 
-const AddButton = ({ text, color, bgColor }) => {
+const AddButton = ({ text, color, bgColor, handleClick }) => {
   return (
-    <Container color={color} bgColor={bgColor}>
+    <Container color={color} bgColor={bgColor} onClick={() => handleClick()}>
       {text}
     </Container>
   );

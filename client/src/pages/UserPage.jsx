@@ -1,51 +1,39 @@
 import React from "react";
-import { useState, useEffect } from "react";
 import styled from "styled-components";
 import ProfileSection from "../components/user-page/ProfileSide";
-import RightContent from "../components/home/RightHomeContent";
-import axios from "axios";
+import { MdOutlineMenuBook } from "react-icons/md";
 import { Outlet } from "react-router";
+import BooksCollection from "../components/user-page/BooksCollection";
 
 const UserPage = () => {
-  const [books, setBooks] = useState([]);
-  const [authors, setAuthors] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  const getBooks = async () => {
-    await axios
-      .get("v1/api/books")
-      .then((response) => {
-        console.log(response);
-        setBooks(response.data.rows);
-      })
-      .catch((e) => console.log(e))
-      .finally(() => setLoading(false));
-  };
-  const getAuthors = async () => {
-    axios
-      .get("/v1/api/authors")
-      .then((response) => {
-        console.log(response);
-        setAuthors(response.data.rows);
-      })
-      .catch((e) => console.log(e))
-      .finally(() => setLoading(false));
-  };
-
-  useEffect(() => {
-    getBooks();
-    getAuthors();
-  }, []);
   return (
     <>
       {" "}
       <Container>
         <Left>
           <Cover />
-          <ProfileSection books={books} loading={loading} />
+          <ProfileSection />
+          <CurrentlyReading>
+            <span>Currently Reading</span>
+            <div className="currently-reading">
+              {" "}
+              <div className="currently-reading-image">
+                <img src="./assets/book.jpg" alt="Book" />
+              </div>
+              <div className="currently-reading-info">
+                <div className="currently-reading-info_title">
+                  <span>The Greatest Book</span>
+                </div>
+                <div className="currently-reading-info_nbPages">
+                  <span>page 69/169</span>
+                  <MdOutlineMenuBook className="currently-reading-info_nbPages_icon" />
+                </div>
+              </div>
+            </div>
+          </CurrentlyReading>
         </Left>
         <Right>
-          <RightContent books={books} loading={loading} authors={authors} />
+          <BooksCollection title={"Read books"} />
         </Right>
       </Container>
       <Outlet />
@@ -57,8 +45,6 @@ export default UserPage;
 
 const Container = styled.main`
   width: 100%;
-  margin-top: 1.7rem;
-  margin-bottom: 1.7rem;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(5, 1fr);
@@ -82,6 +68,7 @@ const Container = styled.main`
     margin-top: 1.5rem;
     margin-bottom: 1.5rem;
     gap: 2rem;
+    height: auto;
   }
   @media screen and (max-width: 1280px) {
     grid-template-columns: repeat(3, 1fr);
@@ -95,10 +82,12 @@ const Left = styled.section`
   max-width: 458px;
   min-width: 400px;
   background-color: #141a1f;
-  border-radius: 20px;
+  border-radius: 10px;
   padding: 1.2rem;
   position: relative;
-  overflow-x: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 
   /* @media screen and (max-width: 928px) {
     max-width: 100%;
@@ -124,8 +113,78 @@ const Cover = styled.div`
   background-image: url("/assets/profilecover.png");
   background-size: cover;
   z-index: 1;
+
+  border-radius: 10px;
 `;
 
+/* Currently Reading */
+const CurrentlyReading = styled.div`
+  width: 100%;
+  span {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+    margin-left: 0.8rem;
+  }
+  .currently-reading {
+    display: flex;
+    background: #0d1117;
+    border-radius: 10px;
+    padding: 0.6rem 1.2rem;
+    margin-top: 0.5rem;
+    width: 100%;
+    .currently-reading-image {
+      img {
+        height: 103px;
+        width: 67px;
+      }
+    }
+    .currently-reading-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      flex-grow: 1;
+
+      &_title {
+        span {
+          font-family: Montserrat;
+          font-size: 1rem;
+          font-style: normal;
+          font-weight: 500;
+          line-height: 24px;
+          letter-spacing: 0em;
+          text-align: left;
+        }
+      }
+      &_nbPages {
+        display: flex;
+        min-width: 100%;
+        justify-content: space-between;
+        align-items: center;
+        span {
+          font-family: Montserrat;
+          font-size: 13px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 20px;
+          letter-spacing: 0em;
+          text-align: left;
+        }
+        &_icon {
+          font-size: 1.7rem;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 20px;
+          letter-spacing: 0em;
+          text-align: left;
+        }
+      }
+    }
+  }
+`;
+
+/*** RIght Side */
 const Right = styled.section`
   grid-area: 1 / 2 / 6 / 5;
   height: 100%;

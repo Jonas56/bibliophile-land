@@ -20,6 +20,7 @@ const Container = styled.div`
   justify-content: flex-start;
   align-items: center;
   gap: 0.4rem;
+  max-width: 140px;
   img {
     height: 216px;
     width: 140px;

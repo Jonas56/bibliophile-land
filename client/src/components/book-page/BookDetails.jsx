@@ -1,8 +1,17 @@
+import axios from "axios";
 import React from "react";
 import styled from "styled-components";
 import AddButton from "../buttons/AddButton";
+import { toast } from "react-toastify";
 
 const BookDetails = ({ book }) => {
+  const markAsRead = async () => {
+    console.log("here");
+    const res = await axios.post("/v1/api/reading/" + book.id, book);
+    console.log(res);
+    toast.error("added");
+  };
+
   return (
     <Container>
       <Info>
@@ -13,7 +22,7 @@ const BookDetails = ({ book }) => {
           <h1 className="book-info__title">{book.title}</h1>
           <p className="book-info__description">{book.description}</p>
           <div className="book-info__buttons">
-            <AddButton text={"Mark as read"} />
+            <AddButton text={"Mark as read"} handleClick={markAsRead} />
             <AddButton
               text={"Add to collection"}
               color="#413F2A"

@@ -23,7 +23,6 @@ const BookPage = () => {
     await axios
       .get("/v1/api/books/")
       .then((response) => {
-        console.log(response);
         setBooks(response.data.rows);
       })
       .catch((e) => console.log(e));
@@ -52,7 +51,7 @@ const Container = styled.div`
   padding: 1.2rem 1.7rem;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 465px);
   overflow: hidden;
 
   @media screen and (max-width: 1280px) {
