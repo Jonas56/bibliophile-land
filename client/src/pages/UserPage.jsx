@@ -33,7 +33,7 @@ const UserPage = () => {
           </CurrentlyReading>
         </Left>
         <Right>
-          <BooksCollection />
+          <BooksCollection title={"Read books"} />
         </Right>
       </Container>
       <Outlet />
@@ -51,7 +51,6 @@ const Container = styled.main`
   grid-column-gap: 1rem;
   grid-row-gap: 0px;
   overflow: hidden;
-  height: 82vh;
 
   @media screen and (max-width: 768px) {
     display: flex;
@@ -120,6 +119,7 @@ const Cover = styled.div`
 
 /* Currently Reading */
 const CurrentlyReading = styled.div`
+  width: 100%;
   span {
     font-style: normal;
     font-weight: 500;
@@ -131,8 +131,9 @@ const CurrentlyReading = styled.div`
     display: flex;
     background: #0d1117;
     border-radius: 10px;
-    padding: 0.4em 1em 0.4em 1em;
+    padding: 0.6rem 1.2rem;
     margin-top: 0.5rem;
+    width: 100%;
     .currently-reading-image {
       img {
         height: 103px;
@@ -143,6 +144,7 @@ const CurrentlyReading = styled.div`
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      flex-grow: 1;
 
       &_title {
         span {
@@ -157,6 +159,7 @@ const CurrentlyReading = styled.div`
       }
       &_nbPages {
         display: flex;
+        min-width: 100%;
         justify-content: space-between;
         align-items: center;
         span {

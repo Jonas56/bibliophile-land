@@ -3,7 +3,7 @@ import axios from "axios";
 import styled from "styled-components";
 import Book from "../home/BookSliderCard";
 
-const BooksCollection = () => {
+const BooksCollection = ({ title }) => {
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -20,14 +20,13 @@ const BooksCollection = () => {
 
   useEffect(() => {
     getBooks();
-    console.log(books);
   }, [loading]);
 
   return loading ? (
     <p>Loading..</p>
   ) : (
     <Container>
-      <span className="read-books_title">Read Books</span>
+      <span className="read-books_title">{title}</span>
       <Books>
         {" "}
         {books.map((book, index) => (
