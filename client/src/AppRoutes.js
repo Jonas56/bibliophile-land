@@ -2,8 +2,7 @@ import {
     Routes,
     Route
   } from "react-router-dom";
-import Navbar from "./components/Navbar";
-import PageLayout1 from "./components/PageLayout1";
+import Home from "./pages/Home";
 import BookPage from "./pages/BookPage";
 import Login from "./pages/Login";
 import UserPage from "./pages/UserPage";
@@ -16,7 +15,7 @@ const AppRoutes = () => {
   <Routes>
       <Route path="/">
         {/* home page */ }
-        <Route index element={<PageLayout1 />} />
+        <Route index element={<Home />} />
 
         {/* login and signup */ }
         <Route path="login" element={<Login />} />
