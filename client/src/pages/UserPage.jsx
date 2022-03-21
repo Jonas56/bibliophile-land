@@ -4,6 +4,7 @@ import ProfileSection from "../components/user-page/ProfileSide";
 import { MdOutlineMenuBook } from "react-icons/md";
 import { Outlet } from "react-router";
 import BooksCollection from "../components/user-page/BooksCollection";
+import Top3Books from "../components/user-page/Top3Books";
 
 const UserPage = () => {
   return (
@@ -13,6 +14,7 @@ const UserPage = () => {
         <Left>
           <Cover />
           <ProfileSection />
+          <Top3Books />
           <CurrentlyReading>
             <span>Currently Reading</span>
             <div className="currently-reading">
