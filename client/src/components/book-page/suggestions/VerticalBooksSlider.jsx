@@ -24,7 +24,7 @@ const VerticalBooksSlider = ({ books, title }) => {
         <>
           <h2>Similar Books</h2>
           <div className="vertical-books-section">
-            {books.slice(3, 8).map((book) => (
+            {books.map((book) => (
               <Link to={`/books/${book.id}`} key={book.title}>
                 <VerticalBookCard book={book} />
               </Link>

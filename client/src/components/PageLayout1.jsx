@@ -25,9 +25,8 @@ const PageLayout1 = () => {
 
   const getBooks = async () => {
     await axios
-      .get("v1/api/books")
+      .get("/v1/api/books")
       .then((response) => {
-        console.log(response);
         setBooks(response.data.rows);
       })
       .catch((e) => console.log(e))
@@ -37,7 +36,6 @@ const PageLayout1 = () => {
     axios
       .get("/v1/api/authors")
       .then((response) => {
-        console.log(response);
         setAuthors(response.data.rows);
       })
       .catch((e) => console.log(e))

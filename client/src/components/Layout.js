@@ -8,9 +8,9 @@ const Layout = (props) => {
   console.log(navigate)
   useEffect(
     () => {
-      if(navigate.pathname.includes('login')) setIsLogin(true)
+      if(navigate.pathname.includes('login') || navigate.pathname.includes('signup')) setIsLogin(true)
     }
-  )
+  , [setIsLogin, navigate])
 
   return (
     <>

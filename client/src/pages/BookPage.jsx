@@ -23,6 +23,7 @@ const BookPage = () => {
     await axios
       .get("/v1/api/books/")
       .then((response) => {
+        console.log(response);
         setBooks(response.data.rows);
       })
       .catch((e) => console.log(e));
