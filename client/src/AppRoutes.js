@@ -7,7 +7,6 @@ import PageLayout1 from "./components/PageLayout1";
 import BookPage from "./pages/BookPage";
 import Login from "./pages/Login";
 import UserPage from "./pages/UserPage";
-
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -15,7 +14,7 @@ const AppRoutes = () => {
   return (
     <>
   <Routes>
-      <Route path="/" element={<Navbar />}>
+      <Route path="/">
         {/* home page */ }
         <Route index element={<PageLayout1 />} />
 

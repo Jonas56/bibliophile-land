@@ -11,7 +11,6 @@ const BooksCollection = ({ title }) => {
     await axios
       .get("/v1/api/reading/")
       .then((response) => {
-        console.log(response);
         setBooks(response.data.reading);
       })
       .catch((e) => console.log(e))

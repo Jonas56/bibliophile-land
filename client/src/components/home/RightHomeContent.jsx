@@ -11,7 +11,7 @@ const RightContent = ({ books, loading, authors }) => {
         <Authors>
           {authors.map((author, index) => (
             <Author key={index}>
-              <img src="./assets/obito.jpg" alt={author.name} />
+              <img src={author.image_link} alt={author.name} />
               <span>{author.name}</span>
             </Author>
           ))}
