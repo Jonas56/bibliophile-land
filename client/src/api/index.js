@@ -2,10 +2,12 @@ import axios from "axios";
 
 
 /* books*/
+// get all books
 export const  getAllBooks = async () =>  {
     return await axios.get("/v1/api/books/")
 }
 
+// get read books
 export const  getReadBooks = async () =>  {
     return await axios.get("/v1/api/reading/")
 }
@@ -13,7 +15,6 @@ export const  getReadBooks = async () =>  {
 
 /* auth */
 
-const API_URL = '/v1/api/login/'
 
 // Register user
 export const register = async (userData) => {

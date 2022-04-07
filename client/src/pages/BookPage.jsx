@@ -6,13 +6,14 @@ import styled from "styled-components";
 import BookDetails from "../components/book-page/BookDetails";
 import VerticalBooksSlider from "../components/book-page/suggestions/VerticalBooksSlider";
 import { getAllBooks, selectAllBooks } from "../redux/slices/booksSlice";
+import { getReadBooks, selectReadBooks } from "../redux/slices/userSlice";
 
 const BookPage = () => {
   /* redux */
+  // get all books
   const reduxBooks = useSelector(selectAllBooks);
   const { status, books } = reduxBooks;
   const dispatch = useDispatch();
-  console.log(reduxBooks);
 
   useEffect(() => {
     if (status === "idle") {
@@ -20,8 +21,17 @@ const BookPage = () => {
     }
   }, [dispatch, status]);
 
+  // get read books
+  const { readBooks } = useSelector(selectReadBooks);
+  console.log(reduxBooks);
+  useEffect(() => {
+    if (readBooks.status === "idle") {
+      dispatch(getReadBooks());
+    }
+  }, [dispatch, readBooks.status]);
+
+  // get book by id from url
   const { bookid } = useParams();
-  const [readBooks, setReadBooks] = useState([]);
   const [bookById, setBookById] = useState(null);
 
   const getBookById = async () => {
@@ -33,28 +43,15 @@ const BookPage = () => {
       .catch((e) => console.log(e));
   };
 
-  const getReadBooks = async () => {
-    await axios
-      .get("/v1/api/reading/")
-      .then((response) => {
-        setReadBooks(response.data.reading);
-      })
-      .catch((e) => console.log(e));
-  };
-
+  // to check if the book is read
   const checkReadBook = (id) => {
     console.count("here");
-    const book_index = readBooks.findIndex((item) => id === item.id);
+    const book_index = readBooks.list.findIndex((item) => id === item.id);
     if (book_index > 0) {
       return true;
     }
     return false;
   };
-
-  useEffect(() => {
-    getReadBooks();
-  }, []);
-
   useEffect(() => {
     getBookById();
     // eslint-disable-next-line react-hooks/exhaustive-deps

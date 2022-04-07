@@ -3,9 +3,15 @@ import styled from "styled-components";
 import AddButton from "../buttons/AddButton";
 import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import {
+  markBookAsReadRedux,
+  unreadBookRedux,
+} from "../../redux/slices/userSlice";
 
 const BookDetails = ({ book, checkReadBook }) => {
   const [isRead, setIsRead] = useState(false);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     setIsRead(checkReadBook(book.id));
@@ -14,6 +20,7 @@ const BookDetails = ({ book, checkReadBook }) => {
   const unreadBook = async () => {
     const res = await axios.delete("/v1/api/reading/" + book.id, book);
     console.log("Response ", res);
+    dispatch(unreadBookRedux(book));
 
     if (!res) {
       toast.error("Book not removed!", {
@@ -47,6 +54,7 @@ const BookDetails = ({ book, checkReadBook }) => {
   const markAsRead = async () => {
     const res = await axios.post("/v1/api/reading/" + book.id, book);
     console.log("Response ", res);
+    dispatch(markBookAsReadRedux(book));
 
     if (!res) {
       toast.error("Book not added!", {

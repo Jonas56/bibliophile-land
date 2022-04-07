@@ -38,6 +38,13 @@ export const userSlice = createSlice(
         name:'user',
         initialState,
         reducers:{
+          markBookAsReadRedux : (state,action) => {
+            state.readBooks.list.push(action.payload)
+          },
+          unreadBookRedux : (state,action) => {
+            const filtredBooks =  state.readBooks.list.filter(item => item.id !== action.payload.id) 
+            state.readBooks.list = filtredBooks
+          }
 
         }, 
         extraReducers: (builder) =>{
@@ -61,4 +68,5 @@ export const userSlice = createSlice(
 
 
 export const selectReadBooks = state => state.user
+export const {markBookAsReadRedux,unreadBookRedux} =userSlice.actions
 export default userSlice.reducer
