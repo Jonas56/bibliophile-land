@@ -1,12 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import ProfileSection from "../components/user-page/ProfileSide";
 import { MdOutlineMenuBook } from "react-icons/md";
 import { Outlet } from "react-router";
 import BooksCollection from "../components/user-page/BooksCollection";
 import Top3Books from "../components/user-page/Top3Books";
+import { useDispatch, useSelector } from "react-redux";
+import { getReadBooks, selectReadBooks } from "../redux/slices/userSlice";
 
 const UserPage = () => {
+  const reduxBooks = useSelector(selectReadBooks);
+  const { readBooks } = reduxBooks;
+  const dispatch = useDispatch();
+  console.log(reduxBooks);
+  useEffect(() => {
+    if (readBooks.status === "idle") {
+      dispatch(getReadBooks());
+    }
+  }, [dispatch, readBooks.status]);
+
   return (
     <>
       {" "}
@@ -35,7 +47,7 @@ const UserPage = () => {
           </CurrentlyReading>
         </Left>
         <Right>
-          <BooksCollection title={"Read books"} />
+          <BooksCollection title={"Read books"} books={readBooks} />
         </Right>
       </Container>
       <Outlet />

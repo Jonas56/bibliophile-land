@@ -9,8 +9,21 @@ import {
 } from "react-icons/md";
 import RightContent from "../components/home/RightHomeContent";
 import axios from "axios";
+import { useSelector, useDispatch } from "react-redux";
+import { getAllBooks, selectAllBooks } from "../redux/slices/booksSlice";
 
 const PageLayout1 = () => {
+  const reduxBooks = useSelector(selectAllBooks);
+  const { status, books } = reduxBooks;
+  const dispatch = useDispatch();
+  console.log(reduxBooks);
+
+  useEffect(() => {
+    if (status === "idle") {
+      dispatch(getAllBooks());
+    }
+  }, [dispatch, status]);
+
   // dropdown 1
   const [isOpen, setIsOpen] = useState(false);
   const toggling = () => setIsOpen(!isOpen);
@@ -19,31 +32,18 @@ const PageLayout1 = () => {
   const toggling2 = () => setIsOpen2(!isOpen2);
 
   // data
-  const [books, setBooks] = useState([]);
   const [authors, setAuthors] = useState([]);
-  const [loading, setLoading] = useState(true);
 
-  const getBooks = async () => {
-    await axios
-      .get("/v1/api/books")
-      .then((response) => {
-        setBooks(response.data.rows);
-      })
-      .catch((e) => console.log(e))
-      .finally(() => setLoading(false));
-  };
   const getAuthors = async () => {
     axios
       .get("/v1/api/authors")
       .then((response) => {
         setAuthors(response.data.rows);
       })
-      .catch((e) => console.log(e))
-      .finally(() => setLoading(false));
+      .catch((e) => console.log(e));
   };
 
   useEffect(() => {
-    getBooks();
     getAuthors();
   }, []);
 
@@ -113,7 +113,11 @@ const PageLayout1 = () => {
         </CurrentlyReading>
       </LeftSide>
       <RightSide>
-        <RightContent books={books} loading={loading} authors={authors} />
+        <RightContent
+          books={books}
+          loading={status === "loading"}
+          authors={authors}
+        />
       </RightSide>
     </Container>
   );
@@ -168,6 +172,11 @@ const RightSide = styled.div`
   height: 100%;
   padding: 1.2rem;
   overflow: auto;
+  background: linear-gradient(
+    119.25deg,
+    #171f29 3.31%,
+    rgba(0, 0, 0, 0) 109.45%
+  );
   @media screen and (max-width: 1024px) {
     grid-area: 1 / 1 / 6 / 2;
   }

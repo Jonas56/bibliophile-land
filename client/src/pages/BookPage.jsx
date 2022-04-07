@@ -1,42 +1,59 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import styled from "styled-components";
 import BookDetails from "../components/book-page/BookDetails";
 import VerticalBooksSlider from "../components/book-page/suggestions/VerticalBooksSlider";
+import { getAllBooks, selectAllBooks } from "../redux/slices/booksSlice";
 
 const BookPage = () => {
+  /* redux */
+  // get all books
+  const reduxBooks = useSelector(selectAllBooks);
+  const { status, books } = reduxBooks;
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (status === "idle") {
+      dispatch(getAllBooks());
+    }
+  }, [dispatch, status]);
+
+  // get book by id from url
   const { bookid } = useParams();
-  const [books, setBooks] = useState([]);
   const [bookById, setBookById] = useState(null);
+
   const getBookById = async () => {
     await axios
       .get("/v1/api/books/" + bookid)
       .then((response) => {
-        console.log(response);
         setBookById(response.data);
       })
       .catch((e) => console.log(e));
   };
 
-  const getBooks = async () => {
-    await axios
-      .get("/v1/api/books/")
-      .then((response) => {
-        console.log(response);
-        setBooks(response.data.rows);
-      })
-      .catch((e) => console.log(e));
+  // to check if the book is read
+  const checkReadBook = (id, readBooks) => {
+    console.count("here");
+    const book_index = readBooks.list.findIndex((item) => id === item.id);
+    if (book_index > -1) {
+      return true;
+    }
+    return false;
   };
   useEffect(() => {
-    getBooks();
     getBookById();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [bookid]);
 
   return (
     <Container>
-      {bookById !== null ? <BookDetails book={bookById} /> : <p>Loading</p>}
+      {bookById ? (
+        <BookDetails book={bookById} checkReadBook={checkReadBook} />
+      ) : (
+        <p>Loading</p>
+      )}
       <VerticalBooksSlider books={books} />
     </Container>
   );

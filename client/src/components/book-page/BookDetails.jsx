@@ -1,15 +1,103 @@
 import axios from "axios";
-import React from "react";
 import styled from "styled-components";
 import AddButton from "../buttons/AddButton";
 import { toast } from "react-toastify";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getReadBooks,
+  markBookAsReadRedux,
+  selectReadBooks,
+  unreadBookRedux,
+} from "../../redux/slices/userSlice";
 
-const BookDetails = ({ book }) => {
+const BookDetails = ({ book, checkReadBook }) => {
+  const [isRead, setIsRead] = useState(true);
+  const dispatch = useDispatch();
+
+  // get read books
+  const { readBooks } = useSelector(selectReadBooks);
+  useEffect(() => {
+    if (readBooks.status === "idle") {
+      dispatch(getReadBooks());
+    }
+  }, [dispatch, readBooks.status]);
+
+  console.log("Read books : ", readBooks);
+
+  // check if book is read
+  useEffect(() => {
+    setIsRead(checkReadBook(book.id, readBooks));
+  }, [book.id, checkReadBook, readBooks]);
+
+  console.log(" Book  ", book);
+  const unreadBook = async () => {
+    const res = await axios.delete("/v1/api/reading/" + book.id, book);
+    console.log("Response ", res);
+    dispatch(unreadBookRedux(book));
+
+    if (!res) {
+      toast.error("Book not removed!", {
+        position: "bottom-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        style: {
+          backgroundColor: "darkred",
+        },
+      });
+      return;
+    }
+    toast.success("Book removed!", {
+      position: "bottom-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      style: {
+        backgroundColor: "darkblue",
+      },
+    });
+    setIsRead(!isRead);
+  };
   const markAsRead = async () => {
-    console.log("here");
     const res = await axios.post("/v1/api/reading/" + book.id, book);
-    console.log(res);
-    toast.error("added");
+    console.log("Response ", res);
+    dispatch(markBookAsReadRedux(book));
+
+    if (!res) {
+      toast.error("Book not added!", {
+        position: "bottom-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        style: {
+          backgroundColor: "darkred",
+        },
+      });
+      return;
+    }
+    toast.success("Book added!", {
+      position: "bottom-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      style: {
+        backgroundColor: "darkblue",
+      },
+    });
+    setIsRead(!isRead);
   };
 
   return (
@@ -22,7 +110,22 @@ const BookDetails = ({ book }) => {
           <h1 className="book-info__title">{book.title}</h1>
           <p className="book-info__description">{book.description}</p>
           <div className="book-info__buttons">
-            <AddButton text={"Mark as read"} handleClick={markAsRead} />
+            {isRead ? (
+              <AddButton
+                text={"Unread"}
+                handleClick={async () => {
+                  await unreadBook();
+                }}
+              />
+            ) : (
+              <AddButton
+                text={"Mark as read"}
+                handleClick={async () => {
+                  await markAsRead();
+                }}
+              />
+            )}
+
             <AddButton
               text={"Add to collection"}
               color="#413F2A"
@@ -31,7 +134,11 @@ const BookDetails = ({ book }) => {
           </div>
         </div>
       </Info>
-      <Details>test</Details>
+      <Details>
+        <span>
+          Comments Section or Author Description or from where to buy the book
+        </span>
+      </Details>
     </Container>
   );
 };
@@ -54,13 +161,17 @@ const Container = styled.div`
 `;
 const Info = styled.div`
   grid-area: 1 / 1 / 2 / 2;
-  width: 100%;
+  width: 95%;
   height: 100%;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
   gap: 2rem;
-
+  padding-bottom: 2rem;
+  border-bottom: thick solid white;
+  border-radius: 1px;
+  border-color: #393b3d;
+  margin-bottom: 1.5rem;
   .book-image {
     grid-area: 1 / 1 / 4 / 2;
     img {
@@ -126,6 +237,11 @@ const Details = styled.div`
   display: grid;
   place-items: center;
   place-content: center;
+  span {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+  }
   @media screen and (max-width: 1280px) {
     grid-area: 2 / 1 / 3 / 4;
   }
