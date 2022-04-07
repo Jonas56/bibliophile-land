@@ -3,19 +3,33 @@ import styled from "styled-components";
 import AddButton from "../buttons/AddButton";
 import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
+  getReadBooks,
   markBookAsReadRedux,
+  selectReadBooks,
   unreadBookRedux,
 } from "../../redux/slices/userSlice";
 
 const BookDetails = ({ book, checkReadBook }) => {
-  const [isRead, setIsRead] = useState(false);
+  const [isRead, setIsRead] = useState(true);
   const dispatch = useDispatch();
 
+  // get read books
+  const { readBooks } = useSelector(selectReadBooks);
   useEffect(() => {
-    setIsRead(checkReadBook(book.id));
-  }, [book.id, checkReadBook]);
+    if (readBooks.status === "idle") {
+      dispatch(getReadBooks());
+    }
+  }, [dispatch, readBooks.status]);
+
+  console.log("Read books : ", readBooks);
+
+  // check if book is read
+  useEffect(() => {
+    setIsRead(checkReadBook(book.id, readBooks));
+  }, [book.id, checkReadBook, readBooks]);
+
   console.log(" Book  ", book);
   const unreadBook = async () => {
     const res = await axios.delete("/v1/api/reading/" + book.id, book);

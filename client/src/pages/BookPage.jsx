@@ -6,7 +6,6 @@ import styled from "styled-components";
 import BookDetails from "../components/book-page/BookDetails";
 import VerticalBooksSlider from "../components/book-page/suggestions/VerticalBooksSlider";
 import { getAllBooks, selectAllBooks } from "../redux/slices/booksSlice";
-import { getReadBooks, selectReadBooks } from "../redux/slices/userSlice";
 
 const BookPage = () => {
   /* redux */
@@ -20,15 +19,6 @@ const BookPage = () => {
       dispatch(getAllBooks());
     }
   }, [dispatch, status]);
-
-  // get read books
-  const { readBooks } = useSelector(selectReadBooks);
-  console.log(reduxBooks);
-  useEffect(() => {
-    if (readBooks.status === "idle") {
-      dispatch(getReadBooks());
-    }
-  }, [dispatch, readBooks.status]);
 
   // get book by id from url
   const { bookid } = useParams();
@@ -44,10 +34,10 @@ const BookPage = () => {
   };
 
   // to check if the book is read
-  const checkReadBook = (id) => {
+  const checkReadBook = (id, readBooks) => {
     console.count("here");
     const book_index = readBooks.list.findIndex((item) => id === item.id);
-    if (book_index > 0) {
+    if (book_index > -1) {
       return true;
     }
     return false;
