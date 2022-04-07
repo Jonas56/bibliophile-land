@@ -13,15 +13,16 @@ import { useSelector, useDispatch } from "react-redux";
 import { getAllBooks, selectAllBooks } from "../redux/slices/booksSlice";
 
 const PageLayout1 = () => {
-  const redux_books = useSelector(selectAllBooks);
+  const reduxBooks = useSelector(selectAllBooks);
+  const { status, books } = reduxBooks;
   const dispatch = useDispatch();
-  console.log(redux_books);
+  console.log(reduxBooks);
 
   useEffect(() => {
-    if (redux_books.status === "idle") {
+    if (status === "idle") {
       dispatch(getAllBooks());
     }
-  }, [dispatch, redux_books]);
+  }, [dispatch, status]);
 
   // dropdown 1
   const [isOpen, setIsOpen] = useState(false);
@@ -31,31 +32,18 @@ const PageLayout1 = () => {
   const toggling2 = () => setIsOpen2(!isOpen2);
 
   // data
-  const [books, setBooks] = useState([]);
   const [authors, setAuthors] = useState([]);
-  const [loading, setLoading] = useState(true);
 
-  const getBooks = async () => {
-    await axios
-      .get("/v1/api/books")
-      .then((response) => {
-        setBooks(response.data.rows);
-      })
-      .catch((e) => console.log(e))
-      .finally(() => setLoading(false));
-  };
   const getAuthors = async () => {
     axios
       .get("/v1/api/authors")
       .then((response) => {
         setAuthors(response.data.rows);
       })
-      .catch((e) => console.log(e))
-      .finally(() => setLoading(false));
+      .catch((e) => console.log(e));
   };
 
   useEffect(() => {
-    getBooks();
     getAuthors();
   }, []);
 
@@ -125,7 +113,11 @@ const PageLayout1 = () => {
         </CurrentlyReading>
       </LeftSide>
       <RightSide>
-        <RightContent books={books} loading={loading} authors={authors} />
+        <RightContent
+          books={books}
+          loading={status === "loading"}
+          authors={authors}
+        />
       </RightSide>
     </Container>
   );

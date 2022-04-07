@@ -1,13 +1,26 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import styled from "styled-components";
 import BookDetails from "../components/book-page/BookDetails";
 import VerticalBooksSlider from "../components/book-page/suggestions/VerticalBooksSlider";
+import { getAllBooks, selectAllBooks } from "../redux/slices/booksSlice";
 
 const BookPage = () => {
+  /* redux */
+  const reduxBooks = useSelector(selectAllBooks);
+  const { status, books } = reduxBooks;
+  const dispatch = useDispatch();
+  console.log(reduxBooks);
+
+  useEffect(() => {
+    if (status === "idle") {
+      dispatch(getAllBooks());
+    }
+  }, [dispatch, status]);
+
   const { bookid } = useParams();
-  const [books, setBooks] = useState([]);
   const [readBooks, setReadBooks] = useState([]);
   const [bookById, setBookById] = useState(null);
 
@@ -20,14 +33,6 @@ const BookPage = () => {
       .catch((e) => console.log(e));
   };
 
-  const getBooks = async () => {
-    await axios
-      .get("/v1/api/books/")
-      .then((response) => {
-        setBooks(response.data.rows);
-      })
-      .catch((e) => console.log(e));
-  };
   const getReadBooks = async () => {
     await axios
       .get("/v1/api/reading/")
@@ -47,7 +52,6 @@ const BookPage = () => {
   };
 
   useEffect(() => {
-    getBooks();
     getReadBooks();
   }, []);
 

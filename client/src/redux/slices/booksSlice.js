@@ -1,5 +1,4 @@
 import {createAsyncThunk , createSlice} from "@reduxjs/toolkit"
-import axios from "axios"
 import * as api from "../../api"
 
 
@@ -16,7 +15,7 @@ export const getAllBooks = createAsyncThunk(
     'books/getAllBooks',
     async (books,  thunkAPI) => {
       try {
-        return await axios.get("/v1/api/books/")
+        return api.getAllBooks()
       } catch (error) {
         const message =
           (error.response &&
