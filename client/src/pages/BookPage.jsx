@@ -8,12 +8,13 @@ import VerticalBooksSlider from "../components/book-page/suggestions/VerticalBoo
 const BookPage = () => {
   const { bookid } = useParams();
   const [books, setBooks] = useState([]);
+  const [readBooks, setReadBooks] = useState([]);
   const [bookById, setBookById] = useState(null);
+
   const getBookById = async () => {
     await axios
       .get("/v1/api/books/" + bookid)
       .then((response) => {
-        console.log(response);
         setBookById(response.data);
       })
       .catch((e) => console.log(e));
@@ -23,20 +24,45 @@ const BookPage = () => {
     await axios
       .get("/v1/api/books/")
       .then((response) => {
-        console.log(response);
         setBooks(response.data.rows);
       })
       .catch((e) => console.log(e));
   };
+  const getReadBooks = async () => {
+    await axios
+      .get("/v1/api/reading/")
+      .then((response) => {
+        setReadBooks(response.data.reading);
+      })
+      .catch((e) => console.log(e));
+  };
+
+  const checkReadBook = (id) => {
+    console.count("here");
+    const book_index = readBooks.findIndex((item) => id === item.id);
+    if (book_index > 0) {
+      return true;
+    }
+    return false;
+  };
+
   useEffect(() => {
     getBooks();
+    getReadBooks();
+  }, []);
+
+  useEffect(() => {
     getBookById();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [bookid]);
 
   return (
     <Container>
-      {bookById !== null ? <BookDetails book={bookById} /> : <p>Loading</p>}
+      {bookById ? (
+        <BookDetails book={bookById} checkReadBook={checkReadBook} />
+      ) : (
+        <p>Loading</p>
+      )}
       <VerticalBooksSlider books={books} />
     </Container>
   );

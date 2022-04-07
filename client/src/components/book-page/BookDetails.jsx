@@ -1,15 +1,81 @@
 import axios from "axios";
-import React from "react";
 import styled from "styled-components";
 import AddButton from "../buttons/AddButton";
 import { toast } from "react-toastify";
+import { useEffect, useState } from "react";
 
-const BookDetails = ({ book }) => {
+const BookDetails = ({ book, checkReadBook }) => {
+  const [isRead, setIsRead] = useState(false);
+
+  useEffect(() => {
+    setIsRead(checkReadBook(book.id));
+  }, [book.id, checkReadBook]);
+  console.log(" Book  ", book);
+  const unreadBook = async () => {
+    const res = await axios.delete("/v1/api/reading/" + book.id, book);
+    console.log("Response ", res);
+
+    if (!res) {
+      toast.error("Book not removed!", {
+        position: "bottom-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        style: {
+          backgroundColor: "darkred",
+        },
+      });
+      return;
+    }
+    toast.success("Book removed!", {
+      position: "bottom-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      style: {
+        backgroundColor: "darkblue",
+      },
+    });
+    setIsRead(!isRead);
+  };
   const markAsRead = async () => {
-    console.log("here");
     const res = await axios.post("/v1/api/reading/" + book.id, book);
-    console.log(res);
-    toast.error("added");
+    console.log("Response ", res);
+
+    if (!res) {
+      toast.error("Book not added!", {
+        position: "bottom-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        style: {
+          backgroundColor: "darkred",
+        },
+      });
+      return;
+    }
+    toast.success("Book added!", {
+      position: "bottom-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      style: {
+        backgroundColor: "darkblue",
+      },
+    });
+    setIsRead(!isRead);
   };
 
   return (
@@ -22,7 +88,22 @@ const BookDetails = ({ book }) => {
           <h1 className="book-info__title">{book.title}</h1>
           <p className="book-info__description">{book.description}</p>
           <div className="book-info__buttons">
-            <AddButton text={"Mark as read"} handleClick={markAsRead} />
+            {isRead ? (
+              <AddButton
+                text={"Unread"}
+                handleClick={async () => {
+                  await unreadBook();
+                }}
+              />
+            ) : (
+              <AddButton
+                text={"Mark as read"}
+                handleClick={async () => {
+                  await markAsRead();
+                }}
+              />
+            )}
+
             <AddButton
               text={"Add to collection"}
               color="#413F2A"
