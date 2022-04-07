@@ -9,8 +9,20 @@ import {
 } from "react-icons/md";
 import RightContent from "../components/home/RightHomeContent";
 import axios from "axios";
+import { useSelector, useDispatch } from "react-redux";
+import { getAllBooks, selectAllBooks } from "../redux/slices/booksSlice";
 
 const PageLayout1 = () => {
+  const redux_books = useSelector(selectAllBooks);
+  const dispatch = useDispatch();
+  console.log(redux_books);
+
+  useEffect(() => {
+    if (redux_books.status === "idle") {
+      dispatch(getAllBooks());
+    }
+  }, [dispatch, redux_books]);
+
   // dropdown 1
   const [isOpen, setIsOpen] = useState(false);
   const toggling = () => setIsOpen(!isOpen);
@@ -168,6 +180,11 @@ const RightSide = styled.div`
   height: 100%;
   padding: 1.2rem;
   overflow: auto;
+  background: linear-gradient(
+    119.25deg,
+    #171f29 3.31%,
+    rgba(0, 0, 0, 0) 109.45%
+  );
   @media screen and (max-width: 1024px) {
     grid-area: 1 / 1 / 6 / 2;
   }

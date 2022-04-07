@@ -112,7 +112,11 @@ const BookDetails = ({ book, checkReadBook }) => {
           </div>
         </div>
       </Info>
-      <Details>test</Details>
+      <Details>
+        <span>
+          Comments Section or Author Description or from where to buy the book
+        </span>
+      </Details>
     </Container>
   );
 };
@@ -135,13 +139,17 @@ const Container = styled.div`
 `;
 const Info = styled.div`
   grid-area: 1 / 1 / 2 / 2;
-  width: 100%;
+  width: 95%;
   height: 100%;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
   gap: 2rem;
-
+  padding-bottom: 2rem;
+  border-bottom: thick solid white;
+  border-radius: 1px;
+  border-color: #393b3d;
+  margin-bottom: 1.5rem;
   .book-image {
     grid-area: 1 / 1 / 4 / 2;
     img {
@@ -207,6 +215,11 @@ const Details = styled.div`
   display: grid;
   place-items: center;
   place-content: center;
+  span {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+  }
   @media screen and (max-width: 1280px) {
     grid-area: 2 / 1 / 3 / 4;
   }
