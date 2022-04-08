@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import ProfileSection from "../components/user-page/ProfileSide";
 import { MdOutlineMenuBook } from "react-icons/md";
+import { FiLogOut, FiSettings } from "react-icons/fi";
 import { Outlet } from "react-router";
 import BooksCollection from "../components/user-page/BooksCollection";
 import Top3Books from "../components/user-page/Top3Books";
@@ -45,6 +46,17 @@ const UserPage = () => {
               </div>
             </div>
           </CurrentlyReading>
+          <ProfileSettings>
+            <Settings>
+              <FiSettings />
+              <span>Settings</span>
+            </Settings>
+            <span>|</span>
+            <Logout>
+              <FiLogOut />
+              <span>Log out</span>
+            </Logout>
+          </ProfileSettings>
         </Left>
         <Right>
           <BooksCollection title={"Read books"} books={readBooks} />
@@ -69,7 +81,7 @@ const Container = styled.main`
   @media screen and (max-width: 768px) {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: stretch;
     flex-direction: column;
     margin-top: 1.5rem;
     margin-bottom: 1.5rem;
@@ -223,5 +235,32 @@ const Right = styled.section`
   }
   @media screen and (max-width: 1280px) {
     grid-area: 1 / 2 / 6 / 4;
+  }
+`;
+
+const ProfileSettings = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 2rem;
+  margin-bottom: auto;
+`;
+const Settings = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  cursor: pointer;
+  * {
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+  }
+`;
+const Logout = styled(Settings)`
+  * {
+    color: #dd4f4f;
   }
 `;
