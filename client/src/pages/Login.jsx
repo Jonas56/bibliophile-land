@@ -1,41 +1,64 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Logo from "../components/Logo";
 
 const Login = () => {
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+  const { email, password } = formData;
+
+  const onChange = (e) => {
+    setFormData((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  // const onSubmit = (e) => {
+  //   e.preventDefault();
+  //   const userData = { email, password };
+  //   dispatch(login(userData));
+  // };
+
   return (
     <Wrapper>
       <div className="BGImage">
         <Logo />
       </div>
-      <div className="LoginDiv">
-        <div className="">
-          <h1 className="LoginHeader">Sign in to your land</h1>
-          <div className="LoginCard">
-            <p className="usernameLabel">Username or email address</p>
-            <input type="text" className="usernameInput" id="" />
-            <p className="passwordLabel">
-              Password
-              <a className="forgetPassword" href="#">
-                Forgot password?
-              </a>
-            </p>
-            <input type="password" className="passwordInput" id="" />
-            <button className="signInButton">Sign in</button>
-          </div>
-        </div>
-        <div className="signUpDiv">
-          <p className="signUpP">
-            new here? <a href="#">Create an account</a>
-          </p>
-        </div>
-        <div>
-          <p className="BGLogo">
-            Bibliophile<span className="BGLogoSpan"> Land</span>
-          </p>
-        </div>
-      </div>
+      <LoginContainer>
+        <Title>Sign in to your Land!</Title>
+        <Box>
+          <InputGroup>
+            <label>Email</label>
+            <input
+              type="text"
+              className="form-control"
+              id="email"
+              name="email"
+              value={email}
+              placeholder="Enter your email"
+              onChange={onChange}
+            />
+          </InputGroup>
+          <InputGroup>
+            <label>Password</label>
+            <input
+              type="password"
+              className="form-control"
+              id="password"
+              name="password"
+              value={password}
+              placeholder="Enter your password"
+              onChange={onChange}
+            />
+          </InputGroup>
+          <Submit>Signin</Submit>
+        </Box>
+        <NewAccount>New here? Join us now!</NewAccount>
+      </LoginContainer>
     </Wrapper>
   );
 };
@@ -44,7 +67,17 @@ export default Login;
 
 const Wrapper = styled.div`
   display: flex;
-
+  justify-content: center;
+  align-items: center;
+  margin: -1.2rem -3rem;
+  height: 100%;
+  @media screen and (max-width: 768px) {
+    margin: -1.2rem -1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+  }
   // Background Login Image Section
   .BGImage {
     top: 0;
@@ -52,99 +85,6 @@ const Wrapper = styled.div`
     width: 48%;
     background-image: url("./assets/BGlogin.jpg");
     background-size: cover;
-  }
-
-  // Login Div Section
-  .LoginDiv {
-    margin: 10% auto;
-  }
-
-  .LoginHeader {
-    max-width: 220px;
-    line-height: 1;
-    text-align: center;
-    margin: auto;
-    margin-bottom: 30px;
-    color: #dedede;
-    font-size: 36px;
-    font-weight: 500;
-  }
-
-  // Login Card
-  .LoginCard {
-    padding: 35px;
-    background-color: #1c272c;
-    border-radius: 10px;
-    height: 220px;
-    width: 300px;
-  }
-
-  .usernameLabel,
-  .passwordLabel {
-    position: relative;
-    color: #ebebeb;
-    font-size: 15px;
-    width: 100%;
-  }
-
-  .forgetPassword {
-    position: absolute;
-    right: 5px;
-  }
-
-  a {
-    text-decoration: none;
-    color: #8ba5ff;
-    font-size: 13px;
-  }
-
-  .usernameInput,
-  .passwordInput {
-    width: 90%;
-    height: 40px;
-    border-radius: 5px;
-    border: none;
-    background-color: #0d1117;
-    margin-top: 1%;
-    margin-bottom: 4%;
-    padding: 0 5%;
-    color: #ebebeb;
-    font-size: 15px;
-    font-family: "Montserrat", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  }
-
-  input:focus {
-    outline: none;
-  }
-
-  .signInButton {
-    font-family: "Montserrat";
-    width: 100%;
-    height: 40px;
-    background-color: #529a47;
-    color: #fff;
-    font-size: 18px;
-    font-weight: 500;
-    border-radius: 5px;
-    border: none;
-    margin-top: 12%;
-    cursor: pointer;
-  }
-
-  // SignUP Div
-  .signUpDiv {
-    position: relative;
-    z-index: 2;
-    text-align: center;
-    margin-top: 20px;
-    background-color: #1c272c;
-    width: 330px;
-    border-radius: 10px;
-    padding: 20px;
-  }
-
-  .signUpP {
-    color: #ebebeb;
   }
 
   // Background Logo
@@ -170,10 +110,6 @@ const Wrapper = styled.div`
       display: none;
     }
 
-    .LoginDiv {
-      margin-top: 15%;
-    }
-
     .BGLogo {
       display: none;
     }
@@ -184,4 +120,69 @@ const Wrapper = styled.div`
       display: none;
     }
   }
+`;
+
+const LoginContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  margin: auto;
+  min-height: 90vh;
+  gap: 2rem;
+  width: 380px;
+`;
+const Title = styled.h2`
+  line-height: 1;
+  text-align: center;
+  color: #dedede;
+  font-size: 36px;
+  font-weight: 500;
+`;
+const Box = styled.div`
+  padding: 1.2rem 2.5rem;
+  background-color: #1c272c;
+  border-radius: 10px;
+  height: 270px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+`;
+const InputGroup = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  width: 100%;
+  label {
+    color: #ebebeb;
+    font-size: 15px;
+  }
+  input {
+    height: 40px;
+    border-radius: 5px;
+    border: none;
+    background-color: #0d1117;
+    padding: 0 5%;
+    color: #ebebeb;
+    font-size: 15px;
+  }
+`;
+const Submit = styled.button`
+  width: 100%;
+  height: 40px;
+  background-color: #529a47;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+`;
+const NewAccount = styled.div`
+  text-align: center;
+  background-color: #1c272c;
+  border-radius: 10px;
+  padding: 20px;
+  color: #ebebeb;
 `;
