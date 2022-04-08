@@ -1,16 +1,22 @@
 import {createAsyncThunk , createSlice} from "@reduxjs/toolkit"
 import * as api from "../../api"
 
-
+const user = JSON.parse(localStorage.getItem('bibliophile-user'))
 
 // our initial state
 const initialState = {
-    readBooks : {
-        list: [],
-        status: 'idle',
-        message:''
-    },
-    status: 'idle', // idle | loading | succeeded | failed
+  user:user,
+  top3:{
+    list: [],
+    status: 'idle',
+    message:''
+  },
+  readBooks : {
+      list: [],
+      status: 'idle',
+      message:''
+  },
+  status: 'idle', // idle | loading | succeeded | failed
     
 }
 
@@ -19,7 +25,7 @@ export const getReadBooks = createAsyncThunk(
     'books/getReadBooks',
     async (books,  thunkAPI) => {
       try {
-        return api.getReadBooks()
+        return await api.getReadBooks()
       } catch (error) {
         const message =
           (error.response &&

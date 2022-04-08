@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react"
 import Navbar from "./Navbar";
 import {useLocation} from "react-router-dom"
+import styled from "styled-components";
 
 const Layout = (props) => {
   const navigate = useLocation()
@@ -15,8 +16,13 @@ const Layout = (props) => {
   return (
     <>
       {!isLogin ? <Navbar /> : ""}
-      <main>{props.children}</main>
+      <Container>{props.children}</Container>
     </>
   )
 }
 export default Layout;
+
+
+const Container = styled.main`
+/* min-height:100vh */
+`

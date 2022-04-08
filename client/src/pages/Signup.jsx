@@ -3,12 +3,13 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import Logo from "../components/Logo";
 
-const Login = () => {
+const Signup = () => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
+    username: "",
   });
-  const { email, password } = formData;
+  const { email, password, username } = formData;
 
   const onChange = (e) => {
     setFormData((prevState) => ({
@@ -29,8 +30,20 @@ const Login = () => {
         <Logo />
       </div>
       <LoginContainer>
-        <Title>Sign in to your Land!</Title>
+        <Title>Create you own Land!</Title>
         <Box>
+          <InputGroup>
+            <label>Username</label>
+            <input
+              type="text"
+              className="form-control"
+              id="username"
+              name="username"
+              value={username}
+              placeholder="Enter your username"
+              onChange={onChange}
+            />
+          </InputGroup>
           <InputGroup>
             <label>Email</label>
             <input
@@ -57,13 +70,13 @@ const Login = () => {
           </InputGroup>
           <Submit>Signin</Submit>
         </Box>
-        <NewAccount>New here? Join us now!</NewAccount>
+        <NewAccount>Already a member? Sign in!</NewAccount>
       </LoginContainer>
     </Wrapper>
   );
 };
 
-export default Login;
+export default Signup;
 
 const Wrapper = styled.div`
   display: flex;
@@ -143,7 +156,7 @@ const Box = styled.div`
   padding: 1.2rem 2.5rem;
   background-color: #1c272c;
   border-radius: 10px;
-  height: 270px;
+  height: 370px;
   display: flex;
   flex-direction: column;
   align-items: center;
