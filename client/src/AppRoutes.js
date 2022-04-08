@@ -8,6 +8,7 @@ import Login from "./pages/Login";
 import UserPage from "./pages/UserPage";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Signup from "./pages/Signup";
 
 const AppRoutes = () => {
   return (
@@ -19,7 +20,7 @@ const AppRoutes = () => {
 
         {/* login and signup */ }
         <Route path="login" element={<Login />} />
-        <Route path="signup" element={<Login />} />
+        <Route path="signup" element={<Signup />} />
 
         {/* books */}
         <Route path="books" element={<BookPage />}>
