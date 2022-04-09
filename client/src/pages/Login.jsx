@@ -1,9 +1,17 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router";
 import styled from "styled-components";
 import Logo from "../components/Logo";
+import { login, reset } from "../redux/slices/authSlice";
+import toast from "react-toastify";
 
 const Login = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  // handle form
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -17,11 +25,23 @@ const Login = () => {
     }));
   };
 
-  // const onSubmit = (e) => {
-  //   e.preventDefault();
-  //   const userData = { email, password };
-  //   dispatch(login(userData));
-  // };
+  const { user, status, message } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    if (status === "failed") {
+      toast.error(message);
+      console.log("failed");
+    }
+    if (status === "succeeded" || user) {
+      navigate("/");
+      dispatch(reset());
+    }
+  }, [user, status, message, navigate, dispatch]);
+  const handleLogin = (e) => {
+    e.preventDefault();
+    const userData = { email, password };
+    dispatch(login(userData));
+  };
 
   return (
     <Wrapper>
@@ -55,7 +75,7 @@ const Login = () => {
               onChange={onChange}
             />
           </InputGroup>
-          <Submit>Signin</Submit>
+          <Submit onClick={handleLogin}>Signin</Submit>
         </Box>
         <NewAccount>New here? Join us now!</NewAccount>
       </LoginContainer>
