@@ -13,6 +13,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { getAllBooks, selectAllBooks } from "../redux/slices/booksSlice";
 
 const PageLayout1 = () => {
+  // protect route
+  const { user } = useSelector((state) => state.auth);
+
   const reduxBooks = useSelector(selectAllBooks);
   const { status, books } = reduxBooks;
   const dispatch = useDispatch();
@@ -73,44 +76,48 @@ const PageLayout1 = () => {
               </DropDownListContainer>
             )}
           </div>
-          <div className="dropdown-library">
-            {" "}
-            <DropDownHeader onClick={toggling2}>
-              <span>
-                <MdOutlineLocalLibrary />
-                Your Library
-              </span>
-              {isOpen2 ? <MdKeyboardArrowUp /> : <MdKeyboardArrowDown />}
-            </DropDownHeader>
-            {isOpen2 && (
-              <DropDownListContainer>
-                <DropDownList>
-                  <ListItem>Read Books</ListItem>
-                  <ListItem>Top3</ListItem>
-                  <ListItem>Read Later</ListItem>
-                </DropDownList>
-              </DropDownListContainer>
-            )}
-          </div>
+          {user && (
+            <div className="dropdown-library">
+              {" "}
+              <DropDownHeader onClick={toggling2}>
+                <span>
+                  <MdOutlineLocalLibrary />
+                  Your Library
+                </span>
+                {isOpen2 ? <MdKeyboardArrowUp /> : <MdKeyboardArrowDown />}
+              </DropDownHeader>
+              {isOpen2 && (
+                <DropDownListContainer>
+                  <DropDownList>
+                    <ListItem>Read Books</ListItem>
+                    <ListItem>Top3</ListItem>
+                    <ListItem>Read Later</ListItem>
+                  </DropDownList>
+                </DropDownListContainer>
+              )}
+            </div>
+          )}
         </DropDownContainer>
-        <CurrentlyReading>
-          <span>Currently Reading</span>
-          <div className="currently-reading">
-            {" "}
-            <div className="currently-reading-image">
-              <img src="./assets/book.jpg" alt="Book" />
-            </div>
-            <div className="currently-reading-info">
-              <div className="currently-reading-info_title">
-                <span>The Greatest Book</span>
+        {user && (
+          <CurrentlyReading>
+            <span>Currently Reading</span>
+            <div className="currently-reading">
+              {" "}
+              <div className="currently-reading-image">
+                <img src="./assets/book.jpg" alt="Book" />
               </div>
-              <div className="currently-reading-info_nbPages">
-                <span>page 69/169</span>
-                <MdOutlineMenuBook className="currently-reading-info_nbPages_icon" />
+              <div className="currently-reading-info">
+                <div className="currently-reading-info_title">
+                  <span>The Greatest Book</span>
+                </div>
+                <div className="currently-reading-info_nbPages">
+                  <span>page 69/169</span>
+                  <MdOutlineMenuBook className="currently-reading-info_nbPages_icon" />
+                </div>
               </div>
             </div>
-          </div>
-        </CurrentlyReading>
+          </CurrentlyReading>
+        )}
       </LeftSide>
       <RightSide>
         <RightContent

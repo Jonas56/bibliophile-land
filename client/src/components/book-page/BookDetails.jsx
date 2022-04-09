@@ -10,8 +10,13 @@ import {
   selectReadBooks,
   unreadBookRedux,
 } from "../../redux/slices/userSlice";
+import { useNavigate } from "react-router";
 
 const BookDetails = ({ book, checkReadBook }) => {
+  // protect route
+  const { user } = useSelector((state) => state.auth);
+  const navigate = useNavigate();
+
   const [isRead, setIsRead] = useState(true);
   const dispatch = useDispatch();
 
@@ -109,29 +114,38 @@ const BookDetails = ({ book, checkReadBook }) => {
         <div className="book-info">
           <h1 className="book-info__title">{book.title}</h1>
           <p className="book-info__description">{book.description}</p>
-          <div className="book-info__buttons">
-            {isRead ? (
-              <AddButton
-                text={"Unread"}
-                handleClick={async () => {
-                  await unreadBook();
-                }}
-              />
-            ) : (
-              <AddButton
-                text={"Mark as read"}
-                handleClick={async () => {
-                  await markAsRead();
-                }}
-              />
-            )}
+          {user ? (
+            <div className="book-info__buttons">
+              {isRead ? (
+                <AddButton
+                  text={"Unread"}
+                  handleClick={async () => {
+                    await unreadBook();
+                  }}
+                />
+              ) : (
+                <AddButton
+                  text={"Mark as read"}
+                  handleClick={async () => {
+                    await markAsRead();
+                  }}
+                />
+              )}
 
-            <AddButton
-              text={"Add to collection"}
-              color="#413F2A"
-              bgColor={"#D6C957"}
-            />
-          </div>
+              <AddButton
+                text={"Add to collection"}
+                color="#413F2A"
+                bgColor={"#D6C957"}
+              />
+            </div>
+          ) : (
+            <span
+              className="book_login_error"
+              onClick={() => navigate("/login")}
+            >
+              Log in for more infos
+            </span>
+          )}
         </div>
       </Info>
       <Details>
@@ -204,6 +218,13 @@ const Info = styled.div`
       align-items: center;
       justify-content: center;
       gap: 1rem;
+    }
+    .book_login_error {
+      align-self: center;
+      text-align: center;
+      border-radius: 10px;
+      color: #45cbdd;
+      cursor: pointer;
     }
   }
   @media screen and (max-width: 1280px) {
