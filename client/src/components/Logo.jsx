@@ -1,11 +1,13 @@
 import React from "react";
+import { useNavigate } from "react-router";
 //styles
 import styled from "styled-components";
 
 const Logo = () => {
+  const navigate = useNavigate();
   return (
     <Container>
-      <span>Bibliophile</span> Land
+      <span onClick={() => navigate("/")}>Bibliophile</span> Land
     </Container>
   );
 };
