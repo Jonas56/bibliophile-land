@@ -1,11 +1,13 @@
-import React from "react";
+import { NavLink } from "react-router-dom";
 //styles
 import styled from "styled-components";
 
 const Logo = () => {
   return (
     <Container>
-      <span>Bibliophile</span> Land
+      <NavLink to="/">
+        <Text>Bibliophile</Text> Land
+      </NavLink>
     </Container>
   );
 };
@@ -18,9 +20,9 @@ const Container = styled.h1`
   color: #d9d9d9;
   font-weight: 600;
   flex-grow: 2;
+`;
 
-  span {
-    color: #cbcbcb;
-    font-weight: 400;
-  }
+const Text = styled.span`
+  color: #cbcbcb;
+  font-weight: 400;
 `;

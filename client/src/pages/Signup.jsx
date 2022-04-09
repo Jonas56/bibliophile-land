@@ -1,15 +1,24 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router";
+import { toast } from "react-toastify";
 import styled from "styled-components";
 import Logo from "../components/Logo";
+import { register, reset } from "../redux/slices/authSlice";
 
 const Signup = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
     username: "",
+    name: "",
+    age: 21,
   });
-  const { email, password, username } = formData;
+  const { email, password, username, name, age } = formData;
 
   const onChange = (e) => {
     setFormData((prevState) => ({
@@ -18,11 +27,35 @@ const Signup = () => {
     }));
   };
 
-  // const onSubmit = (e) => {
-  //   e.preventDefault();
-  //   const userData = { email, password };
-  //   dispatch(login(userData));
-  // };
+  const { user, status, message } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    if (status === "failed") {
+      toast.error("Error", {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        style: {
+          backgroundColor: "darkred",
+        },
+      });
+      console.log("failed");
+    }
+    if (status === "succeeded" || user) {
+      navigate("/");
+      dispatch(reset());
+    }
+  }, [user, status, message, navigate, dispatch]);
+  const handleSignup = (e) => {
+    e.preventDefault();
+    const userData = { email, password, username, name, age };
+    console.log("User: ", userData);
+    dispatch(register(userData));
+  };
 
   return (
     <Wrapper>
@@ -33,10 +66,20 @@ const Signup = () => {
         <Title>Create you own Land!</Title>
         <Box>
           <InputGroup>
-            <label>Username</label>
+            <label>Name*</label>
             <input
               type="text"
-              className="form-control"
+              id="name"
+              name="name"
+              value={name}
+              placeholder="Enter your name"
+              onChange={onChange}
+            />
+          </InputGroup>
+          <InputGroup>
+            <label>Username*</label>
+            <input
+              type="text"
               id="username"
               name="username"
               value={username}
@@ -45,10 +88,9 @@ const Signup = () => {
             />
           </InputGroup>
           <InputGroup>
-            <label>Email</label>
+            <label>Email*</label>
             <input
               type="text"
-              className="form-control"
               id="email"
               name="email"
               value={email}
@@ -57,10 +99,9 @@ const Signup = () => {
             />
           </InputGroup>
           <InputGroup>
-            <label>Password</label>
+            <label>Password*</label>
             <input
               type="password"
-              className="form-control"
               id="password"
               name="password"
               value={password}
@@ -68,9 +109,12 @@ const Signup = () => {
               onChange={onChange}
             />
           </InputGroup>
-          <Submit>Signin</Submit>
+          <Submit onClick={handleSignup}>Sign up</Submit>
         </Box>
-        <NewAccount>Already a member? Sign in!</NewAccount>
+        <NewAccount>
+          Already a member?{" "}
+          <span onClick={() => navigate("/login")}>Sign in!</span>
+        </NewAccount>
       </LoginContainer>
     </Wrapper>
   );
@@ -156,7 +200,7 @@ const Box = styled.div`
   padding: 1.2rem 2.5rem;
   background-color: #1c272c;
   border-radius: 10px;
-  height: 370px;
+  height: 470px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -198,4 +242,8 @@ const NewAccount = styled.div`
   border-radius: 10px;
   padding: 20px;
   color: #ebebeb;
+  span {
+    color: #45cbdd;
+    cursor: pointer;
+  }
 `;

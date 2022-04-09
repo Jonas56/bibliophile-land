@@ -3,13 +3,21 @@ import styled from "styled-components";
 import ProfileSection from "../components/user-page/ProfileSide";
 import { MdOutlineMenuBook } from "react-icons/md";
 import { FiLogOut, FiSettings } from "react-icons/fi";
-import { Outlet } from "react-router";
+import { Outlet, useNavigate } from "react-router";
 import BooksCollection from "../components/user-page/BooksCollection";
 import Top3Books from "../components/user-page/Top3Books";
 import { useDispatch, useSelector } from "react-redux";
 import { getReadBooks, selectReadBooks } from "../redux/slices/userSlice";
 
 const UserPage = () => {
+  // protect route
+  const { user } = useSelector((state) => state.auth);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!user) navigate("/login");
+  }, [user, navigate]);
+
   const reduxBooks = useSelector(selectReadBooks);
   const { readBooks } = reduxBooks;
   const dispatch = useDispatch();

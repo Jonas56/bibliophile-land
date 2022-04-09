@@ -1,9 +1,17 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router";
 import styled from "styled-components";
 import Logo from "../components/Logo";
+import { login, reset } from "../redux/slices/authSlice";
+import { toast } from "react-toastify";
 
 const Login = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  // handle form
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -17,11 +25,34 @@ const Login = () => {
     }));
   };
 
-  // const onSubmit = (e) => {
-  //   e.preventDefault();
-  //   const userData = { email, password };
-  //   dispatch(login(userData));
-  // };
+  const { user, status, message } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    if (status === "failed") {
+      toast.error("Error", {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        style: {
+          backgroundColor: "darkred",
+        },
+      });
+      console.log("failed");
+    }
+    if (status === "succeeded" || user) {
+      navigate("/");
+      dispatch(reset());
+    }
+  }, [user, status, message, navigate, dispatch]);
+  const handleLogin = (e) => {
+    e.preventDefault();
+    const userData = { email, password };
+    dispatch(login(userData));
+  };
 
   return (
     <Wrapper>
@@ -35,7 +66,6 @@ const Login = () => {
             <label>Email</label>
             <input
               type="text"
-              className="form-control"
               id="email"
               name="email"
               value={email}
@@ -47,7 +77,6 @@ const Login = () => {
             <label>Password</label>
             <input
               type="password"
-              className="form-control"
               id="password"
               name="password"
               value={password}
@@ -55,9 +84,12 @@ const Login = () => {
               onChange={onChange}
             />
           </InputGroup>
-          <Submit>Signin</Submit>
+          <Submit onClick={handleLogin}>Log in</Submit>
         </Box>
-        <NewAccount>New here? Join us now!</NewAccount>
+        <NewAccount>
+          New here?{" "}
+          <span onClick={() => navigate("/signup")}>Join us now!</span>
+        </NewAccount>
       </LoginContainer>
     </Wrapper>
   );
@@ -185,4 +217,8 @@ const NewAccount = styled.div`
   border-radius: 10px;
   padding: 20px;
   color: #ebebeb;
+  span {
+    color: #45cbdd;
+    cursor: pointer;
+  }
 `;
