@@ -15,7 +15,7 @@ const Layout = (props) => {
 
   return (
     <>
-      {!isLogin ? <Navbar /> : ""}
+      {(!isLogin || !navigate.pathname.includes('login') || !navigate.pathname.includes('signup')) ? <Navbar /> : ""}
       <Container>{props.children}</Container>
     </>
   )
