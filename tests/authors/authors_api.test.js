@@ -4,6 +4,8 @@ const { sequelize } = require("../../models");
 const helper = require("./helper");
 
 beforeAll(async () => {
+  // clear db
+  await helper.clearDB();
   // Insert authors data from helper.js
   await helper.loadDataToDb();
 });
@@ -34,6 +36,5 @@ describe("GET /v1/api/authors", () => {
 });
 
 afterAll(async () => {
-  await helper.clearDB();
   await sequelize.close();
 });
