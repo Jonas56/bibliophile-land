@@ -5,7 +5,7 @@ import { useNavigate } from "react-router";
 import styled from "styled-components";
 import Logo from "../components/Logo";
 import { login, reset } from "../redux/slices/authSlice";
-import toast from "react-toastify";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -29,7 +29,18 @@ const Login = () => {
 
   useEffect(() => {
     if (status === "failed") {
-      toast.error(message);
+      toast.error("Error", {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        style: {
+          backgroundColor: "darkred",
+        },
+      });
       console.log("failed");
     }
     if (status === "succeeded" || user) {
@@ -55,7 +66,6 @@ const Login = () => {
             <label>Email</label>
             <input
               type="text"
-              className="form-control"
               id="email"
               name="email"
               value={email}
@@ -67,7 +77,6 @@ const Login = () => {
             <label>Password</label>
             <input
               type="password"
-              className="form-control"
               id="password"
               name="password"
               value={password}
@@ -75,7 +84,7 @@ const Login = () => {
               onChange={onChange}
             />
           </InputGroup>
-          <Submit onClick={handleLogin}>Signin</Submit>
+          <Submit onClick={handleLogin}>Log in</Submit>
         </Box>
         <NewAccount>New here? Join us now!</NewAccount>
       </LoginContainer>
