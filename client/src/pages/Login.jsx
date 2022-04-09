@@ -86,7 +86,10 @@ const Login = () => {
           </InputGroup>
           <Submit onClick={handleLogin}>Log in</Submit>
         </Box>
-        <NewAccount>New here? Join us now!</NewAccount>
+        <NewAccount>
+          New here?{" "}
+          <span onClick={() => navigate("/signup")}>Join us now!</span>
+        </NewAccount>
       </LoginContainer>
     </Wrapper>
   );
@@ -214,4 +217,8 @@ const NewAccount = styled.div`
   border-radius: 10px;
   padding: 20px;
   color: #ebebeb;
+  span {
+    color: #45cbdd;
+    cursor: pointer;
+  }
 `;

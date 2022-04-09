@@ -111,7 +111,10 @@ const Signup = () => {
           </InputGroup>
           <Submit onClick={handleSignup}>Sign up</Submit>
         </Box>
-        <NewAccount>Already a member? Sign in!</NewAccount>
+        <NewAccount>
+          Already a member?{" "}
+          <span onClick={() => navigate("/login")}>Sign in!</span>
+        </NewAccount>
       </LoginContainer>
     </Wrapper>
   );
@@ -239,4 +242,8 @@ const NewAccount = styled.div`
   border-radius: 10px;
   padding: 20px;
   color: #ebebeb;
+  span {
+    color: #45cbdd;
+    cursor: pointer;
+  }
 `;
