@@ -8,6 +8,7 @@ import BooksCollection from "../components/user-page/BooksCollection";
 import Top3Books from "../components/user-page/Top3Books";
 import { useDispatch, useSelector } from "react-redux";
 import { getReadBooks, selectReadBooks } from "../redux/slices/userSlice";
+import { logout } from "../redux/slices/authSlice";
 
 const UserPage = () => {
   // protect route
@@ -21,12 +22,17 @@ const UserPage = () => {
   const reduxBooks = useSelector(selectReadBooks);
   const { readBooks } = reduxBooks;
   const dispatch = useDispatch();
-  console.log(reduxBooks);
   useEffect(() => {
     if (readBooks.status === "idle") {
       dispatch(getReadBooks());
     }
   }, [dispatch, readBooks.status]);
+
+  // handle logout
+  const handleLogout = () => {
+    navigate("/login");
+    dispatch(logout());
+  };
 
   return (
     <>
@@ -60,7 +66,7 @@ const UserPage = () => {
               <span>Settings</span>
             </Settings>
             <span>|</span>
-            <Logout>
+            <Logout onClick={handleLogout}>
               <FiLogOut />
               <span>Log out</span>
             </Logout>
