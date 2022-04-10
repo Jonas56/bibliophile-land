@@ -32,6 +32,6 @@ const httpHandleLogin = async (req, res) => {
     expiresIn: 60 * 60,
   });
 
-  return res.status(200).send({ name: user.name, email: user.email, token });
+  return res.status(200).send({ name: user.name, email: user.email, username: user.username, token });
 };
 module.exports = { httpHandleLogin };
