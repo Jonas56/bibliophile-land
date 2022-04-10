@@ -1,6 +1,11 @@
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 
 const ProfileSection = ({ books, loading }) => {
+  const user = useSelector((state) => state.auth.user);
+  const readBooks = useSelector((state) => state.user.readBooks.list);
+  console.log("User :", user);
+  console.log("Read Books :", readBooks);
   return (
     <Container>
       <ProfileInfo>
@@ -9,14 +14,14 @@ const ProfileSection = ({ books, loading }) => {
             <img src="/assets/obito.jpg" alt="" />
           </Photo>
           <Info>
-            <Name>Moussaab</Name>
-            <Username>@marcos</Username>
+            <Name>{user?.name.split(" ")[0]}</Name>
+            <Username>@{user?.username}</Username>
             <Followers>Following: 69</Followers>
           </Info>
         </Profile>
         <Readbooks>
           <Title>Books Read</Title>
-          <Number>69</Number>
+          <Number>{readBooks?.length}</Number>
         </Readbooks>
         <ReadPages>
           <Title>Pages Read</Title>

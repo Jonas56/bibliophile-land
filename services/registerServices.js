@@ -11,7 +11,7 @@ const httpHanldeRegister = async (req, res) => {
   });
 
   return res.status(201).json({
-    username: createdUser.username,
+    name: createdUser.name, email: createdUser.email, username: createdUser.username,
     mesagge: "You have succesfully signup!",
   });
 };
